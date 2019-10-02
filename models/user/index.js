@@ -23,6 +23,9 @@ const schema = new mongoose.Schema({
     type: String,
     required: false
   },
+  azulejos: {
+    type: Array
+  },
   role: {
     type: String,
     required: true,
