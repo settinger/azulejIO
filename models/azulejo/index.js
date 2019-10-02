@@ -11,6 +11,9 @@ const schema = new mongoose.Schema({
   colors: {
     type: Array
   },
+  ratings: {
+    type: Array
+  },
   image: {
     type: String,
     required: true
