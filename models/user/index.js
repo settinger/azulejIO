@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
     trim: true,
     unique: true
   },
-  name: {
+  username: {
     type: String,
     required: true,
     trim: true
@@ -19,10 +19,14 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  profilePic: {
+    type: String,
+    required: false
+  },
   role: {
     type: String,
     required: true,
-    enum: ["user", "editor", "admin"],
+    enum: ["user", "admin"],
     default: "user"
   }
 });
