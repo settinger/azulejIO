@@ -25,13 +25,13 @@ export default class SignUp extends Component {
   }
 
   signUp(event) {
-    console.dir(event);
     event.preventDefault();
     const { email, username, password } = this.state;
     signUp({ email, username, password })
       .then(user => {
-        this.props.loadUser(user);
-        this.props.history.push("/");
+        console.log(user);
+        this.props.uploadUser(user);
+        this.props.history.push(`/profile/${this.state.username}`);
       })
       .catch(error => {
         console.log(error);

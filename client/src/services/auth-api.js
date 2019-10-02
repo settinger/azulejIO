@@ -49,7 +49,8 @@ export const verify = () => {
     authAPI
       .get("/verify")
       .then(response => {
-        const user = response.data.user;
+        console.log(response.data.user.user);
+        const user = response.data.user.user;
         resolve(user);
       })
       .catch(error => {

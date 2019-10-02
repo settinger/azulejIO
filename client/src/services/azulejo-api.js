@@ -9,7 +9,7 @@ export const loadUser = username => {
     azulejoAPI
       .get(`/profile/${username}`)
       .then(response => {
-        resolve(response.data.data.post);
+        resolve(response.data.user);
       })
       .catch(error => {
         reject(error);

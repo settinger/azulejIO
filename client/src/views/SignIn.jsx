@@ -5,11 +5,11 @@ import Container from "react-bootstrap/Container";
 
 import { signIn } from "../services/auth-api";
 
-export default class SignUp extends Component {
+export default class SignIn extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
@@ -26,10 +26,10 @@ export default class SignUp extends Component {
 
   signIn(event) {
     event.preventDefault();
-    const { username, password } = this.state;
-    signIn({ username, password })
+    const { email, password } = this.state;
+    signIn({ email, password })
       .then(user => {
-        // this.props.loadUser(user);
+        this.props.uploadUser(user);
         this.props.history.push("/profile");
       })
       .catch(error => {
@@ -43,14 +43,14 @@ export default class SignUp extends Component {
         <h1>SIGN IN</h1>
         <Form onSubmit={this.signIn}>
           <Form.Group>
-            <Form.Label htmlFor="sign-up-username">username</Form.Label>
+            <Form.Label htmlFor="sign-up-email">Email</Form.Label>
             <Form.Control
-              id="sign-up-username"
-              name="username"
+              id="sign-up-email"
+              name="email"
               required
-              placeholder="username"
+              placeholder="email"
               onChange={this.onValueChange}
-              value={this.state.username}
+              value={this.state.email}
             />
           </Form.Group>
           <Form.Group>

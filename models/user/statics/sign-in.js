@@ -10,6 +10,7 @@ module.exports = function({ email, password }) {
 
   return Model.findByEmail(email)
     .then(user => {
+      console.log(user);
       if (!user) {
         throw new Error("USER_NOT_FOUND");
       } else {

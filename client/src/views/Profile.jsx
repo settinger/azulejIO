@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { loadUser } from "../services/azulejo-api";
 
-export default class user extends Component {
+export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: null
     };
   }
-
   loadUser() {
-    loadUser(this.props.user.username)
+    loadUser(this.props.user)
       .then(user => {
         this.setState({
           user
@@ -20,7 +19,6 @@ export default class user extends Component {
         console.log(error);
       });
   }
-
   componentDidMount() {
     this.loadUser();
   }
@@ -39,6 +37,7 @@ export default class user extends Component {
     return (
       (user && (
         <div>
+          <h1>KING</h1>
           <h1>{user.username}</h1>
           <h2>Profile Page</h2>
           <span>Check your azulejos:</span>
