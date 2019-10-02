@@ -1,7 +1,7 @@
 ///////////////
 // Drawing class for controlling object interactions, and drawing
 
-class Drawing {
+export default class Drawing {
   constructor(canvas) {
     // First, set up the canvas and context
     this.canvas = canvas;
@@ -18,17 +18,8 @@ class Drawing {
     // Access the inputs for brush size and brush color
     this.defaultBlue = "#0055AA";
     this.brushColor = this.defaultBlue;
-    this.$brushColor = document.getElementById("brush-color");
-    this.$brushColor.addEventListener("change", event => {
-      this.brushColor = event.target.value;
-    });
 
     this.brushSize = 20;
-    this.$brushSize = document.getElementById("brush-size");
-    this.$brushSize.addEventListener("input", event => {
-      this.brushSize = event.target.value;
-      document.getElementById("brush-size-value").innerText = this.brushSize;
-    });
 
     this.drawing = false;
     this.currentPoint = [0, 0];
