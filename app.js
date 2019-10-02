@@ -13,6 +13,7 @@ const mongoose = require("mongoose");
 
 const deserializeUserMiddleware = require("./middleware/deserialize-user");
 
+const azulejoRouter = require("./routes/azulejo");
 const authRouter = require("./routes/auth");
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(
 
 app.use(deserializeUserMiddleware);
 
+app.use("/", azulejoRouter);
 app.use("/auth", authRouter);
 
 app.get("*", (req, res, next) => {
