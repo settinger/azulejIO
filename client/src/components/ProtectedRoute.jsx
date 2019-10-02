@@ -19,7 +19,7 @@ export default ({
             return <ViewComponent {...props} />;
           }
         } else {
-          return <Redirect to="/sign-in" />;
+          return <Redirect to="/auth/signin" />;
         }
       }}
     />

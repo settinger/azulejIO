@@ -56,6 +56,7 @@ exports.loadUser = (req, res, next) => {
 
 exports.edit = (req, res, next) => {
   const username = req.body.username;
+  console.log(username);
   User.findByIdAndUpdate(
     req.user._id,
     {

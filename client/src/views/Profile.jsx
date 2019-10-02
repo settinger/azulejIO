@@ -1,16 +1,25 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import { loadUser } from "../services/auth-api";
+import EditProfileView from "./EditProfile";
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      editProfileState: false,
       user: null
     };
+    this.toggleEditProfile = this.toggleEditProfile.bind(this);
+  }
+  toggleEditProfile() {
+    this.setState({
+      editProfileState: !this.state.editProfileState
+    });
   }
   loadUser() {
-    loadUser()
+    loadUser(this.props.match.params.username)
       .then(user => {
         this.setState({
           user
@@ -42,7 +51,13 @@ export default class Profile extends Component {
           <h1>{user.username}</h1>
           <h2>Profile Page</h2>
           <span>Check your azulejos:</span>
-          <Link to={`/profile/${user.username}/edit`}>Edit Profile</Link>
+          {/* <Link to={`/profile/${user.username}/edit`}>Edit Profile</Link> */}
+          <Button className="btn" onClick={this.toggleEditProfile}>
+            Edit Profile
+          </Button>
+          {this.state.editProfileState && (
+            <EditProfileView user={this.state.user} />
+          )}
         </div>
       )) || <div></div>
     );

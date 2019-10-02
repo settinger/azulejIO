@@ -6,7 +6,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const NavbarView = props => {
-  console.log(props);
   return (
     <Navbar>
       <Link className="btn" to="/">

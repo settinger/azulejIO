@@ -10,7 +10,6 @@ export default class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      oldUsername: this.props.match.params.username,
       user: {
         username: ""
       }
@@ -21,32 +20,36 @@ export default class EditProfile extends Component {
   }
 
   componentDidMount() {
-    loadUser()
-      .then(user => {
-        this.setState({
-          user: {
-            ...user
-          }
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    // loadUser()
+    //   .then(singleUser => {
+    //     console.log(singleUser);
+    //     this.setState({
+    //       user: singleUser
+    //     });
+    //     console.log(this.state);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    this.setState({
+      user: this.props.user
+    });
   }
 
   onValueChange(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [name]: value
+      user: { [name]: value }
     });
   }
 
   editUser() {
-    edit(this.state.oldUsername, this.state.user)
+    const user = this.state.user;
+    edit(this.state.user.username, user)
       .then(user => {
-        console.log(user);
-        // this.props.history.push(`/profile/${this.state.user.username}`);
+        // this.props.history.push("/");
+        this.props.history.push(`/profile/${user.username}`);
       })
       .catch(error => {
         console.log(error);
@@ -67,7 +70,6 @@ export default class EditProfile extends Component {
   render() {
     return (
       <Container>
-        <h1>EDIT YOUR PROFILE</h1>
         <Form onSubmit={this.editUser}>
           <Form.Group>
             <Form.Label htmlFor="sign-up-username">Username</Form.Label>
@@ -79,7 +81,7 @@ export default class EditProfile extends Component {
               defaultValue={this.state.user.username}
             />
           </Form.Group>
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit">Edit Profile</Button>
         </Form>
       </Container>
     );

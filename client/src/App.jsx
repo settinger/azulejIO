@@ -84,20 +84,17 @@ export default class App extends Component {
               path="/auth/signin"
               verify={this.verifyUnauthenticated}
               render={props => (
-                <SignInView {...props} exact loadUser={this.uploadUser} />
+                <SignInView {...props} exact uploadUser={this.uploadUser} />
               )}
             />
-            <ProtectedRoute
-              path="/profile/:username"
-              verify={this.verifyAuthenticated}
-              exact
-              component={ProfileView}
-            />
+            <Route path="/profile/:username" exact component={ProfileView} />
             <ProtectedRoute
               path="/profile/:username/edit"
               verify={this.verifyAuthenticated}
               exact
-              component={EditProfileView}
+              render={props => (
+                <EditProfileView {...props} user={this.state.user} />
+              )}
             />
             <ProtectedRoute
               path="/azulejo/create"

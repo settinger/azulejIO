@@ -9,7 +9,6 @@ export const signUp = ({ email, username, password }) => {
     authAPI
       .post("/signup", { email, username, password })
       .then(response => {
-        console.log(response);
         resolve(response.data.user);
       })
       .catch(error => {
@@ -49,7 +48,6 @@ export const verify = () => {
     authAPI
       .get("/verify")
       .then(response => {
-        console.log(response.data.user.user);
         const user = response.data.user.user;
         resolve(user);
       })
@@ -72,14 +70,16 @@ export const loadUser = username => {
   });
 };
 
-export const edit = (oldUsername, editedUser) => {
+export const edit = (username, editedUser) => {
   return new Promise((resolve, reject) => {
     authAPI
-      .patch(`/profile/${oldUsername}/edit`, editedUser)
+      .patch(`/profile/${username}/edit`, editedUser)
       .then(response => {
+        console.log(response);
         resolve(response.data.user);
       })
       .catch(error => {
+        console.log("BIG ERROR");
         reject(error);
       });
   });
