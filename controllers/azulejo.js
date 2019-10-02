@@ -2,7 +2,6 @@
 
 const Azulejo = require("./../models/azulejo");
 const Review = require("./../models/review");
-const User = require("./../models/user");
 
 exports.loadAll = (req, res, next) => {
   Azulejo.find({})
@@ -34,16 +33,6 @@ exports.rate = (req, res, next) => {
   })
     .then(review => {
       res.json({ type: "success", review });
-    })
-    .catch(error => {
-      next(error);
-    });
-};
-
-exports.loadUser = (req, res, next) => {
-  User.findOne(req.params.id)
-    .then(user => {
-      res.json({ type: "success", user });
     })
     .catch(error => {
       next(error);

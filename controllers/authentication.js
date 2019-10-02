@@ -44,6 +44,15 @@ exports.verify = (req, res, next) => {
     }
   });
 };
+exports.loadUser = (req, res, next) => {
+  User.findOne(req.params.id)
+    .then(user => {
+      res.json({ type: "success", user });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
 
 exports.edit = (req, res, next) => {
   const { username } = req.body;

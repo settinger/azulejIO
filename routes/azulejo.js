@@ -18,8 +18,6 @@ router.post(
 
 // router.post("/search", azulejoController.verify);
 
-router.get("/profile/:username", azulejoController.loadUser);
-
 router.post(
   "/azulejo/create",
   routeGuardMiddleware(true),

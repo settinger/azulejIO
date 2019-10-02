@@ -43,19 +43,6 @@ export const rate = ratingData => {
   });
 };
 
-export const loadUser = username => {
-  return new Promise((resolve, reject) => {
-    azulejoAPI
-      .get(`/profile/${username}`)
-      .then(response => {
-        resolve(response.data.user);
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
-};
-
 // //CREATE AZULEJO DESIGN
 // export const rate = azulejoDesign => {
 //   return new Promise((resolve, reject) => {

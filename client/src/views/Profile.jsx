@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { loadUser } from "../services/azulejo-api";
+import { loadUser } from "../services/auth-api";
 
 export default class Profile extends Component {
   constructor(props) {

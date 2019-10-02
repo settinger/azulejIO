@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { loadUser } from "../services/azulejo-api";
-import { edit, remove } from "./../services/auth-api";
+
+import { edit, loadUser } from "./../services/auth-api";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";

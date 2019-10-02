@@ -58,6 +58,20 @@ export const verify = () => {
       });
   });
 };
+
+export const loadUser = username => {
+  return new Promise((resolve, reject) => {
+    authAPI
+      .get(`/profile/${username}`)
+      .then(response => {
+        resolve(response.data.user);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
 export const edit = (oldusername, editedUser) => {
   return new Promise((resolve, reject) => {
     authAPI
