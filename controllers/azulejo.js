@@ -6,8 +6,8 @@ const User = require("./../models/user");
 
 exports.loadAll = (req, res, next) => {
   Azulejo.find({})
-    .then(azulejo => {
-      res.json({ type: "success", azulejo });
+    .then(azulejos => {
+      res.json({ type: "success", azulejos });
     })
     .catch(error => {
       next(error);
