@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { loadUser } from "../services/azulejo-api";
 
 export default class Profile extends Component {
@@ -41,6 +42,7 @@ export default class Profile extends Component {
           <h1>{user.username}</h1>
           <h2>Profile Page</h2>
           <span>Check your azulejos:</span>
+          <Link to={`/profile/${user.username}/edit`}>Edit Profile</Link>
         </div>
       )) || <div></div>
     );

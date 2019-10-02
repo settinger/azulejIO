@@ -58,10 +58,10 @@ export const verify = () => {
       });
   });
 };
-export const edit = ({ email, username, password }) => {
+export const edit = (oldusername, editedUser) => {
   return new Promise((resolve, reject) => {
     authAPI
-      .post("/profile/edit", { email, username, password })
+      .patch(`/profile/${oldusername}/edit`, editedUser)
       .then(response => {
         resolve(response.data.user);
       })

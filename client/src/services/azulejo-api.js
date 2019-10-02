@@ -17,7 +17,7 @@ export const loadAll = () => {
   });
 };
 
-export const loadSingle = () => {
+export const loadSingle = id => {
   return new Promise((resolve, reject) => {
     azulejoAPI
       .get(`/azulejo/${id}`)
@@ -70,15 +70,15 @@ export const loadUser = username => {
 //   });
 // };
 
-export const remove = id => {
-  return new Promise((resolve, reject) => {
-    postApi
-      .delete(`/azulejo/delete/${id}`)
-      .then(() => {
-        resolve();
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
-};
+// export const remove = id => {
+//   return new Promise((resolve, reject) => {
+//     postApi
+//       .delete(`/azulejo/delete/${id}`)
+//       .then(() => {
+//         resolve();
+//       })
+//       .catch(error => {
+//         reject(error);
+//       });
+//   });
+// };
