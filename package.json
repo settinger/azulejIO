@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ironh/eslint-config": "^0.0.2",
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "connect-mongo": "^3.0.0",
     "cookie-parser": "^1.4.4",
     "debug": "^4.1.1",
