@@ -27,8 +27,8 @@ const AzulejoCanvas = () => {
         <button id="export-button">Export as .png</button>
       </div>
       <div id="image-goes-here"></div>
-      <script type="text/javascript" src="./../../public/scripts/Drawing.js" />
-      <script type="text/javascript" src="./../../public/scripts/Main.js" />
+      <script type="text/javascript" src="./scripts/Drawing.js" />
+      <script type="text/javascript" src="./scripts/Main.js" />
     </Fragment>
   );
 };
