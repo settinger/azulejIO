@@ -18,10 +18,10 @@ export const signUp = ({ email, username, password }) => {
   });
 };
 
-export const signIn = ({ username, password }) => {
+export const signIn = ({ email, password }) => {
   return new Promise((resolve, reject) => {
     authAPI
-      .post("/signin", { username, password })
+      .post("/signin", { email, password })
       .then(response => {
         resolve(response.data.user);
       })

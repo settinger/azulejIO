@@ -23,9 +23,9 @@ const NavbarView = props => {
         </Fragment>
       )) || (
         <Fragment>
-          <span className="btn">
-            Hello {props.user && props.user.username}!
-          </span>
+          <Link className="btn" to={`/profile/${props.user.username}`}>
+            <span className="btn">{props.user && props.user.username}</span>
+          </Link>
           <Link className="btn" to="/azulejo/create">
             + Create an Azulejo
           </Link>

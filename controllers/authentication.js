@@ -17,6 +17,7 @@ exports.signUp = (req, res, next) => {
 };
 
 exports.signIn = (req, res, next) => {
+  console.log(req.body);
   const { email, password } = req.body;
   User.signIn({ email, password })
     .then(user => {

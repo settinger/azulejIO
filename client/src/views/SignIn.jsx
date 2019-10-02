@@ -18,7 +18,7 @@ export default class SignIn extends Component {
 
   onValueChange(event) {
     const name = event.target.name;
-    const value = (event.target.type = event.target.value);
+    const value = event.target.value;
     this.setState({
       [name]: value
     });
@@ -27,10 +27,11 @@ export default class SignIn extends Component {
   signIn(event) {
     event.preventDefault();
     const { email, password } = this.state;
+    console.log(this.state);
     signIn({ email, password })
       .then(user => {
         this.props.uploadUser(user);
-        this.props.history.push("/profile");
+        this.props.history.push(`/profile/${this.state.username}`);
       })
       .catch(error => {
         console.log(error);
@@ -48,6 +49,7 @@ export default class SignIn extends Component {
               id="sign-up-email"
               name="email"
               required
+              type="email"
               placeholder="email"
               onChange={this.onValueChange}
               value={this.state.email}
