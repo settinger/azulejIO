@@ -3,8 +3,8 @@
 const User = require("./../models/user");
 
 exports.signUp = (req, res, next) => {
-  const { email, username, password, profilePic } = req.body;
-  User.signUp({ email, username, password, profilePic })
+  const { email, username, password } = req.body;
+  User.signUp({ email, username, password })
     .then(user => {
       req.session.user = {
         _id: user._id
@@ -45,12 +45,11 @@ exports.verify = (req, res, next) => {
 };
 
 exports.edit = (req, res, next) => {
-  const { username, profilePic } = req.body;
+  const { username } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
     {
-      ...(username && { username }),
-      ...(profilePic && { profilePic })
+      ...(username && { username })
     },
     { new: true }
   )

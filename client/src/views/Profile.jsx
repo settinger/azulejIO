@@ -1,0 +1,49 @@
+import React, { Component } from "react";
+import { loadUser } from "../services/azulejo-api";
+
+export default class user extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    };
+  }
+
+  loadUser() {
+    loadUser(this.props.user.username)
+      .then(user => {
+        this.setState({
+          user
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  componentDidMount() {
+    this.loadUser();
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    if (
+      !this.state.user ||
+      previousProps.match.params.id !== this.props.match.params.id
+    ) {
+      this.loadUser();
+    }
+  }
+
+  render() {
+    const user = this.state.user;
+    return (
+      (user && (
+        <div>
+          <h1>{user.username}</h1>
+          <h2>Profile Page</h2>
+          <span>Check your azulejos:</span>
+        </div>
+      )) || <div></div>
+    );
+  }
+}

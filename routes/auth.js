@@ -3,8 +3,9 @@
 const { Router } = require("express");
 const router = Router();
 
-const uploadImageMiddleware = require("./../middleware/image-upload");
+// const uploadImageMiddleware = require("./../middleware/image-upload");
 const routeGuardMiddleware = require("./../middleware/route-guard");
+// const upload = require("./../tools/cloudinary");
 
 // const signUpController = require("./../controllers/auth/sign-up");
 // const logInController = require("./../controllers/auth/log-in");
