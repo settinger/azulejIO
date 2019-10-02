@@ -11,6 +11,7 @@ import SignUpView from "./views/SignUp";
 import SignInView from "./views/SignIn";
 import ProfileView from "./views/Profile";
 import NavbarView from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { signOut, verify } from "./services/auth-api";
 
 export default class App extends Component {
@@ -21,6 +22,8 @@ export default class App extends Component {
     };
     this.uploadUser = this.uploadUser.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.verifyAuthenticated = this.verifyAuthenticated.bind(this);
+    this.verifyUnauthenticated = this.verifyUnauthenticated.bind(this);
   }
   componentDidMount() {
     verify()
@@ -53,6 +56,14 @@ export default class App extends Component {
         console.log(error);
       });
   }
+
+  verifyAuthenticated() {
+    return !!this.state.user;
+  }
+
+  verifyUnauthenticated() {
+    return !this.state.user;
+  }
   render() {
     return (
       <div className="App">
@@ -60,20 +71,25 @@ export default class App extends Component {
           <NavbarView user={this.state.user} signOut={this.signOut} />
           <Switch>
             <Route path="/" exact component={HomeView} />
-            <Route
+            <ProtectedRoute
               path="/auth/signup"
+              verify={this.verifyUnauthenticated}
               render={props => (
                 <SignUpView {...props} exact uploadUser={this.uploadUser} />
               )}
             />
-            <Route
+            <ProtectedRoute
               path="/auth/signin"
+              verify={this.verifyUnauthenticated}
               render={props => (
-                <SignInView {...props} exact uploadUser={this.uploadUser} />
+                <SignInView {...props} exact loadUser={this.uploadUser} />
               )}
             />
-            <Route path="/profile/:username" exact component={ProfileView} />
-            <Route path="/auth/signout" exact component={HomeView} />
+            <ProtectedRoute
+              path="/profile/:username"
+              verify={this.verifyAuthenticated}
+              component={ProfileView}
+            />
             <Route path="/error/:code" component={ErrorView} />
             <Route path="/" component={CatchAllView} />
           </Switch>
