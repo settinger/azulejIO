@@ -72,10 +72,10 @@ export const loadUser = username => {
   });
 };
 
-export const edit = (oldusername, editedUser) => {
+export const edit = (oldUsername, editedUser) => {
   return new Promise((resolve, reject) => {
     authAPI
-      .patch(`/profile/${oldusername}/edit`, editedUser)
+      .patch(`/profile/${oldUsername}/edit`, editedUser)
       .then(response => {
         resolve(response.data.user);
       })

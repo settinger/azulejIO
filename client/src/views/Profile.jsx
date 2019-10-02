@@ -10,7 +10,7 @@ export default class Profile extends Component {
     };
   }
   loadUser() {
-    loadUser(this.props.user)
+    loadUser()
       .then(user => {
         this.setState({
           user

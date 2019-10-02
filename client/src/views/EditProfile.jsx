@@ -10,14 +10,18 @@ export default class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      oldUsername: this.props.match.params.username,
       user: {
         username: ""
       }
     };
+    this.onValueChange = this.onValueChange.bind(this);
+    this.editUser = this.editUser.bind(this);
+    // // this.deleteUser = this.deleteUser.bind(this);
   }
-  componentDidMount(props) {
-    console.log(props);
-    loadUser(this.props.user)
+
+  componentDidMount() {
+    loadUser()
       .then(user => {
         this.setState({
           user: {
@@ -30,10 +34,19 @@ export default class EditProfile extends Component {
       });
   }
 
+  onValueChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  }
+
   editUser() {
-    edit(this.state.user)
+    edit(this.state.oldUsername, this.state.user)
       .then(user => {
-        this.props.history.push(`/profile/${user.username}`);
+        console.log(user);
+        // this.props.history.push(`/profile/${this.state.user.username}`);
       })
       .catch(error => {
         console.log(error);
@@ -52,22 +65,10 @@ export default class EditProfile extends Component {
   // }
 
   render() {
-    const user = this.state.user;
     return (
       <Container>
-        <h1>SIGN UP</h1>
-        <Form onSubmit={this.signUp}>
-          <Form.Group>
-            <Form.Label htmlFor="sign-up-email">Email</Form.Label>
-            <Form.Control
-              name="email"
-              placeholder="email"
-              required
-              type="email"
-              onChange={this.onValueChange}
-              value={this.state.email}
-            />
-          </Form.Group>
+        <h1>EDIT YOUR PROFILE</h1>
+        <Form onSubmit={this.editUser}>
           <Form.Group>
             <Form.Label htmlFor="sign-up-username">Username</Form.Label>
             <Form.Control
@@ -75,29 +76,7 @@ export default class EditProfile extends Component {
               placeholder="username"
               required
               onChange={this.onValueChange}
-              value={this.state.username}
-            />
-          </Form.Group>
-          {/* <Form.Group>
-            <Form.Label htmlFor="sign-up-profilePic">Profile Image</Form.Label>
-            <Form.Control
-              name="profilePic"
-              placeholder="profilePic"
-              required
-              type="file"
-              onChange={e => this.onValueChange(e)}
-              value={this.state.profilePic}
-            />
-          </Form.Group> */}
-          <Form.Group>
-            <Form.Label htmlFor="sign-up-password">Password</Form.Label>
-            <Form.Control
-              name="password"
-              required
-              type="password"
-              placeholder="Password"
-              onChange={this.onValueChange}
-              value={this.state.password}
+              defaultValue={this.state.user.username}
             />
           </Form.Group>
           <Button type="submit">Sign Up</Button>
