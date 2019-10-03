@@ -20,7 +20,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      loaded: false
     };
     this.uploadUser = this.uploadUser.bind(this);
     this.signOut = this.signOut.bind(this);
@@ -32,7 +33,8 @@ export default class App extends Component {
       .then(user => {
         if (user) {
           this.setState({
-            user
+            ...(user && { user }),
+            loaded: true
           });
         }
       })
@@ -71,40 +73,43 @@ export default class App extends Component {
       <div className="App">
         <Router>
           <NavbarView user={this.state.user} signOut={this.signOut} />
-          <Switch>
-            <Route path="/" exact component={HomeView} />
-            <ProtectedRoute
-              path="/auth/signup"
-              verify={this.verifyUnauthenticated}
-              render={props => (
-                <SignUpView {...props} exact uploadUser={this.uploadUser} />
-              )}
-            />
-            <ProtectedRoute
-              path="/auth/signin"
-              verify={this.verifyUnauthenticated}
-              render={props => (
-                <SignInView {...props} exact uploadUser={this.uploadUser} />
-              )}
-            />
-            <Route path="/profile/:username" exact component={ProfileView} />
-            <ProtectedRoute
-              path="/profile/:username/edit"
-              verify={this.verifyAuthenticated}
-              exact
-              render={props => (
-                <EditProfileView {...props} user={this.state.user} />
-              )}
-            />
-            <ProtectedRoute
-              path="/azulejo/create"
-              verify={this.verifyAuthenticated}
-              exact
-              component={DevAzulejoView}
-            />
-            <Route path="/error/:code" component={ErrorView} />
-            <Route path="/" component={CatchAllView} />
-          </Switch>
+
+          {this.state.loaded && (
+            <Switch>
+              <Route path="/" exact component={HomeView} />
+              <ProtectedRoute
+                path="/auth/signup"
+                verify={this.verifyUnauthenticated}
+                render={props => (
+                  <SignUpView {...props} exact uploadUser={this.uploadUser} />
+                )}
+              />
+              <ProtectedRoute
+                path="/auth/signin"
+                verify={this.verifyUnauthenticated}
+                render={props => (
+                  <SignInView {...props} exact uploadUser={this.uploadUser} />
+                )}
+              />
+              <Route path="/profile/:username" exact component={ProfileView} />
+              <ProtectedRoute
+                path="/profile/:username/edit"
+                verify={this.verifyAuthenticated}
+                exact
+                render={props => (
+                  <EditProfileView {...props} user={this.state.user} />
+                )}
+              />
+              <ProtectedRoute
+                path="/azulejo/create"
+                verify={this.verifyAuthenticated}
+                exact
+                component={DevAzulejoView}
+              />
+              <Route path="/error/:code" component={ErrorView} />
+              <Route path="/" component={CatchAllView} />
+            </Switch>
+          )}
         </Router>
       </div>
     );
