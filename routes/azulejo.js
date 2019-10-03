@@ -7,7 +7,7 @@ const routeGuardMiddleware = require("./../middleware/route-guard");
 
 const azulejoController = require("./../controllers/azulejo");
 
-router.get("/", azulejoController.loadAll);
+router.get("/azulejo/all", azulejoController.loadAll);
 router.get("/azulejo/:id", azulejoController.loadSingle);
 
 router.post(

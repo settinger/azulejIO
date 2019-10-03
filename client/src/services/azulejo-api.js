@@ -7,7 +7,7 @@ const azulejoAPI = axios.create({
 export const loadAll = () => {
   return new Promise((resolve, reject) => {
     azulejoAPI
-      .get("/")
+      .get("/azulejo/all")
       .then(response => {
         resolve(response.data.azulejos);
       })
