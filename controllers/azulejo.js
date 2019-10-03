@@ -1,7 +1,11 @@
 "use strict";
+require("dotenv").config();
+const cloudinary = require("cloudinary");
 
 const Azulejo = require("./../models/azulejo");
 const Review = require("./../models/review");
+
+cloudinary.config();
 
 exports.loadAll = (req, res, next) => {
   Azulejo.find({})
@@ -41,11 +45,15 @@ exports.rate = (req, res, next) => {
 
 exports.create = (req, res, next) => {
   const { name, colors, image } = req.body;
-  console.log("READ THIS MF");
+  // Upload to Cloudinary
+  cloudinary.v2.uploader.upload(image, (error, result) => {
+    console.log(result, error);
+  });
+
   Azulejo.create({
     name,
     colors,
-    image,
+    imageUrl: "Fake URL",
     createdBy: req.user.username
   })
     .then(azulejo => {

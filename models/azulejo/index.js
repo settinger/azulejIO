@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
   ratings: {
     type: Array
   },
-  image: {
+  imageUrl: {
     type: String,
     required: true
   },

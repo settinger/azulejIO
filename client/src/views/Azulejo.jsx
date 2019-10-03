@@ -11,7 +11,7 @@ export default class Azulejo extends Component {
 
   saveToAccount() {
     const img = this.$canvas.toDataURL("image/png");
-    console.log(this.$canvas.toDataURL("image/png"));
+
     const azulejo = {
       name: "First Azulejo",
       colors: ["Yellow", "Green"],
