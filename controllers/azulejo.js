@@ -46,21 +46,25 @@ exports.rate = (req, res, next) => {
 exports.create = (req, res, next) => {
   const { name, colors, image } = req.body;
   // Upload to Cloudinary
-  cloudinary.v2.uploader.upload(image, (error, result) => {
-    console.log(result, error);
-    Azulejo.create({
-      name,
-      colors,
-      imageUrl: result.url,
-      createdBy: req.user.username
-    })
-      .then(azulejo => {
-        res.json({ type: "success", azulejo });
+  cloudinary.v2.uploader.upload(
+    image,
+    { folder: "/azulejio" },
+    (error, result) => {
+      console.log(result, error);
+      Azulejo.create({
+        name,
+        colors,
+        imageUrl: result.url,
+        createdBy: req.user.username
       })
-      .catch(error => {
-        next(error);
-      });
-  });
+        .then(azulejo => {
+          res.json({ type: "success", azulejo });
+        })
+        .catch(error => {
+          next(error);
+        });
+    }
+  );
 };
 
 exports.remove = (req, res, next) => {
