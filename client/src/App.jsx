@@ -10,7 +10,7 @@ import CatchAllView from "./views/CatchAll";
 import SignUpView from "./views/SignUp";
 import SignInView from "./views/SignIn";
 import ProfileView from "./views/Profile";
-import EditProfileView from "./views/EditProfile";
+import EditProfile from "./components/EditProfile";
 import DevAzulejoView from "./views/DevAzulejo";
 import NavbarView from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -51,8 +51,7 @@ export default class App extends Component {
       user
     });
   }
-  signOut(event) {
-    event.preventDefault();
+  signOut() {
     signOut()
       .then(() => {
         this.setState({
@@ -96,12 +95,13 @@ export default class App extends Component {
                 )}
               />
               <Route path="/profile/:username" exact component={ProfileView} />
+
               <ProtectedRoute
                 path="/profile/:username/edit"
                 verify={this.verifyAuthenticated}
                 exact
                 render={props => (
-                  <EditProfileView {...props} user={this.state.user} />
+                  <EditProfile {...props} user={this.state.user} />
                 )}
               />
               <ProtectedRoute

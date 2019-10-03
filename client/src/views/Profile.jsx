@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { loadUser } from "../services/auth-api";
-import EditProfileView from "./EditProfile";
+import EditProfile from "./../components/EditProfile";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -60,7 +59,7 @@ export default class Profile extends Component {
             {this.state.buttonText}
           </Button>
           {this.state.editProfileState && (
-            <EditProfileView user={this.state.user} />
+            <EditProfile user={this.state.user} />
           )}
         </div>
       )) || <div></div>
