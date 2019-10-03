@@ -52,6 +52,7 @@ export const create = azulejoDesign => {
         resolve(response.data.azulejo);
       })
       .catch(error => {
+        console.log(error);
         reject(error);
       });
   });

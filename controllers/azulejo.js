@@ -41,6 +41,7 @@ exports.rate = (req, res, next) => {
 
 exports.create = (req, res, next) => {
   const { name, colors, image } = req.body;
+  console.log("READ THIS MF");
   Azulejo.create({
     name,
     colors,
