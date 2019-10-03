@@ -9,8 +9,10 @@ const User = require("./../models/user");
 cloudinary.config();
 
 exports.loadAll = (req, res, next) => {
-  Azulejo.find({})
+  Azulejo.find()
+    .populate("_createdBy")
     .then(azulejos => {
+      console.log(azulejos);
       res.json({ type: "success", azulejos });
     })
     .catch(error => {

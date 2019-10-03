@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import { loadUser } from "../services/auth-api";
 import { loadAll } from "../services/azulejo-api";
+import AzulejoThumbnail from "./../components/AzulejoThumbnail";
 import EditProfile from "./../components/EditProfile";
 
 export default class Profile extends Component {
@@ -10,7 +11,8 @@ export default class Profile extends Component {
     this.state = {
       buttonText: "Edit profile",
       editProfileState: false,
-      user: null
+      user: null,
+      azulejos: null
     };
     this.toggleEditProfile = this.toggleEditProfile.bind(this);
   }
@@ -33,8 +35,25 @@ export default class Profile extends Component {
         console.log(error);
       });
   }
+  loadAzulejos() {
+    loadAll()
+      .then(azulejos => {
+        let filteredAzulejos = azulejos.filter(
+          azulejo => azulejo._createdBy._id === this.state.user._id
+        );
+        console.log(filteredAzulejos);
+        this.setState({
+          ...this.state,
+          azulejos: filteredAzulejos
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   componentDidMount() {
     this.loadUser();
+    this.loadAzulejos();
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -56,6 +75,20 @@ export default class Profile extends Component {
           <h1>{user.username}</h1>
           <h2>Profile Page</h2>
           <span>Check your azulejos:</span>
+          <div>
+            {this.state.azulejos &&
+              this.state.azulejos.map(azulejo => {
+                return (
+                  <AzulejoThumbnail
+                    name={azulejo.name}
+                    img={azulejo.imageUrl}
+                    createdBy={azulejo.createdBy}
+                    colors={azulejo.colors}
+                    key={azulejo._id}
+                  />
+                );
+              })}
+          </div>
           <Button className="btn" onClick={this.toggleEditProfile}>
             {this.state.buttonText}
           </Button>
