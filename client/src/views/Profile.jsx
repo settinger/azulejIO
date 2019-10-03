@@ -82,7 +82,7 @@ export default class Profile extends Component {
                   <AzulejoThumbnail
                     name={azulejo.name}
                     img={azulejo.imageUrl}
-                    createdBy={azulejo.createdBy}
+                    createdBy={azulejo._createdBy.username}
                     colors={azulejo.colors}
                     key={azulejo._id}
                   />

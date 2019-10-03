@@ -34,9 +34,10 @@ export default class HomeView extends Component {
             {this.state.azulejos.map(azulejo => {
               return (
                 <AzulejoThumbnail
+                  id={azulejo._id}
                   name={azulejo.name}
                   img={azulejo.imageUrl}
-                  createdBy={azulejo.createdBy}
+                  createdBy={azulejo._createdBy.username}
                   colors={azulejo.colors}
                 />
               );
