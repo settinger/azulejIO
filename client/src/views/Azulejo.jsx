@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AzulejoCanvas from "../components/AzulejoCanvas";
+import { create } from "../services/azulejo-api";
 
 export default class Azulejo extends Component {
   constructor(props) {
@@ -10,7 +11,19 @@ export default class Azulejo extends Component {
 
   saveToAccount() {
     const img = this.$canvas.toDataURL("image/png");
-    // To do: pass this img to the backend, where it then gets uploaded to cloudinary
+    console.log(this.$canvas.toDataURL("image/png"));
+    const azulejo = {
+      name: "First Azulejo",
+      colors: ["Yellow", "Green"],
+      image: img
+    };
+    create(azulejo)
+      .then(azulejo => {
+        this.props.history.push("/");
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   componentDidMount() {

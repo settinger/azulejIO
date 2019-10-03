@@ -19,7 +19,7 @@ export default class Profile extends Component {
     });
     this.state.editProfileState
       ? this.setState({ buttonText: "Edit Profile" })
-      : this.setState({ buttonText: "Undo" });
+      : this.setState({ buttonText: "Cancel" });
   }
   loadUser() {
     loadUser(this.props.match.params.username)

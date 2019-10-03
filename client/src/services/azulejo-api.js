@@ -35,7 +35,7 @@ export const rate = ratingData => {
     azulejoAPI
       .post("/azulejo/rate/:id", ratingData)
       .then(response => {
-        resolve(response.data.data.post);
+        resolve(response.data.review);
       })
       .catch(error => {
         reject(error);
@@ -43,19 +43,19 @@ export const rate = ratingData => {
   });
 };
 
-// //CREATE AZULEJO DESIGN
-// export const rate = azulejoDesign => {
-//   return new Promise((resolve, reject) => {
-//     azulejoAPI
-//       .post("/azulejo/create", azulejoDesign)
-//       .then(response => {
-//         resolve(response.data.data.post);
-//       })
-//       .catch(error => {
-//         reject(error);
-//       });
-//   });
-// };
+//CREATE AZULEJO DESIGN
+export const create = azulejoDesign => {
+  return new Promise((resolve, reject) => {
+    azulejoAPI
+      .post("/azulejo/create", azulejoDesign)
+      .then(response => {
+        resolve(response.data.azulejo);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
 
 // export const remove = id => {
 //   return new Promise((resolve, reject) => {
