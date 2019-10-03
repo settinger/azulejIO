@@ -21,5 +21,6 @@ router.post("/signout", routeGuardMiddleware(true), auth.signOut);
 router.get("/verify", auth.verify);
 router.get("/profile/:username", auth.loadUser);
 router.patch("/profile/:username/edit", routeGuardMiddleware(true), auth.edit);
+router.delete("/profile/:username", routeGuardMiddleware(true), auth.remove);
 
 module.exports = router;

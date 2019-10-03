@@ -84,3 +84,16 @@ export const edit = (username, editedUser) => {
       });
   });
 };
+
+export const remove = username => {
+  return new Promise((resolve, reject) => {
+    authAPI
+      .delete(`/profile/${username}`)
+      .then(() => {
+        resolve();
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};

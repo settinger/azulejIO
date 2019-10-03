@@ -8,6 +8,7 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      buttonText: "Edit profile",
       editProfileState: false,
       user: null
     };
@@ -17,6 +18,9 @@ export default class Profile extends Component {
     this.setState({
       editProfileState: !this.state.editProfileState
     });
+    this.state.editProfileState
+      ? this.setState({ buttonText: "Edit Profile" })
+      : this.setState({ buttonText: "Undo" });
   }
   loadUser() {
     loadUser(this.props.match.params.username)
@@ -53,7 +57,7 @@ export default class Profile extends Component {
           <span>Check your azulejos:</span>
           {/* <Link to={`/profile/${user.username}/edit`}>Edit Profile</Link> */}
           <Button className="btn" onClick={this.toggleEditProfile}>
-            Edit Profile
+            {this.state.buttonText}
           </Button>
           {this.state.editProfileState && (
             <EditProfileView user={this.state.user} />

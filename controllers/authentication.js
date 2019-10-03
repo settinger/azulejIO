@@ -56,7 +56,6 @@ exports.loadUser = (req, res, next) => {
 
 exports.edit = (req, res, next) => {
   const username = req.body.username;
-  console.log(username);
   User.findByIdAndUpdate(
     req.user._id,
     {
@@ -69,6 +68,21 @@ exports.edit = (req, res, next) => {
         return next(new Error("USER_NOT_FOUND"));
       }
       res.json({ user });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+exports.remove = (req, res, next) => {
+  User.findOneAndDelete({ username: req.params.username })
+    .then(user => {
+      if (user) {
+        req.session.destroy();
+        res.json({ type: "success" });
+      } else {
+        next(new Error("USER_COULD_NOT_BE_DELETED"));
+      }
     })
     .catch(error => {
       next(error);

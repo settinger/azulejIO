@@ -31,7 +31,7 @@ export default class SignIn extends Component {
     signIn({ email, password })
       .then(user => {
         this.props.uploadUser(user);
-        this.props.history.push(`/profile/${this.state.username}`);
+        this.props.history.push(`/`);
       })
       .catch(error => {
         console.log(error);

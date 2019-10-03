@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { edit, loadUser } from "./../services/auth-api";
+import { edit, remove } from "./../services/auth-api";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -16,7 +16,7 @@ export default class EditProfile extends Component {
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.editUser = this.editUser.bind(this);
-    // // this.deleteUser = this.deleteUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +31,7 @@ export default class EditProfile extends Component {
     //   .catch(error => {
     //     console.log(error);
     //   });
+    console.log("hola", this.props.user._id);
     this.setState({
       user: this.props.user
     });
@@ -56,18 +57,19 @@ export default class EditProfile extends Component {
       });
   }
 
-  // deleteUser() {
-  //   const id = this.props.match.params.id;
-  //   remove(id)
-  //     .then(post => {
-  //       this.props.history.push("/");
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
+  deleteUser() {
+    console.log(this.props.history);
+    remove(this.props.user.username)
+      .then(user => {
+        this.props.history.push("/");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   render() {
+    console.log(this.props);
     return (
       <Container>
         <Form onSubmit={this.editUser}>
@@ -81,8 +83,13 @@ export default class EditProfile extends Component {
               defaultValue={this.state.user.username}
             />
           </Form.Group>
-          <Button type="submit">Edit Profile</Button>
+          <Button variant="outline-success" type="submit">
+            Edit Profile
+          </Button>
         </Form>
+        <Button variant="outline-danger" onClick={this.deleteUser}>
+          Delete
+        </Button>
       </Container>
     );
   }
