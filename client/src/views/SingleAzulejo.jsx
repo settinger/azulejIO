@@ -35,20 +35,18 @@ export default class SingleAzulejo extends Component {
   }
 
   render() {
-    const createdBy =
-      this.state.azulejo && this.state.azulejo._createdBy.username;
+    const createdBy = this.state.azulejo._createdBy.username;
     return (
-      <div>
-        <h1>AZULEJO</h1>
-        <h1>Azulejo: {this.state.azulejo && this.state.azulejo.name}</h1>
-        <img
-          src={this.state.azulejo && this.state.azulejo.imageUrl}
-          alt="Azulejo"
-        />
-        <h3>
-          Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
-        </h3>
-      </div>
+      this.state.azulejo && (
+        <div>
+          <h1>AZULEJO</h1>
+          <h1>Azulejo: {this.state.azulejo.name}</h1>
+          <img src={this.state.azulejo.imageUrl} alt="Azulejo" />
+          <h3>
+            Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
+          </h3>
+        </div>
+      )
     );
   }
 }
