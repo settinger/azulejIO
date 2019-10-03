@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import { loadUser } from "../services/auth-api";
+import { loadAll } from "../services/azulejo-api";
 import EditProfile from "./../components/EditProfile";
 
 export default class Profile extends Component {
@@ -46,6 +47,7 @@ export default class Profile extends Component {
   }
 
   render() {
+    console.log(this.state);
     const user = this.state.user;
     return (
       (user && (

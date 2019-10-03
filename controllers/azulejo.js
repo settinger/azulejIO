@@ -4,6 +4,7 @@ const cloudinary = require("cloudinary");
 
 const Azulejo = require("./../models/azulejo");
 const Review = require("./../models/review");
+const User = require("./../models/user");
 
 cloudinary.config();
 
@@ -55,7 +56,7 @@ exports.create = (req, res, next) => {
         name,
         colors,
         imageUrl: result.url,
-        createdBy: req.user.username
+        _createdBy: req.user._id
       })
         .then(azulejo => {
           res.json({ type: "success", azulejo });

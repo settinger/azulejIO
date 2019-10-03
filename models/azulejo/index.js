@@ -18,10 +18,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  createdBy: {
-    type: String,
-    required: true
-  }
+  _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
 const Azulejo = mongoose.model("Azulejo", schema);
