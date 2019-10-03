@@ -36,6 +36,10 @@ export default class App extends Component {
             ...(user && { user }),
             loaded: true
           });
+        } else {
+          this.setState({
+            loaded: true
+          });
         }
       })
       .catch(error => {
