@@ -10,8 +10,9 @@ import CatchAllView from "./views/CatchAll";
 import SignUpView from "./views/SignUp";
 import SignInView from "./views/SignIn";
 import ProfileView from "./views/Profile";
-import EditProfile from "./components/EditProfile";
 import AzulejoView from "./views/Azulejo";
+import SingleAzulejoView from "./views/SingleAzulejo";
+import EditProfile from "./components/EditProfile";
 import NavbarView from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { signOut, verify } from "./services/auth-api";
@@ -111,6 +112,7 @@ export default class App extends Component {
                   <AzulejoView {...props} user={this.state.user} />
                 )}
               />
+              <Route path="/azulejo/:id" exact component={SingleAzulejoView} />
               <Route path="/error/:code" component={ErrorView} />
               <Route path="/" component={CatchAllView} />
             </Switch>

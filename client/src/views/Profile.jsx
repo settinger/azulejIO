@@ -54,7 +54,6 @@ export default class Profile extends Component {
           <h1>{user.username}</h1>
           <h2>Profile Page</h2>
           <span>Check your azulejos:</span>
-          {/* <Link to={`/profile/${user.username}/edit`}>Edit Profile</Link> */}
           <Button className="btn" onClick={this.toggleEditProfile}>
             {this.state.buttonText}
           </Button>
