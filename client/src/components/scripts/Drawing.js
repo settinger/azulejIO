@@ -142,8 +142,6 @@ export default class Drawing {
 
   onMouseMove(event) {
     if (this.drawing && event.target === this.canvas) {
-      console.log(event);
-      console.log(this.canvas.getBoundingClientRect());
       let x =
         (event.clientX - this.offsetLeft - this.offsetWidth / 2) *
         (this.width / this.offsetWidth);
