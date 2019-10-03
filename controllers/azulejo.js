@@ -22,6 +22,7 @@ exports.loadAll = (req, res, next) => {
 
 exports.loadSingle = (req, res, next) => {
   Azulejo.findById(req.params.id)
+    .populate("_createdBy")
     .then(azulejo => {
       res.json({ type: "success", azulejo });
     })

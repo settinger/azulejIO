@@ -35,7 +35,9 @@ export default class SingleAzulejo extends Component {
   }
 
   render() {
-    const createdBy = this.state.azulejo._createdBy.username;
+    const createdBy =
+      this.state.azulejo && this.state.azulejo._createdBy.username;
+    console.log(createdBy);
     return (
       this.state.azulejo && (
         <div>
