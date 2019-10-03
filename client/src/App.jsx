@@ -11,7 +11,7 @@ import SignUpView from "./views/SignUp";
 import SignInView from "./views/SignIn";
 import ProfileView from "./views/Profile";
 import EditProfile from "./components/EditProfile";
-import DevAzulejoView from "./views/DevAzulejo";
+import AzulejoView from "./views/Azulejo";
 import NavbarView from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { signOut, verify } from "./services/auth-api";
@@ -104,11 +104,12 @@ export default class App extends Component {
                   <EditProfile {...props} user={this.state.user} />
                 )}
               />
-              <ProtectedRoute
+              <Route
                 path="/azulejo/create"
-                verify={this.verifyAuthenticated}
                 exact
-                component={DevAzulejoView}
+                render={props => (
+                  <AzulejoView {...props} user={this.state.user} />
+                )}
               />
               <Route path="/error/:code" component={ErrorView} />
               <Route path="/" component={CatchAllView} />
