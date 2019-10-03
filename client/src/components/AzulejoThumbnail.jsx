@@ -11,7 +11,9 @@ const AzulejoThumbnail = props => {
 
   return (
     <div className="card" style={{ width: "330px" }}>
-      <img src={thumbUrl} alt="Azulejo thumbnail" className="card-img-top" />
+      <Link to={`/azulejo/${props.id}`}>
+        <img src={thumbUrl} alt="Azulejo thumbnail" className="card-img-top" />
+      </Link>
       <div className="card-body">
         <h5 class="card-title">{props.name}</h5>
         <p class="card-text">By {props.createdBy}</p>

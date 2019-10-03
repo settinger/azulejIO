@@ -23,6 +23,8 @@ export default class Azulejo extends Component {
 
   saveToAccount() {
     const img = this.$canvas.toDataURL("image/png");
+    const button = document.getElementById("save-to-account");
+    button.innerText = "Loading...";
 
     const azulejo = {
       name: this.state.name,
@@ -88,7 +90,9 @@ export default class Azulejo extends Component {
                 />
               </Form.Group>
             </Form>
-            <button onClick={this.saveToAccount}>Save to my account</button>
+            <button onClick={this.saveToAccount} id="save-to-account">
+              Save to my account
+            </button>
           </Fragment>
         )}
       </div>
