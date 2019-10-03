@@ -16,6 +16,28 @@ export default class AzulejoCanvas extends Component {
     });
     this.drawing = new Drawing($canvas);
     this.drawing.startMenu();
+
+    // Calculate canvas bounding box offsets (and recompute when window resizes/scrolls)
+    let DOMrect = this.drawing.canvas.getBoundingClientRect();
+    this.drawing.offsetTop = DOMrect.top;
+    this.drawing.offsetLeft = DOMrect.left;
+    this.drawing.offsetWidth = DOMrect.width;
+    this.drawing.offsetHeight = DOMrect.height;
+
+    window.addEventListener("scroll", e => {
+      DOMrect = this.drawing.canvas.getBoundingClientRect();
+      this.drawing.offsetTop = DOMrect.top;
+      this.drawing.offsetLeft = DOMrect.left;
+      this.drawing.offsetWidth = DOMrect.width;
+      this.drawing.offsetHeight = DOMrect.height;
+    });
+    window.addEventListener("resize", e => {
+      DOMrect = this.drawing.canvas.getBoundingClientRect();
+      this.drawing.offsetTop = DOMrect.top;
+      this.drawing.offsetLeft = DOMrect.left;
+      this.drawing.offsetWidth = DOMrect.width;
+      this.drawing.offsetHeight = DOMrect.height;
+    });
   }
 
   render() {
