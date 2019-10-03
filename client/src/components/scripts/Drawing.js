@@ -18,6 +18,10 @@ export default class Drawing {
     // Access the inputs for brush size and brush color
     this.defaultBlue = "#0055AA";
     this.brushColor = this.defaultBlue;
+    this.offsetTop = 0;
+    this.offsetLeft = 0;
+    this.offsetWidth = this.width;
+    this.offsetHeight = this.height;
 
     this.brushSize = 20;
 
@@ -118,16 +122,12 @@ export default class Drawing {
     if (event.target === this.canvas) {
       event.preventDefault();
       this.drawing = true;
-      let offsetTop = event.target.offsetTop;
-      let offsetLeft = event.target.offsetLeft;
-      let offsetWidth = event.target.offsetWidth;
-      let offsetHeight = event.target.offsetHeight;
       let x =
-        (event.clientX - offsetLeft - offsetWidth / 2) *
-        (this.width / offsetWidth);
+        (event.clientX - this.offsetLeft - this.offsetWidth / 2) *
+        (this.width / this.offsetWidth);
       let y =
-        (event.clientY - offsetTop - offsetHeight / 2) *
-        (this.width / offsetWidth);
+        (event.clientY - this.offsetTop - this.offsetHeight / 2) *
+        (this.height / this.offsetHeight);
       this.currentPoint = [x, y];
       this.context.fillStyle = this.brushColor;
       this.context.strokeStyle = this.brushColor;
@@ -142,16 +142,14 @@ export default class Drawing {
 
   onMouseMove(event) {
     if (this.drawing && event.target === this.canvas) {
-      let offsetTop = event.target.offsetTop;
-      let offsetLeft = event.target.offsetLeft;
-      let offsetWidth = event.target.offsetWidth;
-      let offsetHeight = event.target.offsetHeight;
+      console.log(event);
+      console.log(this.canvas.getBoundingClientRect());
       let x =
-        (event.clientX - offsetLeft - offsetWidth / 2) *
-        (this.width / offsetWidth);
+        (event.clientX - this.offsetLeft - this.offsetWidth / 2) *
+        (this.width / this.offsetWidth);
       let y =
-        (event.clientY - offsetTop - offsetHeight / 2) *
-        (this.width / offsetWidth);
+        (event.clientY - this.offsetTop - this.offsetHeight / 2) *
+        (this.height / this.offsetHeight);
       this.context.fillStyle = this.brushColor;
       this.context.strokeStyle = this.brushColor;
       this.drawEightLine(...this.currentPoint, x, y);
@@ -163,16 +161,12 @@ export default class Drawing {
   onTouchMove(event) {
     if (this.drawing && event.target === this.canvas) {
       event.preventDefault();
-      let offsetTop = event.target.offsetTop;
-      let offsetLeft = event.target.offsetLeft;
-      let offsetWidth = event.target.offsetWidth;
-      let offsetHeight = event.target.offsetHeight;
       let x =
-        (event.targetTouches[0].clientX - offsetLeft - offsetWidth / 2) *
-        (this.width / offsetWidth);
+        (event.clientX - this.offsetLeft - this.offsetWidth / 2) *
+        (this.width / this.offsetWidth);
       let y =
-        (event.targetTouches[0].clientY - offsetTop - offsetHeight / 2) *
-        (this.width / offsetWidth);
+        (event.clientY - this.offsetTop - this.offsetHeight / 2) *
+        (this.height / this.offsetHeight);
       this.context.fillStyle = this.brushColor;
       this.context.strokeStyle = this.brushColor;
       this.drawEightLine(...this.currentPoint, x, y);
