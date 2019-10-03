@@ -45,7 +45,7 @@ exports.verify = (req, res, next) => {
   });
 };
 exports.loadUser = (req, res, next) => {
-  User.findOne(req.params.id)
+  User.findOne({ username: req.params.username })
     .then(user => {
       res.json({ type: "success", user });
     })
