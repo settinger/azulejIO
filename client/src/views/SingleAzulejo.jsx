@@ -35,7 +35,8 @@ export default class SingleAzulejo extends Component {
   }
 
   render() {
-    const createdBy = this.state.azulejo && this.state.azulejo.createdBy;
+    const createdBy =
+      this.state.azulejo && this.state.azulejo._createdBy.username;
     return (
       <div>
         <h1>AZULEJO</h1>
@@ -43,8 +44,6 @@ export default class SingleAzulejo extends Component {
         <img
           src={this.state.azulejo && this.state.azulejo.imageUrl}
           alt="Azulejo"
-          width="200px"
-          height="auto"
         />
         <h3>
           Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
