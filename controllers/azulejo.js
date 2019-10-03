@@ -56,6 +56,7 @@ exports.create = (req, res, next) => {
         name,
         colors,
         imageUrl: result.url,
+        createdBy: req.user.username,
         _createdBy: req.user._id
       })
         .then(azulejo => {
