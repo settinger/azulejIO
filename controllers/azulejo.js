@@ -3,13 +3,14 @@ require("dotenv").config();
 const cloudinary = require("cloudinary");
 
 const Azulejo = require("./../models/azulejo");
-const Review = require("./../models/review");
+const Rating = require("./../models/rating");
 const User = require("./../models/user");
 
 cloudinary.config();
 
 exports.loadAll = (req, res, next) => {
   Azulejo.find()
+    .sort({ createdAt: -1 })
     .populate("_createdBy")
     .then(azulejos => {
       console.log(azulejos);
@@ -22,6 +23,7 @@ exports.loadAll = (req, res, next) => {
 
 exports.loadSingle = (req, res, next) => {
   Azulejo.findById(req.params.id)
+    .sort({ createdAt: -1 })
     .populate("_createdBy")
     .then(azulejo => {
       res.json({ type: "success", azulejo });
