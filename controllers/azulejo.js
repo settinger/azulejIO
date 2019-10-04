@@ -3,8 +3,6 @@ require("dotenv").config();
 const cloudinary = require("cloudinary");
 
 const Azulejo = require("./../models/azulejo");
-const Rating = require("./../models/rating");
-const User = require("./../models/user");
 
 cloudinary.config();
 
@@ -13,7 +11,22 @@ exports.loadAll = (req, res, next) => {
     .sort({ createdAt: -1 })
     .populate("_createdBy")
     .then(azulejos => {
-      console.log(azulejos);
+      res.json({ type: "success", azulejos });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+exports.loadRecent = (req, res, next) => {
+  const n = parseInt(req.query.n) || 20; // Pagination: how many entries per page
+  const p = parseInt(req.query.p) || 0; // Pagination: which page to start on
+  Azulejo.find()
+    .sort({ $natural: -1 })
+    .skip(p * n)
+    .limit(n)
+    .populate("_createdBy")
+    .then(azulejos => {
       res.json({ type: "success", azulejos });
     })
     .catch(error => {
@@ -23,26 +36,9 @@ exports.loadAll = (req, res, next) => {
 
 exports.loadSingle = (req, res, next) => {
   Azulejo.findById(req.params.id)
-    .sort({ createdAt: -1 })
     .populate("_createdBy")
     .then(azulejo => {
       res.json({ type: "success", azulejo });
-    })
-    .catch(error => {
-      next(error);
-    });
-};
-
-exports.rate = (req, res, next) => {
-  const { imageID, rating, comment } = req.body;
-  Review.create({
-    imageID,
-    rating,
-    comment,
-    createdBy: req.user.username
-  })
-    .then(review => {
-      res.json({ type: "success", review });
     })
     .catch(error => {
       next(error);
@@ -56,7 +52,6 @@ exports.create = (req, res, next) => {
     image,
     { folder: "/azulejio" },
     (error, result) => {
-      console.log(result, error);
       Azulejo.create({
         name,
         colors,
