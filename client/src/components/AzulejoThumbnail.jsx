@@ -39,7 +39,9 @@ const AzulejoThumbnail = props => {
               return (
                 props.colors.includes(color) && (
                   <span key={color} style={{ color: color.toLowerCase() }}>
-                    ■
+                    <Link to={`/search?color=${color}`} className="no-style">
+                      ■
+                    </Link>
                   </span>
                 )
               );

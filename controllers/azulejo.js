@@ -23,6 +23,7 @@ exports.loadSearch = async (req, res, next) => {
   const n = req.query.n && parseInt(req.query.n); // Pagination: how many entries per page
   const p = req.query.p && parseInt(req.query.p); // Pagination: which page to start on
   const username = req.query.user;
+  const color = req.query.color;
   const searchParams = {};
   const searchOptions = {};
   if (n) {
@@ -31,11 +32,16 @@ exports.loadSearch = async (req, res, next) => {
   if (n && p) {
     searchOptions.skip = p * n;
   }
+  searchOptions.sort = { $natural: -1 };
   if (username) {
     const foundUser = await User.findOne({ username });
     searchParams._createdBy = foundUser && foundUser._id;
   }
+  if (color) {
+    searchParams.colors = { $in: color };
+  }
   Azulejo.find(searchParams, null, searchOptions)
+    .populate("_createdBy")
     .then(azulejos => {
       res.json({ type: "success", azulejos });
     })

@@ -26,3 +26,8 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.no-style {
+  text-decoration: none;
+  color: inherit;
+}

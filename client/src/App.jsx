@@ -12,6 +12,7 @@ import SignInView from "./views/SignIn";
 import ProfileView from "./views/Profile";
 import AzulejoView from "./views/Azulejo";
 import SingleAzulejoView from "./views/SingleAzulejo";
+import SearchView from "./views/Search";
 import EditProfile from "./components/EditProfile";
 import NavbarView from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -125,6 +126,7 @@ export default class App extends Component {
                   <SingleAzulejoView {...props} user={this.state.user} />
                 )}
               />
+              <Route path="/search" component={SearchView} />
               <Route path="/error/:code" component={ErrorView} />
               <Route path="/" component={CatchAllView} />
             </Switch>
