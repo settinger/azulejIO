@@ -95,7 +95,13 @@ export default class App extends Component {
                   <SignInView {...props} exact uploadUser={this.uploadUser} />
                 )}
               />
-              <Route path="/profile/:username" exact component={ProfileView} />
+              <Route
+                path="/profile/:username"
+                exact
+                render={props => (
+                  <ProfileView {...props} user={this.state.user} />
+                )}
+              />
 
               <ProtectedRoute
                 path="/profile/:username/edit"
@@ -115,8 +121,9 @@ export default class App extends Component {
               <Route
                 path="/azulejo/:id"
                 exact
-                component={SingleAzulejoView}
-                user={this.state.user}
+                render={props => (
+                  <SingleAzulejoView {...props} user={this.state.user} />
+                )}
               />
               <Route path="/error/:code" component={ErrorView} />
               <Route path="/" component={CatchAllView} />

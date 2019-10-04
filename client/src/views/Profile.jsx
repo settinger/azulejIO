@@ -67,8 +67,9 @@ export default class Profile extends Component {
 
   render() {
     const user = this.state.user;
+    console.log(this.props);
     return (
-      (user && (
+      user && (
         <div>
           <h1>KING</h1>
           <h1>{user.username}</h1>
@@ -89,17 +90,17 @@ export default class Profile extends Component {
                 );
               })}
           </div>
-          {/* {(this.props.user._id === this.state.user._id) && (
-            
-          )} */}
-          <Button className="btn" onClick={this.toggleEditProfile}>
-            {this.state.buttonText}
-          </Button>
+          {(!this.props.user && <div></div>) ||
+            (this.props.user._id === user._id && (
+              <Button className="btn" onClick={this.toggleEditProfile}>
+                {this.state.buttonText}
+              </Button>
+            ))}
           {this.state.editProfileState && (
             <EditProfile user={this.state.user} />
           )}
         </div>
-      )) || <div></div>
+      )
     );
   }
 }
