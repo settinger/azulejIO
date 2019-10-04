@@ -4,10 +4,10 @@ const authAPI = axios.create({
   baseURL: "/auth"
 });
 
-export const signUp = ({ email, username, password }) => {
+export const signUp = ({ email, username, imageUrl, password }) => {
   return new Promise((resolve, reject) => {
     authAPI
-      .post("/signup", { email, username, password })
+      .post("/signup", { email, username, imageUrl, password })
       .then(response => {
         resolve(response.data.user);
       })
@@ -92,6 +92,17 @@ export const remove = username => {
       .then(() => {
         resolve();
       })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+export const handleUpload = theFile => {
+  return new Promise((resolve, reject) => {
+    authAPI
+      .post("/upload", theFile)
+      .then(res => resolve(res.data))
       .catch(error => {
         reject(error);
       });

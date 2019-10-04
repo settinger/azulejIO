@@ -3,8 +3,9 @@
 const User = require("./../models/user");
 
 exports.signUp = (req, res, next) => {
-  const { email, username, password } = req.body;
-  User.signUp({ email, username, password })
+  const { email, username, imageUrl, password } = req.body;
+  // const imageUrl = req.file.secure_url;
+  User.signUp({ email, username, imageUrl, password })
     .then(user => {
       req.session.user = {
         _id: user._id

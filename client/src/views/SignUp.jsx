@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
-import { signUp } from "./../services/auth-api";
+import { signUp, handleUpload } from "./../services/auth-api";
 
 export default class SignUp extends Component {
   constructor() {
@@ -11,23 +11,34 @@ export default class SignUp extends Component {
     this.state = {
       email: "",
       username: "",
-      password: ""
+      password: "",
+      imageUrl: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.signUp = this.signUp.bind(this);
   }
   onValueChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     this.setState({
       [name]: value
+    });
+  }
+  onInputChange(event) {
+    const image = new FormData();
+    image.append("imageUrl", event.target.files[0]);
+    handleUpload(image).then(response => {
+      this.setState({
+        ...this.state,
+        imageUrl: response.secure_url
+      });
     });
   }
 
   signUp(event) {
     event.preventDefault();
-    const { email, username, password } = this.state;
-    signUp({ email, username, password })
+
+    const { email, username, imageUrl, password } = this.state;
+    signUp({ email, username, imageUrl, password })
       .then(user => {
         console.log(user);
         this.props.uploadUser(user);
@@ -64,17 +75,13 @@ export default class SignUp extends Component {
               value={this.state.username}
             />
           </Form.Group>
-          {/* <Form.Group>
-            <Form.Label htmlFor="sign-up-profilePic">Profile Image</Form.Label>
+          <Form.Group>
+            <Form.Label htmlFor="sign-up-imageUrl">Profile Image</Form.Label>
             <Form.Control
-              name="profilePic"
-              placeholder="profilePic"
-              required
               type="file"
-              onChange={e => this.onValueChange(e)}
-              value={this.state.profilePic}
+              onChange={event => this.onInputChange(event)}
             />
-          </Form.Group> */}
+          </Form.Group>
           <Form.Group>
             <Form.Label htmlFor="sign-up-password">Password</Form.Label>
             <Form.Control

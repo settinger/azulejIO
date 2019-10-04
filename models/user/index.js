@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  profilePic: {
+  imageUrl: {
     type: String,
     required: false
   },
