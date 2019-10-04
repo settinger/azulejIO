@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
   rating: {
-    type: [Number],
+    type: Number,
     min: 1,
     max: 5
   },
   comment: {
-    type: [String]
+    type: String
   },
   _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });

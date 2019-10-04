@@ -3,15 +3,25 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
+  reviews: [
+    {
+      rating: {
+        type: Number,
+        min: 1,
+        max: 5
+      },
+      comment: {
+        type: String
+      },
+      _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    }
+  ],
   name: {
     type: String,
     required: true,
     trim: true
   },
   colors: {
-    type: Array
-  },
-  ratings: {
     type: Array
   },
   imageUrl: {

@@ -43,10 +43,10 @@ export const loadSingle = id => {
   });
 };
 
-export const rate = ratingData => {
+export const rate = (id, ratingData) => {
   return new Promise((resolve, reject) => {
     azulejoAPI
-      .post("/azulejo/rate/:id", ratingData)
+      .post(`azulejo/${id}/rate`, ratingData)
       .then(response => {
         resolve(response.data.review);
       })

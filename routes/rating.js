@@ -7,10 +7,6 @@ const routeGuardMiddleware = require("./../middleware/route-guard");
 
 const ratingController = require("./../controllers/rating");
 
-router.post(
-  "/azulejo/:id/rate",
-  routeGuardMiddleware(true),
-  ratingController.loadSingle
-);
+// router.post("/:id/rate", routeGuardMiddleware(true), ratingController.rate);
 
 module.exports = router;

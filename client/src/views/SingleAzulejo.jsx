@@ -3,17 +3,17 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { loadSingle } from "../services/azulejo-api";
-import { rate } from "./../services/rating-api";
+import { rate } from "./../services/azulejo-api";
 
 export default class SingleAzulejo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      azulejo: null,
-      rating: {
+      review: {
         comment: "",
         rating: ""
-      }
+      },
+      azulejo: null
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.addRate = this.addRate.bind(this);
@@ -30,6 +30,7 @@ export default class SingleAzulejo extends Component {
         console.log(error);
       });
   }
+
   componentDidMount() {
     this.loadAzulejo();
   }
@@ -46,13 +47,13 @@ export default class SingleAzulejo extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      rating: { [name]: value }
+      review: { ...this.state.review, [name]: value }
     });
   }
 
   addRate(event) {
     event.preventDefault();
-    const rating = this.state.rating;
+    const rating = this.state.review;
     rate(this.state.azulejo._id, rating)
       .then(review => {
         console.log(review);
@@ -66,6 +67,7 @@ export default class SingleAzulejo extends Component {
   render() {
     const createdBy =
       this.state.azulejo && this.state.azulejo._createdBy.username;
+    console.log(this.state);
     return (
       this.state.azulejo && (
         <div>
@@ -80,27 +82,29 @@ export default class SingleAzulejo extends Component {
           <h3>
             Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
           </h3>
+          <p>Rating: {this.state.azulejo.reviews[0].rating}</p>{" "}
+          <p>Reviews: {this.state.azulejo.reviews[0].comment}</p>
           <div>
-            <Form onSubmit={this.signUp}>
+            <Form onSubmit={this.addRate}>
               <Form.Group>
-                <Form.Label htmlFor="sign-up-comment">comment</Form.Label>
+                <Form.Label htmlFor="comment">Comment</Form.Label>
                 <Form.Control
                   name="comment"
                   placeholder="comment"
                   required
                   onChange={this.onValueChange}
-                  value={this.state.rating.comment}
+                  value={this.state.review.comment}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label htmlFor="sign-up-rating">Rating</Form.Label>
+                <Form.Label htmlFor="rating">Rating</Form.Label>
                 <Form.Control
                   name="rating"
                   placeholder="rating"
                   type="number"
                   required
                   onChange={this.onValueChange}
-                  value={this.state.rating.rating}
+                  value={this.state.review.rating}
                 />
               </Form.Group>
               <Button type="submit">Rate</Button>

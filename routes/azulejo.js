@@ -10,6 +10,7 @@ const azulejoController = require("./../controllers/azulejo");
 router.get("/azulejos/all", azulejoController.loadAll);
 router.get("/azulejos/recent", azulejoController.loadRecent);
 router.get("/azulejo/:id", azulejoController.loadSingle);
+router.post("/azulejo/:id/rate", azulejoController.updateRate);
 
 // router.post("/search", azulejoController.verify);
 

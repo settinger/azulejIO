@@ -37,6 +37,7 @@ exports.loadRecent = (req, res, next) => {
 exports.loadSingle = (req, res, next) => {
   Azulejo.findById(req.params.id)
     .populate("_createdBy")
+    .populate("_ratings")
     .then(azulejo => {
       res.json({ type: "success", azulejo });
     })
@@ -67,6 +68,22 @@ exports.create = (req, res, next) => {
         });
     }
   );
+};
+exports.updateRate = (req, res, next) => {
+  const { rating, comment } = req.body;
+  Azulejo.findByIdAndUpdate(req.params.id, {
+    reviews: {
+      rating,
+      comment,
+      _createdBy: req.user._id
+    }
+  })
+    .then(azulejo => {
+      res.json({ type: "success", azulejo });
+    })
+    .catch(error => {
+      next(error);
+    });
 };
 
 exports.remove = (req, res, next) => {
