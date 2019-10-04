@@ -112,7 +112,12 @@ export default class App extends Component {
                   <AzulejoView {...props} user={this.state.user} />
                 )}
               />
-              <Route path="/azulejo/:id" exact component={SingleAzulejoView} />
+              <Route
+                path="/azulejo/:id"
+                exact
+                component={SingleAzulejoView}
+                user={this.state.user}
+              />
               <Route path="/error/:code" component={ErrorView} />
               <Route path="/" component={CatchAllView} />
             </Switch>

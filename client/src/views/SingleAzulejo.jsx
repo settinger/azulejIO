@@ -51,8 +51,7 @@ export default class SingleAzulejo extends Component {
     });
   }
 
-  addRate(event) {
-    event.preventDefault();
+  addRate() {
     const rating = this.state.review;
     rate(this.state.azulejo._id, rating)
       .then(review => {
@@ -99,30 +98,32 @@ export default class SingleAzulejo extends Component {
             ))}
           </p>
           <div>
-            <Form onSubmit={this.addRate}>
-              <Form.Group>
-                <Form.Label htmlFor="comment">Comment</Form.Label>
-                <Form.Control
-                  name="comment"
-                  placeholder="comment"
-                  required
-                  onChange={this.onValueChange}
-                  value={this.state.review.comment}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label htmlFor="rating">Rating</Form.Label>
-                <Form.Control
-                  name="rating"
-                  placeholder="rating"
-                  type="number"
-                  required
-                  onChange={this.onValueChange}
-                  value={this.state.review.rating}
-                />
-              </Form.Group>
-              <Button type="submit">Rate</Button>
-            </Form>
+            {this.props.user && (
+              <Form onSubmit={this.addRate}>
+                <Form.Group>
+                  <Form.Label htmlFor="comment">Comment</Form.Label>
+                  <Form.Control
+                    name="comment"
+                    placeholder="comment"
+                    required
+                    onChange={this.onValueChange}
+                    value={this.state.review.comment}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor="rating">Rating</Form.Label>
+                  <Form.Control
+                    name="rating"
+                    placeholder="rating"
+                    type="number"
+                    required
+                    onChange={this.onValueChange}
+                    value={this.state.review.rating}
+                  />
+                </Form.Group>
+                <Button type="submit">Rate</Button>
+              </Form>
+            )}
           </div>
         </div>
       )

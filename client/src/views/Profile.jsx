@@ -86,10 +86,14 @@ export default class Profile extends Component {
                     img={azulejo.imageUrl}
                     colors={azulejo.colors}
                     key={azulejo._id}
+                    reviews={azulejo.reviews}
                   />
                 );
               })}
           </div>
+          {/* {(this.props.user._id === this.state.user._id) && (
+            
+          )} */}
           <Button className="btn" onClick={this.toggleEditProfile}>
             {this.state.buttonText}
           </Button>
