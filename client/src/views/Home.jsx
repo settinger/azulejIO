@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
-import { loadAll } from "./../services/azulejo-api";
+import { loadRecent } from "./../services/azulejo-api";
 
 export default class HomeView extends Component {
   constructor(props) {
@@ -12,9 +12,8 @@ export default class HomeView extends Component {
   }
 
   componentDidMount() {
-    loadAll()
+    loadRecent(20)
       .then(azulejos => {
-        azulejos.reverse();
         this.setState({ azulejos, loaded: true });
       })
       .catch(error => {

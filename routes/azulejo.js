@@ -7,14 +7,9 @@ const routeGuardMiddleware = require("./../middleware/route-guard");
 
 const azulejoController = require("./../controllers/azulejo");
 
-router.get("/azulejo/all", azulejoController.loadAll);
+router.get("/azulejos/all", azulejoController.loadAll);
+router.get("/azulejos/recent", azulejoController.loadRecent);
 router.get("/azulejo/:id", azulejoController.loadSingle);
-
-router.post(
-  "/azulejo/rate/:id",
-  routeGuardMiddleware(true),
-  azulejoController.rate
-);
 
 // router.post("/search", azulejoController.verify);
 

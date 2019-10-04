@@ -12,7 +12,22 @@ exports.loadAll = (req, res, next) => {
   Azulejo.find()
     .populate("_createdBy")
     .then(azulejos => {
-      console.log(azulejos);
+      res.json({ type: "success", azulejos });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+exports.loadRecent = (req, res, next) => {
+  const n = parseInt(req.query.n) || 20; // Pagination: how many entries per page
+  const p = parseInt(req.query.p) || 0; // Pagination: which page to start on
+  Azulejo.find()
+    .sort({ $natural: -1 })
+    .skip(p * n)
+    .limit(n)
+    .populate("_createdBy")
+    .then(azulejos => {
       res.json({ type: "success", azulejos });
     })
     .catch(error => {
@@ -31,22 +46,6 @@ exports.loadSingle = (req, res, next) => {
     });
 };
 
-exports.rate = (req, res, next) => {
-  const { imageID, rating, comment } = req.body;
-  Review.create({
-    imageID,
-    rating,
-    comment,
-    createdBy: req.user.username
-  })
-    .then(review => {
-      res.json({ type: "success", review });
-    })
-    .catch(error => {
-      next(error);
-    });
-};
-
 exports.create = (req, res, next) => {
   const { name, colors, image } = req.body;
   // Upload to Cloudinary
@@ -54,7 +53,6 @@ exports.create = (req, res, next) => {
     image,
     { folder: "/azulejio" },
     (error, result) => {
-      console.log(result, error);
       Azulejo.create({
         name,
         colors,
