@@ -19,14 +19,10 @@ exports.loadAll = (req, res, next) => {
     });
 };
 
-async function getUserObjectFromUserName(username) {
-  await User.findOne({ username });
-}
-
-exports.loadSearch = (req, res, next) => {
+exports.loadSearch = async (req, res, next) => {
   const n = req.query.n && parseInt(req.query.n); // Pagination: how many entries per page
   const p = req.query.p && parseInt(req.query.p); // Pagination: which page to start on
-  const user = req.query.user;
+  const username = req.query.user;
   const searchParams = {};
   const searchOptions = {};
   if (n) {
@@ -35,8 +31,9 @@ exports.loadSearch = (req, res, next) => {
   if (n && p) {
     searchOptions.skip = p * n;
   }
-  if (user) {
-    searchParams._createdBy = getUserObjectFromUserName(user);
+  if (username) {
+    const foundUser = await User.findOne({ username });
+    searchParams._createdBy = foundUser && foundUser._id;
   }
   Azulejo.find(searchParams, null, searchOptions)
     .then(azulejos => {

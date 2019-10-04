@@ -17,10 +17,10 @@ export const loadAll = () => {
   });
 };
 
-export const loadByUser = username => {
+export const loadSearch = searchQuery => {
   return new Promise((resolve, reject) => {
     azulejoAPI
-      .get(`/azulejos/search?user=${username}`)
+      .get(`/azulejos/search?${searchQuery}`)
       .then(response => {
         resolve(response.data.azulejos);
       })
