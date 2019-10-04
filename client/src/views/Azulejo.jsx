@@ -41,7 +41,8 @@ export default class Azulejo extends Component {
     });
   }
 
-  saveToAccount() {
+  saveToAccount(event) {
+    event.preventDefault();
     const img = this.$canvas.toDataURL("image/png");
     const button = document.getElementById("save-to-account");
     button.innerText = "Loading...";
@@ -70,7 +71,7 @@ export default class Azulejo extends Component {
         <AzulejoCanvas />
         {this.props.user && (
           <Fragment>
-            <Form>
+            <Form onSubmit={this.saveToAccount}>
               <Form.Group>
                 <Form.Label htmlFor="sign-up-email">Name</Form.Label>
                 <Form.Control
@@ -111,10 +112,8 @@ export default class Azulejo extends Component {
                   );
                 })}
               </Form.Group>
+              <button id="save-to-account">Save to my account</button>
             </Form>
-            <button onClick={this.saveToAccount} id="save-to-account">
-              Save to my account
-            </button>
           </Fragment>
         )}
       </div>
