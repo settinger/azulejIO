@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import { loadUser } from "../services/auth-api";
-import { loadAll } from "../services/azulejo-api";
+import { loadSearch } from "../services/azulejo-api";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
 import EditProfile from "./../components/EditProfile";
 
@@ -39,16 +39,13 @@ export default class Profile extends Component {
   }
 
   loadAzulejos() {
-    loadAll()
-      .then(azulejos => {
-        let filteredAzulejos = azulejos.filter(
-          azulejo => azulejo._createdBy._id === this.state.user._id
-        );
+    loadSearch(`user=${this.props.match.params.username}`)
+      .then(azulejos =>
         this.setState({
           ...this.state,
-          azulejos: filteredAzulejos
-        });
-      })
+          azulejos
+        })
+      )
       .catch(error => {
         console.log(error);
       });
