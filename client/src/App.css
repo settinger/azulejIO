@@ -31,3 +31,7 @@
   text-decoration: none;
   color: inherit;
 }
+
+.no-style:hover {
+  color: inherit;
+}
