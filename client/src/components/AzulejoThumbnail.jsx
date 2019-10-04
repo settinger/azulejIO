@@ -18,9 +18,11 @@ const AzulejoThumbnail = props => {
         <h5 className="card-title">
           <Link to={`/azulejo/${props.id}`}>{props.name}</Link>
         </h5>
-        <p className="card-text">
-          By <Link to={`/profile/${props.createdBy}`}>{props.createdBy}</Link>
-        </p>
+        {props.createdBy && (
+          <p className="card-text">
+            By <Link to={`/profile/${props.createdBy}`}>{props.createdBy}</Link>
+          </p>
+        )}
         <p className="card-text">
           {["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Black"].map(
             color => {

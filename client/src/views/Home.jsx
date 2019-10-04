@@ -27,9 +27,7 @@ export default class HomeView extends Component {
         <h1>AZULEJ.IO</h1>
         <p>Here are some recent designs by users:</p>
         {this.state.loaded && (
-          <div
-            style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
-          >
+          <div className="card-set">
             {this.state.azulejos.map(azulejo => {
               return (
                 <AzulejoThumbnail

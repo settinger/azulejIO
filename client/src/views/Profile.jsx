@@ -16,6 +16,7 @@ export default class Profile extends Component {
     };
     this.toggleEditProfile = this.toggleEditProfile.bind(this);
   }
+
   toggleEditProfile() {
     this.setState({
       editProfileState: !this.state.editProfileState
@@ -24,6 +25,7 @@ export default class Profile extends Component {
       ? this.setState({ buttonText: "Edit Profile" })
       : this.setState({ buttonText: "Cancel" });
   }
+
   loadUser() {
     loadUser(this.props.match.params.username)
       .then(user => {
@@ -35,13 +37,13 @@ export default class Profile extends Component {
         console.log(error);
       });
   }
+
   loadAzulejos() {
     loadAll()
       .then(azulejos => {
         let filteredAzulejos = azulejos.filter(
           azulejo => azulejo._createdBy._id === this.state.user._id
         );
-        console.log(filteredAzulejos);
         this.setState({
           ...this.state,
           azulejos: filteredAzulejos
@@ -51,6 +53,7 @@ export default class Profile extends Component {
         console.log(error);
       });
   }
+
   componentDidMount() {
     this.loadUser();
     this.loadAzulejos();
@@ -66,7 +69,6 @@ export default class Profile extends Component {
   }
 
   render() {
-    console.log(this.state);
     const user = this.state.user;
     return (
       (user && (
@@ -75,14 +77,13 @@ export default class Profile extends Component {
           <h1>{user.username}</h1>
           <h2>Profile Page</h2>
           <span>Check your azulejos:</span>
-          <div>
+          <div className="card-set">
             {this.state.azulejos &&
               this.state.azulejos.map(azulejo => {
                 return (
                   <AzulejoThumbnail
                     name={azulejo.name}
                     img={azulejo.imageUrl}
-                    createdBy={azulejo._createdBy.username}
                     colors={azulejo.colors}
                     key={azulejo._id}
                   />
