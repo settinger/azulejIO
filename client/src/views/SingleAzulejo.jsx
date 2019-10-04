@@ -82,8 +82,22 @@ export default class SingleAzulejo extends Component {
           <h3>
             Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
           </h3>
-          <p>Rating: {this.state.azulejo.reviews[0].rating}</p>{" "}
-          <p>Reviews: {this.state.azulejo.reviews[0].comment}</p>
+          <p>
+            Rating:{" "}
+            {this.state.azulejo.reviews
+              .map(v => v.rating)
+              .reduce((acc, v, i, a) => {
+                acc += v;
+                return acc / a.length;
+              }, 0)
+              .toFixed(1)}
+          </p>{" "}
+          <p>
+            Reviews:{" "}
+            {this.state.azulejo.reviews.map(v => (
+              <p> {v.comment}</p>
+            ))}
+          </p>
           <div>
             <Form onSubmit={this.addRate}>
               <Form.Group>

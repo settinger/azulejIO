@@ -37,6 +37,7 @@ export default class HomeView extends Component {
                   img={azulejo.imageUrl}
                   createdBy={azulejo._createdBy.username}
                   colors={azulejo.colors}
+                  reviews={azulejo.reviews}
                 />
               );
             })}

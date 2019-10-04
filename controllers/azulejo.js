@@ -101,10 +101,12 @@ exports.create = (req, res, next) => {
 exports.updateRate = (req, res, next) => {
   const { rating, comment } = req.body;
   Azulejo.findByIdAndUpdate(req.params.id, {
-    reviews: {
-      rating,
-      comment,
-      _createdBy: req.user._id
+    $push: {
+      reviews: {
+        rating,
+        comment,
+        _createdBy: req.user._id
+      }
     }
   })
     .then(azulejo => {
