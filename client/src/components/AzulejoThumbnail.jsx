@@ -15,9 +15,9 @@ const AzulejoThumbnail = props => {
         <img src={thumbUrl} alt="Azulejo thumbnail" className="card-img-top" />
       </Link>
       <div className="card-body">
-        <h5 class="card-title">{props.name}</h5>
-        <p class="card-text">By {props.createdBy}</p>
-        <p class="card-text">
+        <h5 className="card-title">{props.name}</h5>
+        <p className="card-text">By {props.createdBy}</p>
+        <p className="card-text">
           {props.colors.includes("Red") && (
             <span style={{ color: "red" }}>■</span>
           )}
