@@ -15,7 +15,6 @@ const deserializeUserMiddleware = require("./middleware/deserialize-user");
 
 const azulejoRouter = require("./routes/azulejo");
 const authRouter = require("./routes/auth");
-const ratingRouter = require("./routes/rating");
 
 const app = express();
 
@@ -42,7 +41,6 @@ app.use(deserializeUserMiddleware);
 
 app.use("/", azulejoRouter);
 app.use("/auth", authRouter);
-app.use("/azulejo", ratingRouter);
 
 app.get("*", (req, res, next) => {
   res.sendFile(join(__dirname, "./client/build/index.html"));

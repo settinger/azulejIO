@@ -24,6 +24,16 @@ const AzulejoThumbnail = props => {
           </p>
         )}
         <p className="card-text">
+          Rating:{" "}
+          {props.reviews
+            .map(v => v.rating)
+            .reduce((acc, v, i, a) => {
+              acc += v;
+              return acc / a.length;
+            }, 0)
+            .toFixed(1)}
+        </p>{" "}
+        <p className="card-text">
           {["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Black"].map(
             color => {
               return (
