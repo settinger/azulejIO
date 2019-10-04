@@ -3,6 +3,7 @@ require("dotenv").config();
 const cloudinary = require("cloudinary");
 
 const Azulejo = require("./../models/azulejo");
+const User = require("./../models/user");
 
 cloudinary.config();
 
@@ -10,6 +11,34 @@ exports.loadAll = (req, res, next) => {
   Azulejo.find()
     .sort({ createdAt: -1 })
     .populate("_createdBy")
+    .then(azulejos => {
+      res.json({ type: "success", azulejos });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+async function getUserObjectFromUserName(username) {
+  await User.findOne({ username });
+}
+
+exports.loadSearch = (req, res, next) => {
+  const n = req.query.n && parseInt(req.query.n); // Pagination: how many entries per page
+  const p = req.query.p && parseInt(req.query.p); // Pagination: which page to start on
+  const user = req.query.user;
+  const searchParams = {};
+  const searchOptions = {};
+  if (n) {
+    searchOptions.limit = n;
+  }
+  if (n && p) {
+    searchOptions.skip = p * n;
+  }
+  if (user) {
+    searchParams._createdBy = getUserObjectFromUserName(user);
+  }
+  Azulejo.find(searchParams, null, searchOptions)
     .then(azulejos => {
       res.json({ type: "success", azulejos });
     })
