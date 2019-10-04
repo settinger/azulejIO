@@ -82,10 +82,12 @@ export default class Profile extends Component {
               this.state.azulejos.map(azulejo => {
                 return (
                   <AzulejoThumbnail
+                    key={azulejo._id}
+                    id={azulejo._id}
                     name={azulejo.name}
                     img={azulejo.imageUrl}
                     colors={azulejo.colors}
-                    key={azulejo._id}
+                    reviews={azulejo.reviews}
                   />
                 );
               })}
