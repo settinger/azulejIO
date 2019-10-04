@@ -17,6 +17,19 @@ export const loadAll = () => {
   });
 };
 
+export const loadByUser = username => {
+  return new Promise((resolve, reject) => {
+    azulejoAPI
+      .get(`/azulejos/search?user=${username}`)
+      .then(response => {
+        resolve(response.data.azulejos);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
 export const loadRecent = n => {
   return new Promise((resolve, reject) => {
     azulejoAPI
