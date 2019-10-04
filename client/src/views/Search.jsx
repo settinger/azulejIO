@@ -31,13 +31,9 @@ export default class Search extends Component {
   }
 
   componentDidUpdate(previousProps, previousState) {
-    // if (
-    //   !this.state.user ||
-    //   previousProps.match.params.username !== this.props.match.params.username
-    // ) {
-    //   this.loadUser();
-    //   this.loadAzulejos();
-    // }
+    if (previousProps.location.search !== this.props.location.search) {
+      this.loadAzulejos();
+    }
   }
 
   render() {
