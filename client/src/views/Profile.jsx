@@ -59,9 +59,10 @@ export default class Profile extends Component {
   componentDidUpdate(previousProps, previousState) {
     if (
       !this.state.user ||
-      previousProps.match.params.id !== this.props.match.params.id
+      previousProps.match.params.username !== this.props.match.params.username
     ) {
       this.loadUser();
+      this.loadAzulejos();
     }
   }
 
