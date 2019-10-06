@@ -1,13 +1,35 @@
 import React, { Component, Fragment } from "react";
 import Drawing from "./scripts/Drawing";
 
+import { SketchPicker } from "react-color";
+
 export default class AzulejoCanvas extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayColorPicker: false,
+      color: { r: 0, g: 85, b: 170, a: 1 }
+    };
+    this.toggleColorPicker = this.toggleColorPicker.bind(this);
+    this.colorChanged = this.colorChanged.bind(this);
+  }
+
+  toggleColorPicker(event) {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker });
+  }
+
+  colorChanged(event) {
+    // console.log(event);
+    this.drawing.brushColor = event.hex;
+    this.setState({ color: event.rgb });
+  }
+
   componentDidMount() {
     const $canvas = document.getElementById("drawing-canvas");
     const $exportButton = document.getElementById("export-button");
     const $img = document.getElementById("image-goes-here");
-    const $brushColor = document.getElementById("brush-color");
-    const $brushSize = document.getElementById("brush-size");
+    // const $brushColor = document.getElementById("brush-color");
+    // const $brushSize = document.getElementById("brush-size");
     this.$brushSizeValue = document.getElementById("brush-size-value");
 
     $exportButton.addEventListener("click", () => {
@@ -44,15 +66,53 @@ export default class AzulejoCanvas extends Component {
     return (
       <Fragment>
         <div id="brush-tools">
-          <label htmlFor="brush-color">Choose brush color:</label>
-          <input
+          {/* <SketchPicker /> */}
+          <label htmlFor="brush-color">Choose brush color: </label>
+          <div
+            style={{
+              padding: "5px",
+              boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
+              borderRadius: "1px",
+              display: "inline-block",
+              cursor: "pointer"
+            }}
+            onClick={this.toggleColorPicker}
+          >
+            <div
+              style={{
+                width: "40px",
+                height: "15px",
+                borderRadius: "2px",
+                background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`
+              }}
+            ></div>
+          </div>
+          {this.state.displayColorPicker && (
+            <div style={{ position: "absolute", zIndex: "2" }}>
+              <div
+                style={{
+                  position: "fixed",
+                  top: "0px",
+                  right: "0px",
+                  bottom: "0px",
+                  left: "0px"
+                }}
+                onClick={() => this.setState({ displayColorPicker: false })}
+              ></div>
+              <SketchPicker
+                color={this.state.color}
+                onChange={this.colorChanged}
+              />
+            </div>
+          )}
+          {/* <input
             type="color"
             id="brush-color"
             defaultValue="#0055AA"
             onChange={event => {
               this.drawing.brushColor = event.target.value;
             }}
-          />
+          /> */}
           <br />
           <input
             onChange={() => {}}
