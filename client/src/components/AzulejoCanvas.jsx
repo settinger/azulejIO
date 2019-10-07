@@ -62,6 +62,18 @@ export default class AzulejoCanvas extends Component {
     });
   }
 
+  componentDidUpdate() {
+    if (this.props.remixUrl) {
+      // console.log(this.props.remixUrl);
+      const remix = new Image();
+      remix.crossOrigin = "anonymous";
+      remix.src = this.props.remixUrl;
+      setTimeout(() => {
+        this.drawing.context.drawImage(remix, -600, -600);
+      }, 500);
+    }
+  }
+
   render() {
     return (
       <Fragment>

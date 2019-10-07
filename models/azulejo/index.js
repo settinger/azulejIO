@@ -32,7 +32,8 @@ const schema = new mongoose.Schema({
     type: Number,
     trim: true
   },
-  _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+  _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  _remixedFrom: { type: mongoose.Schema.Types.ObjectId, ref: "Azulejo" }
 });
 
 const Azulejo = mongoose.model("Azulejo", schema);

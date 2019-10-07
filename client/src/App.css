@@ -31,6 +31,7 @@
 .no-style {
   text-decoration: none;
   color: inherit;
+  font-size: 1.4em;
 }
 
 .no-style:hover {

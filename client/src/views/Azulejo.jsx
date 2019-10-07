@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import AzulejoCanvas from "../components/AzulejoCanvas";
-import { create } from "../services/azulejo-api";
+import { create, loadSingle } from "../services/azulejo-api";
 import Form from "react-bootstrap/Form";
 
 export default class Azulejo extends Component {
@@ -8,8 +8,15 @@ export default class Azulejo extends Component {
     super(props);
     this.state = {
       name: "",
-      colors: []
+      colors: [],
+      remix: false
     };
+    // Check if we are remixing an existing design
+    if (this.props.match.params.id) {
+      this.state.remixedFrom = this.props.match.params.id;
+      this.state.remix = true;
+      this.state.remixUrl = false;
+    }
     this.saveToAccount = this.saveToAccount.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.addColor = this.addColor.bind(this);
@@ -64,12 +71,23 @@ export default class Azulejo extends Component {
 
   componentDidMount() {
     this.$canvas = document.getElementById("drawing-canvas");
+    // If we're making a remix, load the image URL to remix from
+    if (this.state.remix) {
+      console.log("A remix is occurring");
+      loadSingle(this.props.match.params.id)
+        .then(azulejo => {
+          this.setState({ remixUrl: azulejo.imageUrl });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 
   render() {
     return (
       <div>
-        <AzulejoCanvas />
+        <AzulejoCanvas remixUrl={this.state.remixUrl} />
         {this.props.user && (
           <Fragment>
             <Form onSubmit={this.saveToAccount}>

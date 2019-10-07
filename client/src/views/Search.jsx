@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { loadSearch } from "../services/azulejo-api";
 import AzulejoThumbnail from "../components/AzulejoThumbnail";
 
