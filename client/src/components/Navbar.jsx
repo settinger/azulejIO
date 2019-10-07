@@ -27,11 +27,11 @@ const NavbarView = props => {
             </Nav.Link>
             {(!props.user && (
               <Fragment>
-                <Nav.Link href="#" className="nav-link">
+                <Nav.Link href="/auth/signin" className="nav-link">
                   Sign In{" "}
                 </Nav.Link>
 
-                <Nav.Link href="#" className="nav-link">
+                <Nav.Link href="/auth/signup" className="nav-link">
                   Sign Up{" "}
                 </Nav.Link>
               </Fragment>

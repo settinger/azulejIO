@@ -9,9 +9,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.25",
-    "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.5",
     "@ironh/eslint-config": "^0.0.2",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.15.0",
