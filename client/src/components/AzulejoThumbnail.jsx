@@ -42,7 +42,7 @@ class AzulejoThumbnail extends Component {
     this.setState({
       fav: this.props.fav
     });
-    this.props.loadAzulejosFav(this.props.user._id);
+    // this.props.loadAzulejosFav(this.props.user._id);
   }
 
   componentDidUpdate(previousProps, previousState) {

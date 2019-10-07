@@ -92,7 +92,7 @@ export default class Profile extends Component {
     ) {
       this.loadUser();
       this.loadAzulejos();
-      this.loadAzulejosFav();
+      // this.loadAzulejosFav();
     }
   }
 
