@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
 import "./App.css";
 
@@ -118,6 +118,13 @@ export default class App extends Component {
                 render={props => (
                   <AzulejoView {...props} user={this.state.user} />
                 )}
+              />
+              <Route
+                path="/azulejo/remix/:id"
+                exact
+                render={props => {
+                  return <AzulejoView {...props} user={this.state.user} />;
+                }}
               />
               <Route
                 path="/azulejo/:id"
