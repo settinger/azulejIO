@@ -66,12 +66,13 @@ export default class SingleAzulejo extends Component {
   render() {
     const createdBy =
       this.state.azulejo && this.state.azulejo._createdBy.username;
-    console.log(this.state);
+    // console.log(this.state);
     return (
       this.state.azulejo && (
         <div>
-          <h1>AZULEJO</h1>
-          <h1>Azulejo: {this.state.azulejo.name}</h1>
+          <h1>
+            Azulejo: <i>{this.state.azulejo.name}</i>
+          </h1>
           <div>
             <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
               <span className="btn btn-primary">Remix it!</span>
@@ -86,6 +87,22 @@ export default class SingleAzulejo extends Component {
           <h3>
             Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
           </h3>
+          {this.state.azulejo._remixedFrom && (
+            <h4>
+              Remixed from{" "}
+              <i>
+                <Link to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}>
+                  {this.state.azulejo._remixedFrom.name}
+                </Link>
+              </i>{" "}
+              by{" "}
+              <Link
+                to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
+              >
+                {this.state.azulejo._remixedFrom._createdBy.username}
+              </Link>
+            </h4>
+          )}
           <p>
             Rating:{" "}
             {this.state.azulejo.reviews
