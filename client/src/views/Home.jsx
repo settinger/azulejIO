@@ -40,6 +40,7 @@ export default class HomeView extends Component {
                     createdBy={azulejo._createdBy.username}
                     colors={azulejo.colors}
                     reviews={azulejo.reviews}
+                    fav={azulejo.fav}
                   />
                 );
               })}

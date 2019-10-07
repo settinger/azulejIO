@@ -69,12 +69,12 @@ export const rate = (id, ratingData) => {
   });
 };
 
-export const fav = (id, favData) => {
+export const fav = id => {
   return new Promise((resolve, reject) => {
     azulejoAPI
-      .post(`azulejo/${id}/fav`, favData)
+      .post(`azulejo/${id}/fav`)
       .then(response => {
-        resolve(response.data.fav);
+        resolve(response.data.azulejo);
       })
       .catch(error => {
         reject(error);

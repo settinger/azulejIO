@@ -121,7 +121,7 @@ exports.updateRate = (req, res, next) => {
 };
 exports.addFav = (req, res, next) => {
   Azulejo.findByIdAndUpdate(req.params.id, {
-    fav: +1
+    $inc: { fav: 1 }
   })
     .then(azulejo => {
       res.json({ type: "success", azulejo });
