@@ -28,6 +28,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  fav: {
+    type: Number,
+    trim: true
+  },
   _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 

@@ -119,6 +119,17 @@ exports.updateRate = (req, res, next) => {
       next(error);
     });
 };
+exports.addFav = (req, res, next) => {
+  Azulejo.findByIdAndUpdate(req.params.id, {
+    fav: +1
+  })
+    .then(azulejo => {
+      res.json({ type: "success", azulejo });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
 
 exports.remove = (req, res, next) => {
   Azulejo.findOneAndDelete({

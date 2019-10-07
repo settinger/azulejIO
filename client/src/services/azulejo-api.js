@@ -69,6 +69,19 @@ export const rate = (id, ratingData) => {
   });
 };
 
+export const fav = (id, favData) => {
+  return new Promise((resolve, reject) => {
+    azulejoAPI
+      .post(`azulejo/${id}/fav`, favData)
+      .then(response => {
+        resolve(response.data.fav);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
 //CREATE AZULEJO DESIGN
 export const create = azulejoDesign => {
   return new Promise((resolve, reject) => {
