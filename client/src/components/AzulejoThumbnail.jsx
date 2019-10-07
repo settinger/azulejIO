@@ -33,14 +33,11 @@ class AzulejoThumbnail extends Component {
     this.setState({
       fav: this.props.fav
     });
+    console.log(this.state);
   }
 
   componentDidUpdate(previousProps, previousState) {
-    if (
-      !this.state.fav ||
-      (previousProps.fav !== this.props.fav ||
-        previousState.fav !== this.state.fav)
-    ) {
+    if (!this.state.fav || previousState.fav !== this.state.fav) {
       this.setState({
         ...this.state
       });
@@ -48,7 +45,6 @@ class AzulejoThumbnail extends Component {
   }
 
   render() {
-    console.log(this.state);
     const origUrl = this.props.img;
     const thumbIndex =
       origUrl.indexOf("/image/upload") + "/image/upload".length;
@@ -73,7 +69,7 @@ class AzulejoThumbnail extends Component {
             <li className="list-inline-item mr-4">
               <FontAwesomeIcon icon="heart" color="#17a2b8" />
               <span className="ml-2">
-                <Link onClick={this.addFav}>{this.state.fav}</Link>
+                <Link onClick={this.addFav}>{this.state.fav.length}</Link>
               </span>
             </li>
             <li className="list-inline-item mr-4">

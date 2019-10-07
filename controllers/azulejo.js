@@ -123,7 +123,22 @@ exports.addFav = (req, res, next) => {
   Azulejo.findByIdAndUpdate(
     req.params.id,
     {
-      $inc: { fav: 1 }
+      $push: { _createdBy: req.user._id }
+    },
+    { new: "true" }
+  )
+    .then(azulejo => {
+      res.json({ type: "success", azulejo });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+exports.removeFav = (req, res, next) => {
+  Azulejo.findByIdAndUpdate(
+    req.params.id,
+    {
+      $pull: { _createdBy: req.user._id }
     },
     { new: "true" }
   )

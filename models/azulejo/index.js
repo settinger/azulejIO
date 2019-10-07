@@ -28,10 +28,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  fav: {
-    type: Number,
-    trim: true
-  },
+  fav: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
