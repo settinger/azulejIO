@@ -34,8 +34,8 @@ export default class Azulejo extends Component {
   }
 
   onValueChange(event) {
-    console.log(event.target.value);
-    console.log(this.state);
+    // console.log(event.target.value);
+    // console.log(this.state);
     this.setState({
       name: event.target.value
     });
@@ -58,6 +58,7 @@ export default class Azulejo extends Component {
       })
       .catch(error => {
         console.log(error);
+        button.innerText = "Save to my account";
       });
   }
 

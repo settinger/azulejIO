@@ -15,7 +15,6 @@ export default class Search extends Component {
   loadAzulejos() {
     loadSearch(this.props.location.search.substr(1))
       .then(azulejos => {
-        console.log(azulejos);
         this.setState({
           loaded: true,
           azulejos
