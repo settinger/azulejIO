@@ -24,6 +24,7 @@ exports.loadSearch = async (req, res, next) => {
   const p = req.query.p && parseInt(req.query.p); // Pagination: which page to start on
   const username = req.query.user;
   const color = req.query.color;
+  const fav = req.query.fav;
   const searchParams = {};
   const searchOptions = {};
   if (n) {
@@ -39,6 +40,9 @@ exports.loadSearch = async (req, res, next) => {
   }
   if (color) {
     searchParams.colors = { $in: color };
+  }
+  if (fav) {
+    searchParams.fav = { $in: req.user.id };
   }
   Azulejo.find(searchParams, null, searchOptions)
     .populate("_createdBy")

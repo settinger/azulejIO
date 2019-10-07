@@ -137,7 +137,12 @@ export default class App extends Component {
                   <SingleAzulejoView {...props} user={this.state.user} />
                 )}
               />
-              <Route path="/search" component={SearchView} />
+              <Route
+                path="/search"
+                render={props => (
+                  <SearchView {...props} user={this.state.user} />
+                )}
+              />
               <Route path="/error/:code" component={ErrorView} />
               <Route path="/" component={CatchAllView} />
             </Switch>

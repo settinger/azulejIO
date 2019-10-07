@@ -52,6 +52,18 @@ export default class Search extends Component {
                   createdBy={azulejo._createdBy.username}
                   colors={azulejo.colors}
                   reviews={azulejo.reviews}
+                  fav={azulejo.fav}
+                  remixedFromTitle={
+                    azulejo._remixedFrom && azulejo._remixedFrom.name
+                  }
+                  remixedFromId={
+                    azulejo._remixedFrom && azulejo._remixedFrom._id
+                  }
+                  remixedFromUser={
+                    azulejo._remixedFrom &&
+                    azulejo._remixedFrom._createdBy.username
+                  }
+                  user={this.props.user}
                 />
               );
             })}
