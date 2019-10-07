@@ -11,6 +11,7 @@ exports.loadAll = (req, res, next) => {
   Azulejo.find()
     .sort({ createdAt: -1 })
     .populate("_createdBy")
+    .populate({ path: "_remixedFrom", populate: { path: "_createdBy" } })
     .then(azulejos => {
       res.json({ type: "success", azulejos });
     })
@@ -46,6 +47,7 @@ exports.loadSearch = async (req, res, next) => {
   }
   Azulejo.find(searchParams, null, searchOptions)
     .populate("_createdBy")
+    .populate({ path: "_remixedFrom", populate: { path: "_createdBy" } })
     .then(azulejos => {
       res.json({ type: "success", azulejos });
     })
@@ -74,6 +76,7 @@ exports.loadRecent = (req, res, next) => {
 exports.loadSingle = (req, res, next) => {
   Azulejo.findById(req.params.id)
     .populate("_createdBy")
+    .populate({ path: "_remixedFrom", populate: { path: "_createdBy" } })
     .populate("_ratings")
     .then(azulejo => {
       res.json({ type: "success", azulejo });

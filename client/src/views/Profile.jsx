@@ -97,6 +97,7 @@ export default class Profile extends Component {
                     }
                     remixedFromUser={
                       azulejo._remixedFrom &&
+                      azulejo._remixedFrom._createdBy &&
                       azulejo._remixedFrom._createdBy.username
                     }
                     user={this.props.user}
