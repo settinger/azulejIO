@@ -57,7 +57,7 @@ const AzulejoThumbnail = props => {
         <Card.Text>
           {props.createdBy && (
             <Fragment>
-              By
+              By{" "}
               <Link className="link" to={`/profile/${props.createdBy}`}>
                 {props.createdBy}
               </Link>
