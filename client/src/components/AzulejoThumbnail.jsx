@@ -21,7 +21,6 @@ class AzulejoThumbnail extends Component {
         this.setState({
           fav: fav
         });
-        // console.log(this.state);
       })
       .catch(error => {
         console.log(error);
@@ -30,11 +29,9 @@ class AzulejoThumbnail extends Component {
   removeFav() {
     removeFav(this.props.id)
       .then(fav => {
-        // console.log("FAV", fav);
         this.setState({
           fav: fav
         });
-        console.log(this.state);
       })
       .catch(error => {
         console.log(error);
@@ -45,18 +42,20 @@ class AzulejoThumbnail extends Component {
     this.setState({
       fav: this.props.fav
     });
+    this.props.loadAzulejosFav(this.props.user._id);
   }
 
   componentDidUpdate(previousProps, previousState) {
     if (!this.state.fav || previousState.fav !== this.state.fav) {
+      console.log("FAV STATE UPDATED", this.state.fav);
       this.setState({
         ...this.state
       });
+      this.props.loadAzulejosFav(this.props.user._id);
     }
   }
 
   render() {
-    // console.log(this.props);
     const origUrl = this.props.img;
     const thumbIndex =
       origUrl.indexOf("/image/upload") + "/image/upload".length;

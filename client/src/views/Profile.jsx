@@ -16,6 +16,8 @@ export default class Profile extends Component {
       azulejosFav: null
     };
     this.toggleEditProfile = this.toggleEditProfile.bind(this);
+    this.loadAzulejosFav = this.loadAzulejosFav.bind(this);
+    this.loadAzulejos = this.loadAzulejos.bind(this);
   }
 
   toggleEditProfile() {
@@ -52,8 +54,8 @@ export default class Profile extends Component {
       });
   }
 
-  loadAzulejosFav() {
-    loadSearch(`fav=${this.props.user._id}`)
+  loadAzulejosFav(userId) {
+    loadSearch(`fav=${userId}`)
       .then(azulejosFav =>
         this.setState({
           ...this.state,
@@ -61,17 +63,29 @@ export default class Profile extends Component {
         })
       )
       .catch(error => {
-        console.log(error);
+        console.log("BIG ERROR", error);
       });
   }
 
   componentDidMount() {
     this.loadUser();
     this.loadAzulejos();
-    this.loadAzulejosFav();
+    // this.loadAzulejosFav();
   }
 
   componentDidUpdate(previousProps, previousState) {
+    // if (
+    //   !this.state.azulejos ||
+    //   previousState.azulejos !== this.state.azulejos
+    // ) {
+    //   this.loadAzulejos();
+    // } else
+    // if (
+    //   !this.state.azulejosFav ||
+    //   previousState.azulejosFav !== this.state.azulejosFav
+    // ) {
+    //   this.loadAzulejosFav();
+    // }
     if (
       !this.state.user ||
       previousProps.match.params.username !== this.props.match.params.username
@@ -80,23 +94,10 @@ export default class Profile extends Component {
       this.loadAzulejos();
       this.loadAzulejosFav();
     }
-    // else if (
-    //   !this.state.azulejos ||
-    //   previousState.azulejos !== this.state.azulejos
-    // ) {
-    //   this.loadAzulejos();
-    // }
-    //  if (
-    //   !this.state.azulejosFav ||
-    //   previousState.azulejosFav !== this.state.azulejosFav
-    // ) {
-    //   this.loadAzulejosFav();
-    // }
   }
 
   render() {
     const user = this.state.user;
-    console.log(this.state);
     return (
       user && (
         <div>
@@ -129,6 +130,7 @@ export default class Profile extends Component {
                       azulejo._remixedFrom._createdBy.username
                     }
                     user={this.props.user}
+                    loadAzulejosFav={this.loadAzulejosFav}
                   />
                 );
               })}
@@ -158,6 +160,7 @@ export default class Profile extends Component {
                       azulejo._remixedFrom._createdBy.username
                     }
                     user={this.props.user}
+                    loadAzulejosFav={this.loadAzulejosFav}
                   />
                 );
               })}

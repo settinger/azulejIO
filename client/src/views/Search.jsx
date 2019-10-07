@@ -64,6 +64,7 @@ export default class Search extends Component {
                     azulejo._remixedFrom._createdBy.username
                   }
                   user={this.props.user}
+                  loadAzulejosFav={this.loadAzulejosFav}
                 />
               );
             })}
