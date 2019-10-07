@@ -13,6 +13,7 @@ import {
   faTwitter
 } from "@fortawesome/free-brands-svg-icons";
 import { faHeart, faComments, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
   fab,
@@ -20,6 +21,7 @@ library.add(
   faInstagram,
   faTwitter,
   faHeart,
+  farHeart,
   faComments,
   faStar
 );

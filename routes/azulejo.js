@@ -13,6 +13,7 @@ router.get("/azulejos/search", azulejoController.loadSearch);
 router.get("/azulejo/:id", azulejoController.loadSingle);
 router.post("/azulejo/:id/rate", azulejoController.updateRate);
 router.post("/azulejo/:id/fav", azulejoController.addFav);
+router.post("/azulejo/:id/removefav", azulejoController.removeFav);
 
 // router.post("/search", azulejoController.verify);
 

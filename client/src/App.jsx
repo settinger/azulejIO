@@ -81,7 +81,11 @@ export default class App extends Component {
 
           {this.state.loaded && (
             <Switch>
-              <Route path="/" exact component={HomeView} />
+              <Route
+                path="/"
+                exact
+                render={props => <HomeView {...props} user={this.state.user} />}
+              />
               <ProtectedRoute
                 path="/auth/signup"
                 verify={this.verifyUnauthenticated}

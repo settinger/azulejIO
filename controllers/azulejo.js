@@ -123,7 +123,7 @@ exports.addFav = (req, res, next) => {
   Azulejo.findByIdAndUpdate(
     req.params.id,
     {
-      $push: { _createdBy: req.user._id }
+      $push: { fav: req.user._id }
     },
     { new: "true" }
   )
@@ -134,11 +134,12 @@ exports.addFav = (req, res, next) => {
       next(error);
     });
 };
+
 exports.removeFav = (req, res, next) => {
   Azulejo.findByIdAndUpdate(
     req.params.id,
     {
-      $pull: { _createdBy: req.user._id }
+      $pull: { fav: req.user._id }
     },
     { new: "true" }
   )

@@ -81,6 +81,18 @@ export const fav = id => {
       });
   });
 };
+export const removeFav = id => {
+  return new Promise((resolve, reject) => {
+    azulejoAPI
+      .post(`azulejo/${id}/removefav`)
+      .then(response => {
+        resolve(response.data.azulejo.fav);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
 
 //CREATE AZULEJO DESIGN
 export const create = azulejoDesign => {

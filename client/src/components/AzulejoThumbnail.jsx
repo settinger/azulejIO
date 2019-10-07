@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fav } from "./../services/azulejo-api";
+import { fav, removeFav } from "./../services/azulejo-api";
 import { timingSafeEqual } from "crypto";
 
 class AzulejoThumbnail extends Component {
@@ -13,10 +13,23 @@ class AzulejoThumbnail extends Component {
       fav: null
     };
     this.addFav = this.addFav.bind(this);
+    this.removeFav = this.removeFav.bind(this);
   }
 
   addFav() {
     fav(this.props.id)
+      .then(fav => {
+        this.setState({
+          fav: fav
+        });
+        console.log(this.state);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  removeFav() {
+    removeFav(this.props.id)
       .then(fav => {
         console.log("FAV", fav);
         this.setState({
@@ -33,7 +46,6 @@ class AzulejoThumbnail extends Component {
     this.setState({
       fav: this.props.fav
     });
-    console.log(this.state);
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -45,6 +57,7 @@ class AzulejoThumbnail extends Component {
   }
 
   render() {
+    console.log(this.props);
     const origUrl = this.props.img;
     const thumbIndex =
       origUrl.indexOf("/image/upload") + "/image/upload".length;
@@ -66,12 +79,27 @@ class AzulejoThumbnail extends Component {
 
         <Card.Body>
           <ul className="list-inline">
-            <li className="list-inline-item mr-4">
-              <FontAwesomeIcon icon="heart" color="#17a2b8" />
-              <span className="ml-2">
-                <Link onClick={this.addFav}>{this.state.fav.length}</Link>
-              </span>
-            </li>
+            {(this.state.fav &&
+              !this.state.fav.includes(this.props.user._id) && (
+                <li className="list-inline-item mr-4">
+                  <FontAwesomeIcon icon={["far", "heart"]} color="#17a2b8" />
+                  <span className="ml-2">
+                    <Link onClick={this.addFav}>
+                      {this.state.fav && this.state.fav.length}
+                    </Link>
+                  </span>
+                </li>
+              )) || (
+              <li className="list-inline-item mr-4">
+                <FontAwesomeIcon icon="heart" color="#17a2b8" />
+                <span className="ml-2">
+                  <Link onClick={this.removeFav}>
+                    {this.state.fav && this.state.fav.length}
+                  </Link>
+                </span>
+              </li>
+            )}
+
             <li className="list-inline-item mr-4">
               <FontAwesomeIcon icon="comments" color="#17a2b8" />
               <span className="ml-2">{this.props.reviews.length}</span>
