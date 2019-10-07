@@ -4,7 +4,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fav, removeFav } from "./../services/azulejo-api";
-import { timingSafeEqual } from "crypto";
 
 class AzulejoThumbnail extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class AzulejoThumbnail extends Component {
         this.setState({
           fav: fav
         });
-        console.log(this.state);
+        // console.log(this.state);
       })
       .catch(error => {
         console.log(error);
@@ -31,7 +30,7 @@ class AzulejoThumbnail extends Component {
   removeFav() {
     removeFav(this.props.id)
       .then(fav => {
-        console.log("FAV", fav);
+        // console.log("FAV", fav);
         this.setState({
           fav: fav
         });
@@ -57,7 +56,7 @@ class AzulejoThumbnail extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const origUrl = this.props.img;
     const thumbIndex =
       origUrl.indexOf("/image/upload") + "/image/upload".length;
@@ -82,20 +81,20 @@ class AzulejoThumbnail extends Component {
             {(this.state.fav &&
               !this.state.fav.includes(this.props.user._id) && (
                 <li className="list-inline-item mr-4">
-                  <FontAwesomeIcon icon={["far", "heart"]} color="#17a2b8" />
-                  <span className="ml-2">
-                    <Link onClick={this.addFav}>
+                  <span onClick={this.addFav} style={{ cursor: "pointer" }}>
+                    <FontAwesomeIcon icon={["far", "heart"]} color="#17a2b8" />
+                    <span className="ml-2">
                       {this.state.fav && this.state.fav.length}
-                    </Link>
+                    </span>
                   </span>
                 </li>
               )) || (
               <li className="list-inline-item mr-4">
-                <FontAwesomeIcon icon="heart" color="#17a2b8" />
-                <span className="ml-2">
-                  <Link onClick={this.removeFav}>
+                <span onClick={this.removeFav} style={{ cursor: "pointer" }}>
+                  <FontAwesomeIcon icon="heart" color="#17a2b8" />
+                  <span className="ml-2">
                     {this.state.fav && this.state.fav.length}
-                  </Link>
+                  </span>
                 </span>
               </li>
             )}
@@ -127,33 +126,33 @@ class AzulejoThumbnail extends Component {
           <Card.Text>
             {this.props.createdBy && (
               <Fragment>
-                By
+                By{" "}
                 <Link className="link" to={`/profile/${this.props.createdBy}`}>
                   {this.props.createdBy}
                 </Link>
               </Fragment>
             )}
-            <p className="card-text">
-              {[
-                "Red",
-                "Orange",
-                "Yellow",
-                "Green",
-                "Blue",
-                "Purple",
-                "Black"
-              ].map(color => {
-                return (
-                  this.props.colors.includes(color) && (
-                    <span key={color} style={{ color: color.toLowerCase() }}>
-                      <Link to={`/search?color=${color}`} className="no-style">
-                        ■
-                      </Link>
-                    </span>
-                  )
-                );
-              })}
-            </p>
+            <br />
+            {[
+              "Red",
+              "Orange",
+              "Yellow",
+              "Green",
+              "Blue",
+              "Purple",
+              "Black"
+            ].map(color => {
+              return (
+                this.props.colors.includes(color) && (
+                  <span key={color} style={{ color: color.toLowerCase() }}>
+                    <Link to={`/search?color=${color}`} className="no-style">
+                      ■
+                    </Link>
+                  </span>
+                )
+              );
+            })}
+            <br />
             <Button className="btn-info">View Azulejo</Button>
           </Card.Text>
         </Card.Body>
