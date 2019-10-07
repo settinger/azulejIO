@@ -75,7 +75,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App mb-5">
         <Router>
           <NavbarView user={this.state.user} signOut={this.signOut} />
 
