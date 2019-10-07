@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -55,10 +55,14 @@ const AzulejoThumbnail = props => {
         <hr />
 
         <Card.Text>
-          By{" "}
-          <Link className="link" to={`/profile/${props.createdBy}`}>
-            {props.createdBy}
-          </Link>
+          {props.createdBy && (
+            <Fragment>
+              By
+              <Link className="link" to={`/profile/${props.createdBy}`}>
+                {props.createdBy}
+              </Link>
+            </Fragment>
+          )}
           <p className="card-text">
             {[
               "Red",
@@ -72,11 +76,7 @@ const AzulejoThumbnail = props => {
               return (
                 props.colors.includes(color) && (
                   <span key={color} style={{ color: color.toLowerCase() }}>
-                    <Link
-                      className="link"
-                      to={`/search?color=${color}`}
-                      className="no-style"
-                    >
+                    <Link to={`/search?color=${color}`} className="no-style">
                       ■
                     </Link>
                   </span>
