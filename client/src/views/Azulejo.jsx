@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 import AzulejoCanvas from "../components/AzulejoCanvas";
 import { create, loadSingle } from "../services/azulejo-api";
 import Form from "react-bootstrap/Form";
@@ -61,7 +62,7 @@ export default class Azulejo extends Component {
     };
     if (this.state.remix) {
       azulejo._remixedFrom = this.state.remixedFrom;
-      console.log(azulejo);
+      // console.log(azulejo);
     }
     create(azulejo)
       .then(azulejo => {
@@ -77,7 +78,7 @@ export default class Azulejo extends Component {
     this.$canvas = document.getElementById("drawing-canvas");
     // If we're making a remix, load the image URL to remix from
     if (this.state.remix) {
-      console.log("A remix is occurring");
+      // console.log("A remix is occurring");
       loadSingle(this.props.match.params.id)
         .then(azulejo => {
           this.setState({ remixUrl: azulejo.imageUrl });
@@ -92,7 +93,7 @@ export default class Azulejo extends Component {
     return (
       <div>
         <AzulejoCanvas remixUrl={this.state.remixUrl} />
-        {this.props.user && (
+        {(this.props.user && (
           <Fragment>
             <Form onSubmit={this.saveToAccount}>
               <Form.Group>
@@ -138,7 +139,14 @@ export default class Azulejo extends Component {
               <button id="save-to-account">Save to my account</button>
             </Form>
           </Fragment>
+        )) || (
+          <Fragment>
+            <Link to="/auth/signup">Sign up</Link> or{" "}
+            <Link to="/auth/signin">sign in</Link> to save, share, and remix
+            your designs!
+          </Fragment>
         )}
+        <div id="image-goes-here"></div>
       </div>
     );
   }

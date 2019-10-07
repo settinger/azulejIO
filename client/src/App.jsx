@@ -80,72 +80,76 @@ export default class App extends Component {
           <NavbarView user={this.state.user} signOut={this.signOut} />
 
           {this.state.loaded && (
-            <Switch>
-              <Route
-                path="/"
-                exact
-                render={props => <HomeView {...props} user={this.state.user} />}
-              />
-              <ProtectedRoute
-                path="/auth/signup"
-                verify={this.verifyUnauthenticated}
-                render={props => (
-                  <SignUpView {...props} exact uploadUser={this.uploadUser} />
-                )}
-              />
-              <ProtectedRoute
-                path="/auth/signin"
-                verify={this.verifyUnauthenticated}
-                render={props => (
-                  <SignInView {...props} exact uploadUser={this.uploadUser} />
-                )}
-              />
-              <Route
-                path="/profile/:username"
-                exact
-                render={props => (
-                  <ProfileView {...props} user={this.state.user} />
-                )}
-              />
+            <div className="container">
+              <Switch>
+                <Route
+                  path="/"
+                  exact
+                  render={props => (
+                    <HomeView {...props} user={this.state.user} />
+                  )}
+                />
+                <ProtectedRoute
+                  path="/auth/signup"
+                  verify={this.verifyUnauthenticated}
+                  render={props => (
+                    <SignUpView {...props} exact uploadUser={this.uploadUser} />
+                  )}
+                />
+                <ProtectedRoute
+                  path="/auth/signin"
+                  verify={this.verifyUnauthenticated}
+                  render={props => (
+                    <SignInView {...props} exact uploadUser={this.uploadUser} />
+                  )}
+                />
+                <Route
+                  path="/profile/:username"
+                  exact
+                  render={props => (
+                    <ProfileView {...props} user={this.state.user} />
+                  )}
+                />
 
-              <ProtectedRoute
-                path="/profile/:username/edit"
-                verify={this.verifyAuthenticated}
-                exact
-                render={props => (
-                  <EditProfile {...props} user={this.state.user} />
-                )}
-              />
-              <Route
-                path="/azulejo/create"
-                exact
-                render={props => (
-                  <AzulejoView {...props} user={this.state.user} />
-                )}
-              />
-              <Route
-                path="/azulejo/remix/:id"
-                exact
-                render={props => {
-                  return <AzulejoView {...props} user={this.state.user} />;
-                }}
-              />
-              <Route
-                path="/azulejo/:id"
-                exact
-                render={props => (
-                  <SingleAzulejoView {...props} user={this.state.user} />
-                )}
-              />
-              <Route
-                path="/search"
-                render={props => (
-                  <SearchView {...props} user={this.state.user} />
-                )}
-              />
-              <Route path="/error/:code" component={ErrorView} />
-              <Route path="/" component={CatchAllView} />
-            </Switch>
+                <ProtectedRoute
+                  path="/profile/:username/edit"
+                  verify={this.verifyAuthenticated}
+                  exact
+                  render={props => (
+                    <EditProfile {...props} user={this.state.user} />
+                  )}
+                />
+                <Route
+                  path="/azulejo/create"
+                  exact
+                  render={props => (
+                    <AzulejoView {...props} user={this.state.user} />
+                  )}
+                />
+                <Route
+                  path="/azulejo/remix/:id"
+                  exact
+                  render={props => {
+                    return <AzulejoView {...props} user={this.state.user} />;
+                  }}
+                />
+                <Route
+                  path="/azulejo/:id"
+                  exact
+                  render={props => (
+                    <SingleAzulejoView {...props} user={this.state.user} />
+                  )}
+                />
+                <Route
+                  path="/search"
+                  render={props => (
+                    <SearchView {...props} user={this.state.user} />
+                  )}
+                />
+                <Route path="/error/:code" component={ErrorView} />
+                <Route path="/" component={CatchAllView} />
+              </Switch>
+            </div>
           )}
         </Router>
       </div>

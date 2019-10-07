@@ -27,6 +27,10 @@ const NavbarView = props => {
             </Nav.Link>
             {(!props.user && (
               <Fragment>
+                <Nav.Link href="/azulejo/create" className="nav-link">
+                  + Create an Azulejo
+                </Nav.Link>
+
                 <Nav.Link href="/auth/signin" className="nav-link">
                   Sign In{" "}
                 </Nav.Link>
@@ -46,21 +50,16 @@ const NavbarView = props => {
                 </Nav.Link>
 
                 <Form inline onSubmit={props.signOut}>
-                  <Button type="submit">Sign Out</Button>
+                  <Button
+                    type="submit"
+                    className="nav-link"
+                    style={{ background: "none", border: "none" }}
+                  >
+                    Sign Out
+                  </Button>
                 </Form>
               </Fragment>
             )}
-          </Nav>
-          <Nav className="nav-flex-icons">
-            <Nav.Link href="#">
-              <FontAwesomeIcon icon={["fab", "facebook-f"]} color="#17a2b8" />
-            </Nav.Link>
-            <Nav.Link href="#">
-              <FontAwesomeIcon icon={["fab", "twitter"]} color="#17a2b8" />
-            </Nav.Link>
-            <Nav.Link href="#">
-              <FontAwesomeIcon icon={["fab", "instagram"]} color="#17a2b8" />
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

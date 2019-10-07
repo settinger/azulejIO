@@ -159,7 +159,6 @@ export default class AzulejoCanvas extends Component {
         <div>
           <button id="export-button">Export as .png</button>
         </div>
-        <div id="image-goes-here"></div>
       </Fragment>
     );
   }
