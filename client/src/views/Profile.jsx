@@ -85,8 +85,11 @@ export default class Profile extends Component {
                     id={azulejo._id}
                     name={azulejo.name}
                     img={azulejo.imageUrl}
+                    createdBy={azulejo._createdBy.username}
                     colors={azulejo.colors}
                     reviews={azulejo.reviews}
+                    fav={azulejo.fav}
+                    user={this.props.user}
                   />
                 );
               })}
