@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Figure from "react-bootstrap/Figure";
+import FigureImage from "react-bootstrap/FigureImage";
 import { Link } from "react-router-dom";
 import { loadSingle } from "../services/azulejo-api";
 import { rate } from "./../services/azulejo-api";
@@ -70,39 +72,50 @@ export default class SingleAzulejo extends Component {
     return (
       this.state.azulejo && (
         <div>
-          <h1>
-            Azulejo: <i>{this.state.azulejo.name}</i>
-          </h1>
-          <div>
-            <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
-              <span className="btn btn-primary">Remix it!</span>
-            </Link>
-          </div>
-          <img
-            src={this.state.azulejo.imageUrl}
-            alt="Azulejo"
-            width="200"
-            height="auto"
-          />
-          <h3>
-            Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
-          </h3>
-          {this.state.azulejo._remixedFrom && (
-            <h4>
-              Remixed from{" "}
-              <i>
-                <Link to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}>
-                  {this.state.azulejo._remixedFrom.name}
+          <div
+            className="mb-4"
+            id="header-content"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
+            <h1>
+              <i>{this.state.azulejo.name}</i>
+            </h1>
+            <h3>
+              Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
+            </h3>
+            {this.state.azulejo._remixedFrom && (
+              <h4>
+                Remixed from{" "}
+                <i>
+                  <Link to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}>
+                    {this.state.azulejo._remixedFrom.name}
+                  </Link>
+                </i>{" "}
+                by{" "}
+                <Link
+                  to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
+                >
+                  {this.state.azulejo._remixedFrom._createdBy.username}
                 </Link>
-              </i>{" "}
-              by{" "}
-              <Link
-                to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
-              >
-                {this.state.azulejo._remixedFrom._createdBy.username}
+              </h4>
+            )}
+            <div>
+              <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
+                <span className="btn btn-primary">Remix it!</span>
               </Link>
-            </h4>
-          )}
+            </div>
+          </div>
+          <Figure className="container px-5">
+            <Figure.Image
+              src={this.state.azulejo.imageUrl}
+              alt="Azulejo"
+              className="img-fluid"
+            />
+          </Figure>
           <p>
             Rating:{" "}
             {this.state.azulejo.reviews
@@ -122,6 +135,8 @@ export default class SingleAzulejo extends Component {
           <div>
             {this.props.user && (
               <Form onSubmit={this.addRate}>
+                <hr />
+                <div className="mb-2">Leave a review?</div>
                 <Form.Group>
                   <Form.Label htmlFor="comment">Comment</Form.Label>
                   <Form.Control
@@ -138,6 +153,8 @@ export default class SingleAzulejo extends Component {
                     name="rating"
                     placeholder="rating"
                     type="number"
+                    min={1}
+                    max={5}
                     required
                     onChange={this.onValueChange}
                     value={this.state.review.rating}
