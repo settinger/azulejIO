@@ -149,11 +149,11 @@ export default class AzulejoCanvas extends Component {
           <canvas
             id="drawing-canvas"
             style={{
-              border: "1px solid red",
-              backgroundColor: "white",
-              width: "60vw",
-              height: "60vw"
+              boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
+              borderRadius: "1px",
+              backgroundColor: "white"
             }}
+            className="img-fluid"
           ></canvas>
         </div>
         <div>
