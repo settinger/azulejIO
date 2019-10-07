@@ -56,7 +56,7 @@ class AzulejoThumbnail extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const origUrl = this.props.img;
     const thumbIndex =
       origUrl.indexOf("/image/upload") + "/image/upload".length;
