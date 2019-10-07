@@ -78,23 +78,25 @@ export default class AzulejoCanvas extends Component {
   render() {
     return (
       <Fragment>
-        <div id="brush-tools">
+        <div id="brush-tools" style={{ fontSize: "3vw" }}>
           {/* <SketchPicker /> */}
           <label htmlFor="brush-color">Choose brush color: </label>
           <div
             style={{
-              padding: "5px",
+              margin: "0 .4em",
+              padding: ".4em",
               boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
               borderRadius: "1px",
               display: "inline-block",
-              cursor: "pointer"
+              cursor: "pointer",
+              transform: "translateY(.4em)"
             }}
             onClick={this.toggleColorPicker}
           >
             <div
               style={{
-                width: "40px",
-                height: "15px",
+                width: "3.2em",
+                height: "1em",
                 borderRadius: "2px",
                 background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`
               }}
@@ -140,6 +142,10 @@ export default class AzulejoCanvas extends Component {
             max="40"
             defaultValue="20"
             step="1"
+            style={{
+              transform: "translateX(-.4em) translateY(0em)",
+              width: "6em"
+            }}
           />
           <label htmlFor="brush-size">
             Brush size: <span id="brush-size-value">20</span>
