@@ -81,6 +81,7 @@ class AzulejoThumbnail extends Component {
           <ul className="list-inline">
             {/* Favorites */}
             {(this.state.fav &&
+              this.props.user &&
               !this.state.fav.includes(this.props.user._id) && (
                 <li className="list-inline-item mr-4">
                   <span onClick={this.addFav} style={{ cursor: "pointer" }}>
