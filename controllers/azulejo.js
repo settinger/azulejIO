@@ -79,7 +79,7 @@ exports.loadSingle = (req, res, next) => {
 };
 
 exports.create = (req, res, next) => {
-  const { name, colors, image } = req.body;
+  const { name, colors, image, _remixedFrom } = req.body;
   // Upload to Cloudinary
   cloudinary.v2.uploader.upload(
     image,
@@ -90,7 +90,8 @@ exports.create = (req, res, next) => {
         colors,
         imageUrl: result.url,
         createdBy: req.user.username,
-        _createdBy: req.user._id
+        _createdBy: req.user._id,
+        _remixedFrom
       })
         .then(azulejo => {
           res.json({ type: "success", azulejo });

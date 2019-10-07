@@ -59,6 +59,10 @@ export default class Azulejo extends Component {
       colors: this.state.colors,
       image: img
     };
+    if (this.state.remix) {
+      azulejo._remixedFrom = this.state.remixedFrom;
+      console.log(azulejo);
+    }
     create(azulejo)
       .then(azulejo => {
         this.props.history.push("/");

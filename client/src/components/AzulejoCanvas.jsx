@@ -63,7 +63,7 @@ export default class AzulejoCanvas extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.remixUrl) {
+    if (this.props.remixUrl && !this.remixLoaded) {
       // console.log(this.props.remixUrl);
       const remix = new Image();
       remix.crossOrigin = "anonymous";
@@ -71,6 +71,7 @@ export default class AzulejoCanvas extends Component {
       setTimeout(() => {
         this.drawing.context.drawImage(remix, -600, -600);
       }, 500);
+      this.remixLoaded = true;
     }
   }
 
