@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
@@ -64,35 +64,6 @@ const NavbarView = props => {
         </Navbar.Collapse>
       </Navbar>
     </header>
-
-    // <Navbar>
-    //   <Link className="btn" to="/">
-    //     Home
-    //   </Link>
-    //   {(!props.user && (
-    //     <Fragment>
-    //       <Link className="btn" to="/auth/signin">
-    //         Sign In
-    //       </Link>
-    //       <Link className="btn" to="/auth/signup">
-    //         Sign Up
-    //       </Link>
-    //     </Fragment>
-    //   )) || (
-    //     <Fragment>
-    //       <Link className="btn" to={`/profile/${props.user.username}`}>
-    //         <span className="btn">{props.user && props.user.username}</span>
-    //       </Link>
-    //       <Link className="btn" to="/azulejo/create">
-    //         + Create an Azulejo
-    //       </Link>
-
-    //       <Form onSubmit={props.signOut}>
-    //         <Button type="submit">Sign Out</Button>
-    //       </Form>
-    //     </Fragment>
-    //   )}
-    // </Navbar>
   );
 };
 
