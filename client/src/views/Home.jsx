@@ -41,6 +41,7 @@ export default class HomeView extends Component {
                     colors={azulejo.colors}
                     reviews={azulejo.reviews}
                     fav={azulejo.fav}
+                    history={this.props.history}
                   />
                 );
               })}

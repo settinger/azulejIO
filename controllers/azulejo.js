@@ -120,9 +120,13 @@ exports.updateRate = (req, res, next) => {
     });
 };
 exports.addFav = (req, res, next) => {
-  Azulejo.findByIdAndUpdate(req.params.id, {
-    $inc: { fav: 1 }
-  })
+  Azulejo.findByIdAndUpdate(
+    req.params.id,
+    {
+      $inc: { fav: 1 }
+    },
+    { new: "true" }
+  )
     .then(azulejo => {
       res.json({ type: "success", azulejo });
     })

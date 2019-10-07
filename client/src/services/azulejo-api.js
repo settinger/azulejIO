@@ -74,7 +74,7 @@ export const fav = id => {
     azulejoAPI
       .post(`azulejo/${id}/fav`)
       .then(response => {
-        resolve(response.data.azulejo);
+        resolve(response.data.azulejo.fav);
       })
       .catch(error => {
         reject(error);

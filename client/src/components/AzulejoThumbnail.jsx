@@ -4,26 +4,51 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fav } from "./../services/azulejo-api";
+import { timingSafeEqual } from "crypto";
 
 class AzulejoThumbnail extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fav: null
+    };
     this.addFav = this.addFav.bind(this);
   }
 
   addFav() {
     fav(this.props.id)
-      .then(azulejo => {
-        console.log(azulejo);
-        this.props.history.push(`/azulejo/${azulejo._id}`);
+      .then(fav => {
+        console.log("FAV", fav);
+        this.setState({
+          fav: fav
+        });
+        console.log(this.state);
       })
       .catch(error => {
         console.log(error);
       });
   }
 
+  componentDidMount() {
+    this.setState({
+      fav: this.props.fav
+    });
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    if (
+      !this.state.fav ||
+      (previousProps.fav !== this.props.fav ||
+        previousState.fav !== this.state.fav)
+    ) {
+      this.setState({
+        ...this.state
+      });
+    }
+  }
+
   render() {
+    console.log(this.state);
     const origUrl = this.props.img;
     const thumbIndex =
       origUrl.indexOf("/image/upload") + "/image/upload".length;
@@ -48,7 +73,7 @@ class AzulejoThumbnail extends Component {
             <li className="list-inline-item mr-4">
               <FontAwesomeIcon icon="heart" color="#17a2b8" />
               <span className="ml-2">
-                <Link onClick={this.addFav}>{this.props.fav}</Link>
+                <Link onClick={this.addFav}>{this.state.fav}</Link>
               </span>
             </li>
             <li className="list-inline-item mr-4">
