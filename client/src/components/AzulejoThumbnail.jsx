@@ -56,7 +56,7 @@ class AzulejoThumbnail extends Component {
   }
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     const origUrl = this.props.img;
     const thumbIndex =
       origUrl.indexOf("/image/upload") + "/image/upload".length;
@@ -64,6 +64,7 @@ class AzulejoThumbnail extends Component {
       origUrl.substring(0, thumbIndex) +
       "/c_thumb,w_300" +
       origUrl.substring(thumbIndex);
+
     return (
       <Card style={{ width: "18rem" }} className="shadow m-2">
         <Link className="link" to={`/azulejo/${this.props.id}`}>
@@ -78,6 +79,7 @@ class AzulejoThumbnail extends Component {
 
         <Card.Body>
           <ul className="list-inline">
+            {/* Favorites */}
             {(this.state.fav &&
               !this.state.fav.includes(this.props.user._id) && (
                 <li className="list-inline-item mr-4">
@@ -99,10 +101,12 @@ class AzulejoThumbnail extends Component {
               </li>
             )}
 
+            {/* Comments */}
             <li className="list-inline-item mr-4">
               <FontAwesomeIcon icon="comments" color="#17a2b8" />
               <span className="ml-2">{this.props.reviews.length}</span>
             </li>
+            {/* Average rating */}
             <li className="list-inline-item mr-4">
               <FontAwesomeIcon icon="star" color="#17a2b8" />
               <span className="ml-2">
@@ -116,6 +120,8 @@ class AzulejoThumbnail extends Component {
               </span>
             </li>
           </ul>
+
+          {/* Azulejo name */}
           <Card.Title>
             <Link className="link" to={`/azulejo/${this.props.id}`}>
               {this.props.name}
@@ -123,6 +129,7 @@ class AzulejoThumbnail extends Component {
           </Card.Title>
           <hr />
 
+          {/* Azulejo artist */}
           <Card.Text>
             {this.props.createdBy && (
               <Fragment>
@@ -133,6 +140,30 @@ class AzulejoThumbnail extends Component {
               </Fragment>
             )}
             <br />
+            {/* Remix */}
+            {this.props.remixedFromTitle && (
+              <Fragment>
+                Remixed from{" "}
+                <i>
+                  <Link
+                    className="link"
+                    to={`/azulejo/${this.props.remixedFromId}`}
+                  >
+                    {this.props.remixedFromTitle}
+                  </Link>
+                </i>{" "}
+                by{" "}
+                <Link
+                  className="link"
+                  to={`/profile/${this.props.remixedFromUser}`}
+                >
+                  {this.props.remixedFromUser}
+                </Link>
+              </Fragment>
+            )}
+            <br />
+
+            {/* Azulejo colors */}
             {[
               "Red",
               "Orange",
@@ -157,47 +188,6 @@ class AzulejoThumbnail extends Component {
           </Card.Text>
         </Card.Body>
       </Card>
-
-      // <div className="card" style={{ width: "330px" }}>
-      //   <Link to={`/azulejo/${props.id}`}>
-      //     <img src={thumbUrl} alt="Azulejo thumbnail" className="card-img-top" />
-      //   </Link>
-      //   <div className="card-body">
-      //     <h5 className="card-title">
-      //       <Link to={`/azulejo/${props.id}`}>{props.name}</Link>
-      //     </h5>
-      //     {props.createdBy && (
-      //       <p className="card-text">
-      //         By <Link to={`/profile/${props.createdBy}`}>{props.createdBy}</Link>
-      //       </p>
-      //     )}
-      //     <p className="card-text">
-      //       Rating:{" "}
-      //       {props.reviews
-      //         .map(v => v.rating)
-      //         .reduce((acc, v, i, a) => {
-      //           acc += v;
-      //           return acc / a.length;
-      //         }, 0)
-      //         .toFixed(1)}
-      //     </p>{" "}
-      //     <p className="card-text">
-      //       {["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Black"].map(
-      //         color => {
-      //           return (
-      //             props.colors.includes(color) && (
-      //               <span key={color} style={{ color: color.toLowerCase() }}>
-      //                 <Link to={`/search?color=${color}`} className="no-style">
-      //                   ■
-      //                 </Link>
-      //               </span>
-      //             )
-      //           );
-      //         }
-      //       )}
-      //     </p>
-      //   </div>
-      // </div>
     );
   }
 }

@@ -58,6 +58,7 @@ exports.loadRecent = (req, res, next) => {
     .skip(p * n)
     .limit(n)
     .populate("_createdBy")
+    .populate({ path: "_remixedFrom", populate: { path: "_createdBy" } })
     .then(azulejos => {
       res.json({ type: "success", azulejos });
     })

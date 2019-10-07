@@ -30,7 +30,11 @@ const schema = new mongoose.Schema({
   },
   fav: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   _createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  _remixedFrom: { type: mongoose.Schema.Types.ObjectId, ref: "Azulejo" }
+  _remixedFrom: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Azulejo",
+    default: null
+  }
 });
 
 const Azulejo = mongoose.model("Azulejo", schema);
