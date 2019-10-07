@@ -12,7 +12,8 @@ export default class Profile extends Component {
       buttonText: "Edit profile",
       editProfileState: false,
       user: null,
-      azulejos: null
+      azulejos: null,
+      azulejosFav: null
     };
     this.toggleEditProfile = this.toggleEditProfile.bind(this);
   }
@@ -51,9 +52,23 @@ export default class Profile extends Component {
       });
   }
 
+  loadAzulejosFav() {
+    loadSearch(`fav=${this.props.user._id}`)
+      .then(azulejosFav =>
+        this.setState({
+          ...this.state,
+          azulejosFav
+        })
+      )
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   componentDidMount() {
     this.loadUser();
     this.loadAzulejos();
+    this.loadAzulejosFav();
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -63,12 +78,25 @@ export default class Profile extends Component {
     ) {
       this.loadUser();
       this.loadAzulejos();
+      this.loadAzulejosFav();
     }
+    // else if (
+    //   !this.state.azulejos ||
+    //   previousState.azulejos !== this.state.azulejos
+    // ) {
+    //   this.loadAzulejos();
+    // }
+    //  if (
+    //   !this.state.azulejosFav ||
+    //   previousState.azulejosFav !== this.state.azulejosFav
+    // ) {
+    //   this.loadAzulejosFav();
+    // }
   }
 
   render() {
     const user = this.state.user;
-    console.log(this.props);
+    console.log(this.state);
     return (
       user && (
         <div>
@@ -79,6 +107,35 @@ export default class Profile extends Component {
           <div className="card-set">
             {this.state.azulejos &&
               this.state.azulejos.map(azulejo => {
+                return (
+                  <AzulejoThumbnail
+                    key={azulejo._id}
+                    id={azulejo._id}
+                    name={azulejo.name}
+                    img={azulejo.imageUrl}
+                    createdBy={azulejo._createdBy.username}
+                    colors={azulejo.colors}
+                    reviews={azulejo.reviews}
+                    fav={azulejo.fav}
+                    remixedFromTitle={
+                      azulejo._remixedFrom && azulejo._remixedFrom.name
+                    }
+                    remixedFromId={
+                      azulejo._remixedFrom && azulejo._remixedFrom._id
+                    }
+                    remixedFromUser={
+                      azulejo._remixedFrom &&
+                      azulejo._remixedFrom._createdBy &&
+                      azulejo._remixedFrom._createdBy.username
+                    }
+                    user={this.props.user}
+                  />
+                );
+              })}
+          </div>
+          <div className="card-set">
+            {this.state.azulejosFav &&
+              this.state.azulejosFav.map(azulejo => {
                 return (
                   <AzulejoThumbnail
                     key={azulejo._id}
