@@ -72,6 +72,11 @@ export default class SingleAzulejo extends Component {
         <div>
           <h1>AZULEJO</h1>
           <h1>Azulejo: {this.state.azulejo.name}</h1>
+          <div>
+            <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
+              <span className="btn btn-primary">Remix it!</span>
+            </Link>
+          </div>
           <img
             src={this.state.azulejo.imageUrl}
             alt="Azulejo"
