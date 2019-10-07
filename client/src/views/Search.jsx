@@ -10,6 +10,7 @@ export default class Search extends Component {
       loaded: false,
       azulejos: null
     };
+    this.loadAzulejosFav = this.loadAzulejosFav.bind(this);
   }
 
   loadAzulejos() {
@@ -22,6 +23,18 @@ export default class Search extends Component {
       })
       .catch(error => {
         console.log(error);
+      });
+  }
+  loadAzulejosFav(userId) {
+    loadSearch(`fav=${userId}`)
+      .then(azulejosFav =>
+        this.setState({
+          ...this.state,
+          azulejosFav
+        })
+      )
+      .catch(error => {
+        console.log("BIG ERROR", error);
       });
   }
 

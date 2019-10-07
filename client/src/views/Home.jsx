@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
 import { loadRecent } from "./../services/azulejo-api";
 import CardGroup from "react-bootstrap/CardGroup";
+import { loadSearch } from "../services/azulejo-api";
 
 export default class HomeView extends Component {
   constructor(props) {
@@ -10,8 +11,20 @@ export default class HomeView extends Component {
       loaded: false,
       azulejos: []
     };
+    this.loadAzulejosFav = this.loadAzulejosFav.bind(this);
   }
-
+  loadAzulejosFav(userId) {
+    loadSearch(`fav=${userId}`)
+      .then(azulejosFav =>
+        this.setState({
+          ...this.state,
+          azulejosFav
+        })
+      )
+      .catch(error => {
+        console.log("BIG ERROR", error);
+      });
+  }
   componentDidMount() {
     loadRecent(20)
       .then(azulejos => {
