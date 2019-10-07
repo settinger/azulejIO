@@ -9,7 +9,7 @@ const NavbarView = props => {
   return (
     <header>
       <Navbar expand="lg" bg="light" variant="light" className="shadow-sm">
-        <button
+        <Navbar.Toggle
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -19,7 +19,7 @@ const NavbarView = props => {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-        </button>
+        </Navbar.Toggle>
         <Navbar.Collapse>
           <Nav className="mr-auto">
             <Nav.Link href="/" className="nav-link">
