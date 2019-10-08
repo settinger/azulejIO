@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -22,32 +23,32 @@ const NavbarView = props => {
         </Navbar.Toggle>
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <Nav.Link href="/" className="nav-link">
+            <Link to="/" className="nav-link">
               Home
-            </Nav.Link>
+            </Link>
             {(!props.user && (
               <Fragment>
-                <Nav.Link href="/azulejo/create" className="nav-link">
+                <Link to="/azulejo/create" className="nav-link">
                   + Create an Azulejo
-                </Nav.Link>
+                </Link>
 
-                <Nav.Link href="/auth/signin" className="nav-link">
+                <Link to="/auth/signin" className="nav-link">
                   Sign In{" "}
-                </Nav.Link>
+                </Link>
 
-                <Nav.Link href="/auth/signup" className="nav-link">
+                <Link to="/auth/signup" className="nav-link">
                   Sign Up{" "}
-                </Nav.Link>
+                </Link>
               </Fragment>
             )) || (
               <Fragment>
-                <Nav.Link href={`/profile/${props.user.username}`}>
+                <Link to={`/profile/${props.user.username}`}>
                   {props.user && props.user.username}
-                </Nav.Link>
+                </Link>
 
-                <Nav.Link href="/azulejo/create" className="nav-link">
+                <Link to="/azulejo/create" className="nav-link">
                   + Create an Azulejo
-                </Nav.Link>
+                </Link>
 
                 <Form inline onSubmit={props.signOut}>
                   <Button
