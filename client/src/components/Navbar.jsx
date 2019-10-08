@@ -42,7 +42,10 @@ const NavbarView = props => {
               </Fragment>
             )) || (
               <Fragment>
-                <Link to={`/profile/${props.user.username}`}>
+                <Link
+                  to={`/profile/${props.user.username}`}
+                  className="nav-link"
+                >
                   {props.user && props.user.username}
                 </Link>
 
