@@ -21,6 +21,8 @@
   color: #09d3ac;
 } */
 
+@import url("https://fonts.googleapis.com/css?family=Roboto:300&display=swap");
+
 .card-set {
   display: flex;
   flex-direction: row;
@@ -40,9 +42,9 @@
 
 h1 {
   color: #333;
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 64px;
-  font-weight: 700;
+  /* font-weight: 700; */
   line-height: 64px;
   margin: 0 0 0;
   padding: 20px 30px;
@@ -51,13 +53,12 @@ h1 {
 
 h2 {
   color: #333;
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 48px;
-  margin: 0 0 24px;
-  padding: 0 30px;
-  text-align: center;
+  font-family: "Roboto", sans-serif;
+  /* font-size: 38px; */
+  /* font-weight: 700; */
+  /* line-height: 48px; */
+  /* margin: 0 0 24px;
+  padding: 0 30px; */
 }
 
 p {
@@ -71,10 +72,46 @@ p {
 .link {
   color: #333;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .link:hover {
-  text-decoration: underline;
   color: #17a2b8;
+}
+
+.cardButton {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  padding: 10px 0;
+  top: 206px;
+  opacity: 0;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+
+.hoverCard:hover .cardButton {
+  opacity: 100;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #333;
+  cursor: pointer;
+}
+
+.hoverCard:hover .cardButton:hover {
+  background-color: #17a2b8;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cardImg {
+  position: absolute;
+  top: 50px;
+  left: 70px;
+  box-shadow: 0px 13px 21px -5px rgba(0, 0, 0, 0.3);
+  max-width: 50%;
+}
+
+.bgCardImg {
+  max-height: 250px;
 }

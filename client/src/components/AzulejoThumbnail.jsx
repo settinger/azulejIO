@@ -68,14 +68,20 @@ class AzulejoThumbnail extends Component {
       origUrl.substring(thumbIndex);
 
     return (
-      <Card style={{ width: "18rem" }} className="shadow m-2">
+      <Card style={{ width: "18rem" }} className="shadow m-2 hoverCard">
         <Link className="link" to={`/azulejo/${this.props.id}`}>
           <Card.Img
-            className="card-img-top"
+            className="bgCardImg"
+            src="/img/lukas-blazek-EWDvHNNfUmQ-unsplash.jpg"
+            alt="Azulejo Thumbnail"
+          />
+          <Card.Img
+            className="cardImg"
             src={thumbUrl}
             alt="Azulejo Thumbnail"
           />
         </Link>
+        <div class="cardButton">View Azulejo</div>
 
         <div className="mask rgba-white-slight" />
 
@@ -127,7 +133,7 @@ class AzulejoThumbnail extends Component {
           {/* Azulejo name */}
           <Card.Title>
             <Link className="link" to={`/azulejo/${this.props.id}`}>
-              {this.props.name}
+              <h2>{this.props.name}</h2>
             </Link>
           </Card.Title>
           <hr />
@@ -136,13 +142,18 @@ class AzulejoThumbnail extends Component {
           <Card.Text>
             {this.props.createdBy && (
               <Fragment>
-                By{" "}
-                <Link className="link" to={`/profile/${this.props.createdBy}`}>
-                  {this.props.createdBy}
-                </Link>
+                <p>
+                  By{" "}
+                  <Link
+                    className="link"
+                    to={`/profile/${this.props.createdBy}`}
+                  >
+                    {this.props.createdBy}
+                  </Link>
+                </p>
               </Fragment>
             )}
-            <br />
+
             {/* Remix */}
             {this.props.remixedFromTitle && (
               <Fragment>
@@ -164,7 +175,6 @@ class AzulejoThumbnail extends Component {
                 </Link>
               </Fragment>
             )}
-            <br />
 
             {/* Azulejo colors */}
             {[
@@ -186,8 +196,6 @@ class AzulejoThumbnail extends Component {
                 )
               );
             })}
-            <br />
-            <Button className="btn-info">View Azulejo</Button>
           </Card.Text>
         </Card.Body>
       </Card>
