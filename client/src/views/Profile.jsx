@@ -1,7 +1,5 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { loadUser } from "../services/auth-api";
 import { loadSearch } from "../services/azulejo-api";

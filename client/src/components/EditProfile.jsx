@@ -31,7 +31,7 @@ export default class EditProfile extends Component {
     //   .catch(error => {
     //     console.log(error);
     //   });
-    console.log("hola", this.props.user._id);
+    // console.log("hola", this.props.user._id);
     this.setState({
       user: this.props.user
     });
@@ -69,7 +69,7 @@ export default class EditProfile extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <Container>
         <Form onSubmit={this.editUser}>
