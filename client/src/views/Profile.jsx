@@ -105,7 +105,21 @@ export default class Profile extends Component {
     return (
       user && (
         <Container>
-          <h1>{user.username}'s profile</h1>
+          <div className="d-flex justify-content-between">
+            <h1>{user.username}'s profile</h1>
+            {(!this.props.user && <div></div>) ||
+              (this.props.user._id === user._id && (
+                <Button
+                  onClick={this.toggleEditProfile}
+                  style={{ background: "none", border: "none", color: "#333" }}
+                >
+                  + {this.state.buttonText}
+                </Button>
+              ))}
+          </div>
+          {this.state.editProfileState && (
+            <EditProfile user={this.state.user} />
+          )}
           <h2>Check your azulejos:</h2>
           <div className="card-set">
             {this.state.azulejos &&
@@ -168,15 +182,6 @@ export default class Profile extends Component {
                 );
               })}
           </div>
-          {(!this.props.user && <div></div>) ||
-            (this.props.user._id === user._id && (
-              <Button className="btn" onClick={this.toggleEditProfile}>
-                {this.state.buttonText}
-              </Button>
-            ))}
-          {this.state.editProfileState && (
-            <EditProfile user={this.state.user} />
-          )}
         </Container>
       )
     );
