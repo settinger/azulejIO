@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fav, removeFav } from "../services/azulejo-api";
 
@@ -50,7 +49,7 @@ class AzulejoThumbnail extends Component {
       this.props.user &&
       (!this.state.fav || previousState.fav !== this.state.fav)
     ) {
-      console.log("FAV STATE UPDATED", this.state.fav);
+      // console.log("FAV STATE UPDATED", this.state.fav);
       this.setState({
         ...this.state
       });
@@ -81,7 +80,7 @@ class AzulejoThumbnail extends Component {
             alt="Azulejo Thumbnail"
           />
         </Link>
-        <div class="cardButton">View Azulejo</div>
+        <div className="cardButton">View Azulejo</div>
 
         <div className="mask rgba-white-slight" />
 
@@ -158,6 +157,7 @@ class AzulejoThumbnail extends Component {
                 >
                   {this.props.remixedFromUser}
                 </Link>
+                <br />
               </Fragment>
             )}
 

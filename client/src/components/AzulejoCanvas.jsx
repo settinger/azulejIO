@@ -78,7 +78,7 @@ export default class AzulejoCanvas extends Component {
   render() {
     return (
       <Fragment>
-        <div id="brush-tools" style={{ fontSize: "3vw" }}>
+        <div id="brush-tools" style={{ fontSize: "1em" }}>
           {/* <SketchPicker /> */}
           <label htmlFor="brush-color">Choose brush color: </label>
           <div
