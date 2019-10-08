@@ -1,5 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import { loadUser } from "../services/auth-api";
 import { loadSearch } from "../services/azulejo-api";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
@@ -101,11 +104,23 @@ export default class Profile extends Component {
     const user = this.state.user;
     return (
       user && (
-        <div>
-          <h1>KING</h1>
-          <h1>{user.username}</h1>
-          <h2>Profile Page</h2>
-          <span>Check your azulejos:</span>
+        <Container>
+          <div className="d-flex justify-content-between">
+            <h1>{user.username}'s profile</h1>
+            {(!this.props.user && <div></div>) ||
+              (this.props.user._id === user._id && (
+                <Button
+                  onClick={this.toggleEditProfile}
+                  style={{ background: "none", border: "none", color: "#333" }}
+                >
+                  + {this.state.buttonText}
+                </Button>
+              ))}
+          </div>
+          {this.state.editProfileState && (
+            <EditProfile user={this.state.user} />
+          )}
+          <h2>Check your azulejos:</h2>
           <div className="card-set">
             {this.state.azulejos &&
               this.state.azulejos.map(azulejo => {
@@ -136,7 +151,8 @@ export default class Profile extends Component {
                 );
               })}
           </div>
-          <div className="card-set">
+          <h2>Your favourite Azulejos:</h2>
+          <div className="card-set ">
             {this.state.azulejosFav &&
               this.state.azulejosFav.map(azulejo => {
                 return (
@@ -166,16 +182,7 @@ export default class Profile extends Component {
                 );
               })}
           </div>
-          {(!this.props.user && <div></div>) ||
-            (this.props.user._id === user._id && (
-              <Button className="btn" onClick={this.toggleEditProfile}>
-                {this.state.buttonText}
-              </Button>
-            ))}
-          {this.state.editProfileState && (
-            <EditProfile user={this.state.user} />
-          )}
-        </div>
+        </Container>
       )
     );
   }
