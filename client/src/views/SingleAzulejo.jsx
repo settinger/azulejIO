@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
-import FigureImage from "react-bootstrap/FigureImage";
 import { Link } from "react-router-dom";
 import { loadSingle } from "../services/azulejo-api";
 import { rate } from "./../services/azulejo-api";
@@ -35,6 +34,8 @@ export default class SingleAzulejo extends Component {
 
   componentDidMount() {
     this.loadAzulejo();
+    console.dir(this.state);
+    console.log(this.props);
   }
 
   componentDidUpdate(previousProps) {
@@ -68,7 +69,6 @@ export default class SingleAzulejo extends Component {
   render() {
     const createdBy =
       this.state.azulejo && this.state.azulejo._createdBy.username;
-    // console.log(this.state);
     return (
       this.state.azulejo && (
         <div>
@@ -116,6 +116,15 @@ export default class SingleAzulejo extends Component {
               className="img-fluid"
             />
           </Figure>
+          {this.props.user._id === this.state.azulejo._createdBy._id && (
+            <div className="col-md-2 offset-md-5">
+              <Form>
+                <Form.Group>
+                  <Button className="btn btn-danger">Delete Azulejo</Button>
+                </Form.Group>
+              </Form>
+            </div>
+          )}
           <p>
             Rating:{" "}
             {this.state.azulejo.reviews
