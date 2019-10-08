@@ -35,6 +35,8 @@ export default class Drawing {
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onTouchMove = this.onTouchMove.bind(this);
+    this.onTouchStart = this.onTouchStart.bind(this);
+    this.onTouchEnd = this.onTouchEnd.bind(this);
 
     this.drawFour = this.drawFour.bind(this);
     this.drawEight = this.drawEight.bind(this);
@@ -44,11 +46,11 @@ export default class Drawing {
   startMenu() {
     this.isInPlay = false;
     document.addEventListener("mousedown", this.onMouseDown, false);
-    document.addEventListener("touchstart", this.onMouseDown, {
+    document.addEventListener("touchstart", this.onTouchStart, {
       passive: false
     });
     document.addEventListener("mouseup", this.onMouseUp, false);
-    document.addEventListener("touchend", this.onMouseUp, false);
+    document.addEventListener("touchend", this.onTouchEnd, { passive: false });
     document.addEventListener("mousemove", this.onMouseMove, false);
     document.addEventListener("touchmove", this.onTouchMove, {
       passive: false
@@ -135,6 +137,31 @@ export default class Drawing {
     }
   }
 
+  onTouchStart(event) {
+    if (event.target === this.canvas) {
+      event.preventDefault();
+      this.drawing = true;
+      let x =
+        (event.targetTouches[0].clientX -
+          this.offsetLeft -
+          this.offsetWidth / 2) *
+        (this.width / this.offsetWidth);
+      let y =
+        (event.targetTouches[0].clientY -
+          this.offsetTop -
+          this.offsetHeight / 2) *
+        (this.height / this.offsetHeight);
+      this.currentPoint = [x, y];
+      this.context.fillStyle = this.brushColor;
+      this.context.strokeStyle = this.brushColor;
+      this.drawEight(x, y);
+    }
+  }
+
+  onTouchEnd(event) {
+    this.drawing = false;
+  }
+
   onMouseUp(event) {
     this.drawing = false;
     // console.log("mouse/touch ended");
@@ -160,10 +187,14 @@ export default class Drawing {
     if (this.drawing && event.target === this.canvas) {
       event.preventDefault();
       let x =
-        (event.clientX - this.offsetLeft - this.offsetWidth / 2) *
+        (event.targetTouches[0].clientX -
+          this.offsetLeft -
+          this.offsetWidth / 2) *
         (this.width / this.offsetWidth);
       let y =
-        (event.clientY - this.offsetTop - this.offsetHeight / 2) *
+        (event.targetTouches[0].clientY -
+          this.offsetTop -
+          this.offsetHeight / 2) *
         (this.height / this.offsetHeight);
       this.context.fillStyle = this.brushColor;
       this.context.strokeStyle = this.brushColor;
