@@ -149,7 +149,7 @@ export default class SingleAzulejo extends Component {
             <Col sm={3}>
               <div className="mb-4 pl-2 profile-user" id="header-content">
                 <h1 style={{ paddingTop: "0px" }}>{this.state.azulejo.name}</h1>
-                <p style={{ marginTop: "-30px" }}>
+                <p style={{ marginTop: "-25px" }}>
                   Created by:{" "}
                   <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
                 </p>
