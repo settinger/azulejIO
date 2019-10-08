@@ -39,8 +39,8 @@ app.use(
 
 app.use(deserializeUserMiddleware);
 
-app.use("/", azulejoRouter);
-app.use("/auth", authRouter);
+app.use("/api/", azulejoRouter);
+app.use("/api/auth", authRouter);
 
 app.get("*", (req, res, next) => {
   res.sendFile(join(__dirname, "./client/build/index.html"));

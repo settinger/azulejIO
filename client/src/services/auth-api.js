@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authAPI = axios.create({
-  baseURL: "/auth"
+  baseURL: "/api/auth"
 });
 
 export const signUp = ({ email, username, imageUrl, password }) => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const azulejoAPI = axios.create({
-  baseURL: "/"
+  baseURL: "/api/"
 });
 
 export const loadAll = () => {
