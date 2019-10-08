@@ -109,14 +109,17 @@ export const create = azulejoDesign => {
   });
 };
 
-// export const remove = id => {
+// //CREATE AZULEJO DESIGN
+// export const create = azulejoDesign => {
+//   debugger;
 //   return new Promise((resolve, reject) => {
-//     postApi
-//       .delete(`/azulejo/delete/${id}`)
-//       .then(() => {
-//         resolve();
+//     azulejoAPI
+//       .post("/azulejo/create", azulejoDesign)
+//       .then(response => {
+//         resolve(response.data.azulejo);
 //       })
 //       .catch(error => {
+//         console.log(error);
 //         reject(error);
 //       });
 //   });

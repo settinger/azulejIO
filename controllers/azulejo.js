@@ -1,11 +1,17 @@
 "use strict";
 require("dotenv").config();
 const cloudinary = require("cloudinary");
+const DataUri = require("datauri");
+const path = require("path");
 
 const Azulejo = require("./../models/azulejo");
 const User = require("./../models/user");
 
-cloudinary.config();
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_API_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 exports.loadAll = (req, res, next) => {
   Azulejo.find()
@@ -88,9 +94,15 @@ exports.loadSingle = (req, res, next) => {
 
 exports.create = (req, res, next) => {
   const { name, colors, image, _remixedFrom } = req.body;
+  console.log("REQUEST BODY", { name, colors, _remixedFrom });
+  console.log("REQUEST FILE", req.file);
+  // Convert req.file.buffer to a file
+  const dataUri = new DataUri();
+  dataUri.format(".png", req.file.buffer);
+  // console.log("FILE", dataUri.content);
   // Upload to Cloudinary
   cloudinary.v2.uploader.upload(
-    image,
+    dataUri.content,
     { folder: "/azulejio" },
     (error, result) => {
       Azulejo.create({

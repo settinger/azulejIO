@@ -51,27 +51,35 @@ export default class Azulejo extends Component {
 
   saveToAccount(event) {
     event.preventDefault();
-    const img = this.$canvas.toDataURL("image/png");
-    const button = document.getElementById("save-to-account");
-    button.innerText = "Loading...";
+    this.$canvas.toBlob(blob => {
+      const button = document.getElementById("save-to-account");
+      button.innerText = "Loading...";
 
-    const azulejo = {
-      name: this.state.name,
-      colors: this.state.colors,
-      image: img
-    };
-    if (this.state.remix) {
-      azulejo._remixedFrom = this.state.remixedFrom;
-      // console.log(azulejo);
-    }
-    create(azulejo)
-      .then(azulejo => {
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        console.log(error);
-        button.innerText = "Save to my account";
-      });
+      const azulejo = {
+        name: this.state.name,
+        colors: this.state.colors,
+        image: blob
+      };
+      if (this.state.remix) {
+        azulejo._remixedFrom = this.state.remixedFrom;
+        // console.log(azulejo);
+      }
+
+      const formData = new FormData();
+      for (let key in azulejo) {
+        const value = azulejo[key];
+        formData.append(key, value);
+      }
+
+      create(formData)
+        .then(azulejo => {
+          this.props.history.push("/");
+        })
+        .catch(error => {
+          console.log(error);
+          button.innerText = "Save to my account";
+        });
+    });
   }
 
   componentDidMount() {

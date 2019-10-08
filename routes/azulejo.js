@@ -4,6 +4,7 @@ const { Router } = require("express");
 const router = Router();
 
 const routeGuardMiddleware = require("./../middleware/route-guard");
+const uploadImageMiddleware = require("./../middleware/image-upload");
 
 const azulejoController = require("./../controllers/azulejo");
 
@@ -20,6 +21,7 @@ router.post("/azulejo/:id/removefav", azulejoController.removeFav);
 router.post(
   "/azulejo/create",
   routeGuardMiddleware(true),
+  uploadImageMiddleware.single("image"),
   azulejoController.create
 );
 
