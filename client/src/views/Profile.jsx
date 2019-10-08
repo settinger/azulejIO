@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { loadUser } from "../services/auth-api";
 import { loadSearch } from "../services/azulejo-api";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
+import AzulejoThumbnailMod from "./../components/AzulejoThumbnailMod";
 import EditProfile from "./../components/EditProfile";
 
 export default class Profile extends Component {
@@ -109,7 +110,7 @@ export default class Profile extends Component {
             {this.state.azulejos &&
               this.state.azulejos.map(azulejo => {
                 return (
-                  <AzulejoThumbnail
+                  <AzulejoThumbnailMod
                     key={azulejo._id}
                     id={azulejo._id}
                     name={azulejo.name}
