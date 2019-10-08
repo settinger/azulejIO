@@ -1,5 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import { loadUser } from "../services/auth-api";
 import { loadSearch } from "../services/azulejo-api";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
@@ -100,11 +103,9 @@ export default class Profile extends Component {
     const user = this.state.user;
     return (
       user && (
-        <div>
-          <h1>KING</h1>
-          <h1>{user.username}</h1>
-          <h2>Profile Page</h2>
-          <span>Check your azulejos:</span>
+        <Container>
+          <h1>{user.username}'s profile</h1>
+          <h2>Check your azulejos:</h2>
           <div className="card-set">
             {this.state.azulejos &&
               this.state.azulejos.map(azulejo => {
@@ -135,7 +136,8 @@ export default class Profile extends Component {
                 );
               })}
           </div>
-          <div className="card-set">
+          <h2>Your favourite Azulejos:</h2>
+          <div className="card-set ">
             {this.state.azulejosFav &&
               this.state.azulejosFav.map(azulejo => {
                 return (
@@ -174,7 +176,7 @@ export default class Profile extends Component {
           {this.state.editProfileState && (
             <EditProfile user={this.state.user} />
           )}
-        </div>
+        </Container>
       )
     );
   }
