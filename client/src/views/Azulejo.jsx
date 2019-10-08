@@ -73,7 +73,8 @@ export default class Azulejo extends Component {
 
       create(formData)
         .then(azulejo => {
-          this.props.history.push("/");
+          console.log("THE NEW AZUL IS", azulejo);
+          this.props.history.push(`/azulejo/${azulejo._id}`);
         })
         .catch(error => {
           console.log(error);
