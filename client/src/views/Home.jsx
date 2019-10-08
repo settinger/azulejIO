@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
 import { loadRecent } from "./../services/azulejo-api";
 import CardGroup from "react-bootstrap/CardGroup";
@@ -72,6 +73,7 @@ export default class HomeView extends Component {
             </div>
           </CardGroup>
         )}
+        <Link to="/search?p=1&n=20">Browse older designs</Link>
       </div>
     );
   }

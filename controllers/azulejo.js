@@ -30,7 +30,7 @@ exports.loadSearch = async (req, res, next) => {
   const n = (req.query.n && parseInt(req.query.n)) || 20; // Pagination: how many entries per page
   const p = (req.query.p && parseInt(req.query.p)) || 0; // Pagination: which page to start on
   const username = req.query.user;
-  const color = req.query.color;
+  const color = req.query.color || "";
   const fav = req.query.fav;
   const searchParams = {};
   const searchOptions = {};
