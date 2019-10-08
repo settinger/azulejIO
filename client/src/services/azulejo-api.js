@@ -22,7 +22,7 @@ export const loadSearch = searchQuery => {
     azulejoAPI
       .get(`/azulejos/search?${searchQuery}`)
       .then(response => {
-        resolve(response.data.azulejos);
+        resolve(response.data);
       })
       .catch(error => {
         reject(error);

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
@@ -7,7 +7,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import { rate, deleteDesign, loadSingle } from "./../services/azulejo-api";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SingleAzulejo extends Component {
   constructor(props) {

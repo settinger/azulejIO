@@ -27,8 +27,8 @@ exports.loadAll = (req, res, next) => {
 };
 
 exports.loadSearch = async (req, res, next) => {
-  const n = req.query.n && parseInt(req.query.n); // Pagination: how many entries per page
-  const p = req.query.p && parseInt(req.query.p); // Pagination: which page to start on
+  const n = (req.query.n && parseInt(req.query.n)) || 20; // Pagination: how many entries per page
+  const p = (req.query.p && parseInt(req.query.p)) || 0; // Pagination: which page to start on
   const username = req.query.user;
   const color = req.query.color;
   const fav = req.query.fav;
@@ -55,7 +55,7 @@ exports.loadSearch = async (req, res, next) => {
     .populate("_createdBy")
     .populate({ path: "_remixedFrom", populate: { path: "_createdBy" } })
     .then(azulejos => {
-      res.json({ type: "success", azulejos });
+      res.json({ type: "success", azulejos, n, p, color, fav, username });
     })
     .catch(error => {
       next(error);

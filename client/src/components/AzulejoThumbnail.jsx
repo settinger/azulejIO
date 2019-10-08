@@ -81,7 +81,7 @@ class AzulejoThumbnail extends Component {
           />
         </Link>
         <Link to={`/azulejo/${this.props.id}`}>
-          <div class="cardButton">View Azulejo</div>
+          <div className="cardButton">View Azulejo</div>
         </Link>
 
         <div className="mask rgba-white-slight" />
@@ -186,7 +186,10 @@ class AzulejoThumbnail extends Component {
               return (
                 this.props.colors.includes(color) && (
                   <span key={color} style={{ color: color.toLowerCase() }}>
-                    <Link to={`/search?color=${color}`} className="no-style">
+                    <Link
+                      to={`/search?n=20&p=0&color=${color}`}
+                      className="no-style"
+                    >
                       ■
                     </Link>
                   </span>

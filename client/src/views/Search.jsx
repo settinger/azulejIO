@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 // import Button from "react-bootstrap/Button";
 import { loadSearch } from "../services/azulejo-api";
 import AzulejoThumbnail from "../components/AzulejoThumbnail";
@@ -15,10 +16,11 @@ export default class Search extends Component {
 
   loadAzulejos() {
     loadSearch(this.props.location.search.substr(1))
-      .then(azulejos => {
+      .then(response => {
         this.setState({
           loaded: true,
-          azulejos
+          azulejos: response.azulejos,
+          response: response
         });
       })
       .catch(error => {
@@ -53,6 +55,42 @@ export default class Search extends Component {
       <div>
         <h1>Search</h1>
         <h2>Search results</h2>
+        {this.state.response && this.state.response.color && (
+          <p>Filtering by color: {this.state.response.color}</p>
+        )}
+        {this.state.response && (
+          <Fragment>
+            <p>
+              Showing results{" "}
+              {this.state.response.n * this.state.response.p + 1} &ndash;{" "}
+              {this.state.response.n * this.state.response.p +
+                this.state.azulejos.length}
+              .
+            </p>
+            {this.state.response.p > 0 && (
+              <p>
+                <Link
+                  to={`/search?p=${this.state.response.p - 1}&n=${
+                    this.state.response.n
+                  }&color=${this.state.response.color}`}
+                >
+                  &larr; Newer azulejos
+                </Link>
+              </p>
+            )}
+            {this.state.azulejos.length === 20 && (
+              <p>
+                <Link
+                  to={`/search?p=${this.state.response.p + 1}&n=${
+                    this.state.response.n
+                  }&color=${this.state.response.color}`}
+                >
+                  Older azulejos &rarr;
+                </Link>
+              </p>
+            )}
+          </Fragment>
+        )}
         <div className="card-set">
           {this.state.azulejos &&
             this.state.azulejos.map(azulejo => {
