@@ -1,9 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Figure from "react-bootstrap/Figure";
+import Carousel from "react-bootstrap/Carousel";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import { rate, deleteDesign, loadSingle } from "./../services/azulejo-api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SingleAzulejo extends Component {
   constructor(props) {
@@ -81,109 +84,161 @@ export default class SingleAzulejo extends Component {
       this.state.azulejo && this.state.azulejo._createdBy.username;
     return (
       this.state.azulejo && (
-        <div>
-          <div
-            className="mb-4"
-            id="header-content"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center"
-            }}
-          >
-            <h1>
-              <i>{this.state.azulejo.name}</i>
-            </h1>
-            <h3>
-              Created by: <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
-            </h3>
-            {this.state.azulejo._remixedFrom && (
-              <h4>
-                Remixed from{" "}
-                <i>
-                  <Link to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}>
-                    {this.state.azulejo._remixedFrom.name}
+        <div className="d-flex justify-content-start py-2">
+          <Carousel className="single-azulejo-carrousel">
+            <Carousel.Item>
+              <img
+                className="d-block"
+                src={this.state.azulejo.imageUrl}
+                alt="First slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="w-100"
+                src="/img/lukas-blazek-EWDvHNNfUmQ-unsplash.jpg"
+                alt="First slide"
+              />
+              <img
+                className="single-azulego-wood-azulejo"
+                src={this.state.azulejo.imageUrl}
+                alt="First slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <div
+                className="div-tile"
+                style={{
+                  backgroundSize: "10%",
+                  backgroundImage: `url(${this.state.azulejo.imageUrl})`
+                }}
+              >
+                <img
+                  className="d-block w-100 h-100"
+                  src="/img/tile_template_1.png"
+                  alt="First slide"
+                />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div
+                className="div-tile"
+                style={{
+                  backgroundSize: "10%",
+                  backgroundImage: `url(${this.state.azulejo.imageUrl})`
+                }}
+              >
+                <img
+                  className="d-block w-100 h-25"
+                  src="/img/tile_template_2.png"
+                  alt="First slide"
+                />
+              </div>
+            </Carousel.Item>
+          </Carousel>
+
+          {/* RIGTH COL
+
+          ALL //
+
+          UNSER INFO*/}
+
+          <div>
+            <div className="mb-4 pl-5 profile-user" id="header-content">
+              <h1 style={{ paddingTop: "0px" }}>{this.state.azulejo.name}</h1>
+              <p style={{ marginTop: "-30px" }}>
+                Created by:{" "}
+                <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
+              </p>
+              {this.state.azulejo._remixedFrom && (
+                <h4>
+                  Remixed from{" "}
+                  <i>
+                    <Link
+                      to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}
+                    >
+                      {this.state.azulejo._remixedFrom.name}
+                    </Link>
+                  </i>{" "}
+                  by{" "}
+                  <Link
+                    to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
+                  >
+                    {this.state.azulejo._remixedFrom._createdBy.username}
                   </Link>
-                </i>{" "}
-                by{" "}
-                <Link
-                  to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
-                >
-                  {this.state.azulejo._remixedFrom._createdBy.username}
-                </Link>
-              </h4>
-            )}
-            <div>
-              <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
-                <span className="btn btn-primary">Remix it!</span>
-              </Link>
+                </h4>
+              )}
+              <Row>
+                <Col>
+                  <div className="d-flex justify-content-start">
+                    <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
+                      <span className="btn btn-primary mr-2">Remix it!</span>
+                    </Link>
+                    {this.props.user &&
+                      this.props.user._id ===
+                        this.state.azulejo._createdBy._id && (
+                        <Form onSubmit={this.deleteDesign}>
+                          <Form.Group>
+                            <Button type="submit" className="btn btn-danger">
+                              Delete Azulejo
+                            </Button>
+                          </Form.Group>
+                        </Form>
+                      )}
+                  </div>
+                  <p>
+                    Rating:{" "}
+                    {this.state.azulejo.reviews
+                      .map(v => v.rating)
+                      .reduce((acc, v, i, a) => {
+                        acc += v;
+                        return acc / a.length;
+                      }, 0)
+                      .toFixed(1)}
+                  </p>{" "}
+                </Col>
+              </Row>
+              <div>
+                {this.props.user && (
+                  <Form onSubmit={this.addRate}>
+                    <hr />
+                    <div className="mb-2">Leave a review?</div>
+                    <Form.Group>
+                      <Form.Label htmlFor="comment">Comment</Form.Label>
+                      <Form.Control
+                        name="comment"
+                        placeholder="comment"
+                        required
+                        onChange={this.onValueChange}
+                        value={this.state.review.comment}
+                      />
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label htmlFor="rating">Rating</Form.Label>
+                      <Form.Control
+                        name="rating"
+                        placeholder="rating"
+                        type="number"
+                        min={1}
+                        max={5}
+                        required
+                        onChange={this.onValueChange}
+                        value={this.state.review.rating}
+                      />
+                    </Form.Group>
+                    <Button type="submit">Rate</Button>
+                  </Form>
+                )}
+              </div>
             </div>
           </div>
-          <Figure className="container px-5">
-            <Figure.Image
-              src={this.state.azulejo.imageUrl}
-              alt="Azulejo"
-              className="img-fluid"
-            />
-          </Figure>
-          {this.props.user._id === this.state.azulejo._createdBy._id && (
-            <div className="col-md-2 offset-md-5">
-              <Form onSubmit={this.deleteDesign}>
-                <Form.Group>
-                  <Button type="submit" className="btn btn-danger">
-                    Delete Azulejo
-                  </Button>
-                </Form.Group>
-              </Form>
-            </div>
-          )}
-          <p>
-            Rating:{" "}
-            {this.state.azulejo.reviews
-              .map(v => v.rating)
-              .reduce((acc, v, i, a) => {
-                acc += v;
-                return acc / a.length;
-              }, 0)
-              .toFixed(1)}
-          </p>{" "}
-          <p>
-            Reviews:{" "}
-            {this.state.azulejo.reviews.map(v => (
-              <p> {v.comment}</p>
-            ))}
-          </p>
-          <div>
-            {this.props.user && (
-              <Form onSubmit={this.addRate}>
-                <hr />
-                <div className="mb-2">Leave a review?</div>
-                <Form.Group>
-                  <Form.Label htmlFor="comment">Comment</Form.Label>
-                  <Form.Control
-                    name="comment"
-                    placeholder="comment"
-                    required
-                    onChange={this.onValueChange}
-                    value={this.state.review.comment}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label htmlFor="rating">Rating</Form.Label>
-                  <Form.Control
-                    name="rating"
-                    placeholder="rating"
-                    type="number"
-                    min={1}
-                    max={5}
-                    required
-                    onChange={this.onValueChange}
-                    value={this.state.review.rating}
-                  />
-                </Form.Group>
-                <Button type="submit">Rate</Button>
-              </Form>
-            )}
+          <div className="pl-5">
+            <p>
+              Reviews:{" "}
+              {this.state.azulejo.reviews.map(v => (
+                <p> {v.comment}</p>
+              ))}
+            </p>
           </div>
         </div>
       )

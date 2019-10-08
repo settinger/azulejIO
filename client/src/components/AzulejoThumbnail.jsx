@@ -81,7 +81,9 @@ class AzulejoThumbnail extends Component {
             alt="Azulejo Thumbnail"
           />
         </Link>
-        <div class="cardButton">View Azulejo</div>
+        <Link to={`/azulejo/${this.props.id}`}>
+          <div class="cardButton">View Azulejo</div>
+        </Link>
 
         <div className="mask rgba-white-slight" />
 
