@@ -12,6 +12,7 @@ export default class Search extends Component {
       azulejos: null
     };
     this.loadAzulejosFav = this.loadAzulejosFav.bind(this);
+    this.OlderNewerButtons = this.OlderNewerButtons.bind(this);
   }
 
   loadAzulejos() {
@@ -50,11 +51,9 @@ export default class Search extends Component {
     }
   }
 
-  render() {
+  OlderNewerButtons() {
     return (
-      <div>
-        <h1>Search</h1>
-        <h2>Search results</h2>
+      <Fragment>
         {this.state.response && this.state.response.color && (
           <p>Filtering by color: {this.state.response.color}</p>
         )}
@@ -91,6 +90,16 @@ export default class Search extends Component {
             )}
           </Fragment>
         )}
+      </Fragment>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Search</h1>
+        <h2>Search results</h2>
+        {this.OlderNewerButtons()}
         <div className="card-set">
           {this.state.azulejos &&
             this.state.azulejos.map(azulejo => {
@@ -120,6 +129,7 @@ export default class Search extends Component {
               );
             })}
         </div>
+        {this.OlderNewerButtons()}
       </div>
     );
   }
