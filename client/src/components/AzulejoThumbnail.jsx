@@ -46,12 +46,15 @@ class AzulejoThumbnail extends Component {
   }
 
   componentDidUpdate(previousProps, previousState) {
-    if (!this.state.fav || previousState.fav !== this.state.fav) {
+    if (
+      this.props.user &&
+      (!this.state.fav || previousState.fav !== this.state.fav)
+    ) {
       console.log("FAV STATE UPDATED", this.state.fav);
       this.setState({
         ...this.state
       });
-      //this.props.loadAzulejosFav(this.props.user._id);
+      this.props.loadAzulejosFav(this.props.user._id);
     }
   }
 
