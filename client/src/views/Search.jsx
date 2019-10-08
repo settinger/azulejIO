@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 // import Button from "react-bootstrap/Button";
-import { loadSearch } from "../services/azulejo-api";
+import { loadSearch, loadFavs } from "../services/azulejo-api";
 import AzulejoThumbnail from "../components/AzulejoThumbnail";
 
 export default class Search extends Component {
@@ -28,7 +28,7 @@ export default class Search extends Component {
       });
   }
   loadAzulejosFav(userId) {
-    loadSearch(`fav=${userId}`)
+    loadFavs(`fav=${userId}`)
       .then(azulejosFav =>
         this.setState({
           ...this.state,

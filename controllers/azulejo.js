@@ -26,6 +26,24 @@ exports.loadAll = (req, res, next) => {
     });
 };
 
+exports.loadFavs = (req, res, next) => {
+  const fav = req.query.fav;
+  const searchParams = {};
+  const searchOptions = {};
+  searchParams.fav = { $in: req.user.id };
+  searchOptions.sort = { $natural: -1 };
+
+  Azulejo.find(searchParams, null, searchOptions)
+    .populate("_createdBy")
+    .populate({ path: "_remixedFrom", populate: { path: "_createdBy" } })
+    .then(azulejos => {
+      res.json({ type: "success", azulejos });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
 exports.loadSearch = async (req, res, next) => {
   const n = (req.query.n && parseInt(req.query.n)) || 20; // Pagination: how many entries per page
   const p = (req.query.p && parseInt(req.query.p)) || 0; // Pagination: which page to start on

@@ -30,6 +30,19 @@ export const loadSearch = searchQuery => {
   });
 };
 
+export const loadFavs = searchQuery => {
+  return new Promise((resolve, reject) => {
+    azulejoAPI
+      .get(`/azulejos/search?${searchQuery}&n=999`)
+      .then(response => {
+        resolve(response.data.azulejos);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
 export const loadRecent = n => {
   return new Promise((resolve, reject) => {
     azulejoAPI

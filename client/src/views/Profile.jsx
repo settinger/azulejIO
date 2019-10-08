@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { loadUser } from "../services/auth-api";
-import { loadSearch } from "../services/azulejo-api";
+import { loadSearch, loadFavs } from "../services/azulejo-api";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
 import AzulejoThumbnailMod from "./../components/AzulejoThumbnailMod";
 import EditProfile from "./../components/EditProfile";
@@ -45,10 +45,10 @@ export default class Profile extends Component {
 
   loadAzulejos() {
     loadSearch(`user=${this.props.match.params.username}`)
-      .then(azulejos =>
+      .then(response =>
         this.setState({
           ...this.state,
-          azulejos
+          azulejos: response.azulejos
         })
       )
       .catch(error => {
@@ -57,13 +57,14 @@ export default class Profile extends Component {
   }
 
   loadAzulejosFav(userId) {
-    loadSearch(`fav=${userId}`)
-      .then(azulejosFav =>
+    loadFavs(`fav=${userId}`)
+      .then(azulejosFav => {
+        // console.log(response);
         this.setState({
           ...this.state,
           azulejosFav
-        })
-      )
+        });
+      })
       .catch(error => {
         console.log("BIG ERROR", error);
       });
