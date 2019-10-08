@@ -25,6 +25,11 @@ router.post(
   azulejoController.create
 );
 
+router.post(
+  "/azulejo/delete/:id",
+  routeGuardMiddleware(true),
+  azulejoController.remove
+);
 router.delete(
   "/azulejo/delete/:id",
   routeGuardMiddleware(true),

@@ -3,8 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Figure from "react-bootstrap/Figure";
 import { Link } from "react-router-dom";
-import { loadSingle } from "../services/azulejo-api";
-import { rate } from "./../services/azulejo-api";
+import { rate, deleteDesign, loadSingle } from "./../services/azulejo-api";
 
 export default class SingleAzulejo extends Component {
   constructor(props) {
@@ -18,6 +17,7 @@ export default class SingleAzulejo extends Component {
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.addRate = this.addRate.bind(this);
+    this.deleteDesign = this.deleteDesign.bind(this);
   }
 
   loadAzulejo() {
@@ -34,8 +34,6 @@ export default class SingleAzulejo extends Component {
 
   componentDidMount() {
     this.loadAzulejo();
-    console.dir(this.state);
-    console.log(this.props);
   }
 
   componentDidUpdate(previousProps) {
@@ -60,6 +58,18 @@ export default class SingleAzulejo extends Component {
       .then(review => {
         console.log(review);
         this.props.history.push(`/azulejo/${this.state.azulejo._id}`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  deleteDesign(event) {
+    event.preventDefault();
+    const id = this.state.azulejo._id;
+    deleteDesign(id)
+      .then(result => {
+        this.props.history.push("/");
       })
       .catch(error => {
         console.log(error);
@@ -118,9 +128,11 @@ export default class SingleAzulejo extends Component {
           </Figure>
           {this.props.user._id === this.state.azulejo._createdBy._id && (
             <div className="col-md-2 offset-md-5">
-              <Form>
+              <Form onSubmit={this.deleteDesign}>
                 <Form.Group>
-                  <Button className="btn btn-danger">Delete Azulejo</Button>
+                  <Button type="submit" className="btn btn-danger">
+                    Delete Azulejo
+                  </Button>
                 </Form.Group>
               </Form>
             </div>
