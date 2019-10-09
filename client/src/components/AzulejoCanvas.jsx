@@ -184,7 +184,9 @@ export default class AzulejoCanvas extends Component {
           ></canvas>
         </div>
         <div>
-          <button id="export-button">Export .png in new tab</button>
+          <button id="export-button" className="btn btn-primary">
+            Export .png in new tab
+          </button>
         </div>
       </Fragment>
     );

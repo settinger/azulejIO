@@ -67,13 +67,13 @@ export default class Azulejo extends Component {
 
       const formData = new FormData();
       for (let key in azulejo) {
-        const value = azulejo[key];
+        let value = azulejo[key];
+        if (key === "colors") value = JSON.stringify(azulejo[key]);
         formData.append(key, value);
       }
 
       create(formData)
         .then(azulejo => {
-          console.log("THE NEW AZUL IS", azulejo);
           this.props.history.push(`/azulejo/${azulejo._id}`);
         })
         .catch(error => {
