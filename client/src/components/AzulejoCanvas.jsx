@@ -43,7 +43,11 @@ export default class AzulejoCanvas extends Component {
 
     $exportButton.addEventListener("click", () => {
       const img = $canvas.toDataURL("image/png");
-      $img.innerHTML = `<img src="${img}" alt="my azulejo design" />`;
+      const tabImage = new Image();
+      tabImage.src = img;
+      // $img.innerHTML = `<img src="${img}" alt="my azulejo design" />`;
+      const newTab = window.open("");
+      newTab.document.write(tabImage.outerHTML);
     });
     this.drawing = new Drawing($canvas);
     this.drawing.startMenu();
@@ -180,7 +184,7 @@ export default class AzulejoCanvas extends Component {
           ></canvas>
         </div>
         <div>
-          <button id="export-button">Export as .png</button>
+          <button id="export-button">Export .png in new tab</button>
         </div>
       </Fragment>
     );
