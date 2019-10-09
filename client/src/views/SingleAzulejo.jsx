@@ -14,7 +14,8 @@ export default class SingleAzulejo extends Component {
     this.state = {
       review: {
         comment: "",
-        rating: ""
+        rating: "",
+        user: ""
       },
       azulejo: null
     };
@@ -50,8 +51,9 @@ export default class SingleAzulejo extends Component {
   onValueChange(event) {
     const name = event.target.name;
     const value = event.target.value;
+    console.log(this.props.user);
     this.setState({
-      review: { ...this.state.review, [name]: value }
+      review: { ...this.state.review, user: this.props.user, [name]: value }
     });
   }
 
@@ -87,7 +89,7 @@ export default class SingleAzulejo extends Component {
         <Container>
           <Row>
             <Col sm={5}>
-              <Carousel className="single-azulejo-carrousel">
+              <Carousel>
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
@@ -237,12 +239,17 @@ export default class SingleAzulejo extends Component {
             </Col>
             <Col sm={3}>
               <div className="pl-2">
-                <p>
-                  Reviews:{" "}
-                  {this.state.azulejo.reviews.map(v => (
-                    <p> {v.comment}</p>
-                  ))}
-                </p>
+                {this.state.azulejo.reviews.map(v => (
+                  <div className="comments-box my-2 py-3">
+                    <Row>
+                      {/* <Col>{v.user.imageUrl}</Col> */}
+                      <Col>
+                        {/* <strong> {v.user.username}</strong> */}
+                        <p> {v.comment}</p>
+                      </Col>
+                    </Row>
+                  </div>
+                ))}
               </div>
             </Col>
           </Row>

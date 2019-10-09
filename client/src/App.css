@@ -115,17 +115,6 @@ p {
   max-height: 250px;
 }
 
-/* .single-azulejo-carrousel {
-  display: flex;
-  justify-content: center;
-  height: 80vh;
-  width: 35vw;
-} */
-/* .single-azulejo-carrousel img {
-  height: 78vh;
-  width: auto;
-} */
-
 .single-azulego-wood-azulejo {
   position: absolute;
   top: 25%;
@@ -141,4 +130,13 @@ p {
   display: "flex";
   flex-direction: "column";
   text-align: left;
+}
+
+.comments-box {
+  width: 100%;
+  border: 2px solid rgb(230, 230, 230);
+  background-color: rgb(245, 245, 245);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
