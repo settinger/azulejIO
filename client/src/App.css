@@ -22,116 +22,9 @@
 } */
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300&display=swap");
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
-
-.fa {
-  width: 60px;
-  display: block;
-  text-align: center;
-  color: #fff;
-  font: normal 45px "FontAwesome";
-  line-height: 60px;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-}
-
-.fa-angle-double-down:before {
-  content: "\f107";
-}
-
-.bounce {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  margin-left: -30px;
-  border: 2px solid #fff;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
-  animation: bounce 2s infinite;
-  -webkit-animation: bounce 2s infinite;
-  -moz-animation: bounce 2s infinite;
-  -o-animation: bounce 2s infinite;
-}
-
-@-webkit-keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    -webkit-transform: translateY(0);
-  }
-  40% {
-    -webkit-transform: translateY(-30px);
-  }
-  60% {
-    -webkit-transform: translateY(-15px);
-  }
-}
-
-@-moz-keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    -moz-transform: translateY(0);
-  }
-  40% {
-    -moz-transform: translateY(-30px);
-  }
-  60% {
-    -moz-transform: translateY(-15px);
-  }
-}
-
-@-o-keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    -o-transform: translateY(0);
-  }
-  40% {
-    -o-transform: translateY(-30px);
-  }
-  60% {
-    -o-transform: translateY(-15px);
-  }
-}
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-30px);
-  }
-  60% {
-    transform: translateY(-15px);
-  }
-}
-.navbar {
-  color: #fff;
-  text-decoration-color: #fff;
-  -webkit-box-shadow: 0px 76px 54px -44px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 76px 54px -44px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 76px 54px -44px rgba(0, 0, 0, 0.75);
-}
-.navbar a {
-  color: #fff;
-}
 
 .header-bg {
-  height: 100vh;
+  height: 60vh;
   background-color: #333;
   background-image: url("/img/header.jpg");
   background-size: cover;
@@ -139,13 +32,10 @@
   -webkit-box-shadow: inset 300px 300px 0px 600px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: inset 300px 300px 0px 600px rgba(0, 0, 0, 0.5);
   box-shadow: inset 300px 300px 0px 600px rgba(0, 0, 0, 0.5);
-}
-
-.slider {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 7%;
 }
 
 .header-text {
@@ -176,8 +66,6 @@ h1 {
   font-size: 64px;
   /* font-weight: 700; */
   line-height: 64px;
-  margin: 0 0 0;
-  padding: 20px 0px;
 }
 
 h2 {
@@ -187,7 +75,6 @@ h2 {
   /* font-weight: 700; */
   /* line-height: 48px; */
   /* margin: 0 0 24px; */
-  padding: 30px 0px;
 }
 
 p {
