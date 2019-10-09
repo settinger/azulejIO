@@ -12,6 +12,15 @@ export default class AzulejoCanvas extends Component {
     };
     this.toggleColorPicker = this.toggleColorPicker.bind(this);
     this.colorChanged = this.colorChanged.bind(this);
+    this.boundingBoxChanged = this.boundingBoxChanged.bind(this);
+  }
+
+  boundingBoxChanged(event) {
+    let DOMrect = this.drawing.canvas.getBoundingClientRect();
+    this.drawing.offsetTop = DOMrect.top;
+    this.drawing.offsetLeft = DOMrect.left;
+    this.drawing.offsetWidth = DOMrect.width;
+    this.drawing.offsetHeight = DOMrect.height;
   }
 
   toggleColorPicker(event) {
@@ -40,26 +49,15 @@ export default class AzulejoCanvas extends Component {
     this.drawing.startMenu();
 
     // Calculate canvas bounding box offsets (and recompute when window resizes/scrolls)
-    let DOMrect = this.drawing.canvas.getBoundingClientRect();
-    this.drawing.offsetTop = DOMrect.top;
-    this.drawing.offsetLeft = DOMrect.left;
-    this.drawing.offsetWidth = DOMrect.width;
-    this.drawing.offsetHeight = DOMrect.height;
+    this.boundingBoxChanged();
 
-    window.addEventListener("scroll", e => {
-      DOMrect = this.drawing.canvas.getBoundingClientRect();
-      this.drawing.offsetTop = DOMrect.top;
-      this.drawing.offsetLeft = DOMrect.left;
-      this.drawing.offsetWidth = DOMrect.width;
-      this.drawing.offsetHeight = DOMrect.height;
+    const $header = document.querySelector("header");
+    $header.addEventListener("transitionrun", e => {
+      setTimeout(this.boundingBoxChanged, 750);
     });
-    window.addEventListener("resize", e => {
-      DOMrect = this.drawing.canvas.getBoundingClientRect();
-      this.drawing.offsetTop = DOMrect.top;
-      this.drawing.offsetLeft = DOMrect.left;
-      this.drawing.offsetWidth = DOMrect.width;
-      this.drawing.offsetHeight = DOMrect.height;
-    });
+
+    window.addEventListener("scroll", this.boundingBoxChanged);
+    window.addEventListener("resize", this.boundingBoxChanged);
   }
 
   componentDidUpdate() {

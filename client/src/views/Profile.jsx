@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { loadUser } from "../services/auth-api";
@@ -121,7 +122,8 @@ export default class Profile extends Component {
           )}
           <h2>Check your azulejos:</h2>
           <div className="card-set">
-            {this.state.azulejos &&
+            {(this.state.azulejos &&
+              this.state.azulejos.length > 0 &&
               this.state.azulejos.map(azulejo => {
                 return (
                   <AzulejoThumbnailMod
@@ -148,11 +150,17 @@ export default class Profile extends Component {
                     loadAzulejosFav={this.loadAzulejosFav}
                   />
                 );
-              })}
+              })) || (
+              <p>
+                You haven't designed any azulejos yet!{" "}
+                <Link to="/azulejo/create">Go design a new one</Link> or find an
+                existing design to remix!
+              </p>
+            )}
           </div>
-          <h2>Your favourite Azulejos:</h2>
+          <h2>Your favourite azulejos:</h2>
           <div className="card-set ">
-            {this.state.azulejosFav &&
+            {(this.state.azulejosFav &&
               this.state.azulejosFav.map(azulejo => {
                 return (
                   <AzulejoThumbnail
@@ -179,7 +187,13 @@ export default class Profile extends Component {
                     loadAzulejosFav={this.loadAzulejosFav}
                   />
                 );
-              })}
+              })) || (
+              <p>
+                You haven't favourited any azulejos!{" "}
+                <Link to="/">Browse the latest designs</Link> and find some you
+                like!
+              </p>
+            )}
           </div>
         </Container>
       )
