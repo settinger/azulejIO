@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import { rate, deleteDesign, loadSingle } from "./../services/azulejo-api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SingleAzulejo extends Component {
   constructor(props) {
@@ -17,16 +18,17 @@ export default class SingleAzulejo extends Component {
         rating: "",
         user: ""
       },
-      azulejo: null
+      azulejo: null,
+      average: null
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.addRate = this.addRate.bind(this);
     this.deleteDesign = this.deleteDesign.bind(this);
   }
-
   loadAzulejo() {
     loadSingle(this.props.match.params.id)
       .then(azulejo => {
+        console.log("THIS IS AZULEJO LOADED", azulejo);
         this.setState({
           azulejo
         });
@@ -36,18 +38,6 @@ export default class SingleAzulejo extends Component {
       });
   }
 
-  componentDidMount() {
-    this.loadAzulejo();
-  }
-
-  componentDidUpdate(previousProps) {
-    if (
-      !this.state.azulejo ||
-      previousProps.match.params.id !== this.props.match.params.id
-    ) {
-      this.loadAzulejo();
-    }
-  }
   onValueChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -63,6 +53,9 @@ export default class SingleAzulejo extends Component {
       .then(review => {
         console.log(review);
         this.props.history.push(`/azulejo/${this.state.azulejo._id}`);
+        this.setState({
+          review
+        });
       })
       .catch(error => {
         console.log(error);
@@ -81,7 +74,21 @@ export default class SingleAzulejo extends Component {
       });
   }
 
+  componentDidMount() {
+    this.loadAzulejo();
+  }
+
+  componentDidUpdate(previousProps) {
+    if (
+      !this.state.azulejo ||
+      previousProps.match.params.id !== this.props.match.params.id
+    ) {
+      this.loadAzulejo();
+    }
+  }
+
   render() {
+    console.log(this.state.average && this.state.average);
     const createdBy =
       this.state.azulejo && this.state.azulejo._createdBy.username;
     return (
@@ -151,33 +158,37 @@ export default class SingleAzulejo extends Component {
             <Col sm={7}>
               <div className="mb-4 pl-2 profile-user" id="header-content">
                 <Row>
-                  <h1 style={{ paddingTop: "0px" }}>
-                    {this.state.azulejo.name}
-                  </h1>
-                  {/* REMIXED FROM!!! */}
-                  {this.state.azulejo._remixedFrom && (
-                    <h4>
-                      Remixed from{" "}
-                      <i>
+                  <Col sm={6}>
+                    <h1 style={{ paddingTop: "0px" }}>
+                      {this.state.azulejo.name}
+                    </h1>
+                    {/* REMIXED FROM!!! */}
+                    {this.state.azulejo._remixedFrom && (
+                      <h4>
+                        Remixed from{" "}
+                        <i>
+                          <Link
+                            to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}
+                          >
+                            {this.state.azulejo._remixedFrom.name}
+                          </Link>
+                        </i>{" "}
+                        by{" "}
                         <Link
-                          to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}
+                          to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
                         >
-                          {this.state.azulejo._remixedFrom.name}
+                          {this.state.azulejo._remixedFrom._createdBy.username}
                         </Link>
-                      </i>{" "}
-                      by{" "}
-                      <Link
-                        to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
-                      >
-                        {this.state.azulejo._remixedFrom._createdBy.username}
-                      </Link>
-                    </h4>
-                  )}
-                  <Row className="ml-5">
+                      </h4>
+                    )}
+                  </Col>
+                  <Col sm={3}>
                     {/* REMIX IT!!! */}
                     <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
                       <span className="btn btn-primary mr-2">Remix it!</span>
                     </Link>
+                  </Col>
+                  <Col sm={3}>
                     {/* DELETE!!! */}
                     {this.props.user &&
                       this.props.user._id ===
@@ -190,22 +201,26 @@ export default class SingleAzulejo extends Component {
                           </Form.Group>
                         </Form>
                       )}
-                  </Row>
+                  </Col>
                 </Row>
-                <p style={{ marginTop: "-25px" }}>
-                  Created by:{" "}
-                  <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
-                </p>
-                <p>
-                  Rating:{" "}
-                  {this.state.azulejo.reviews
-                    .map(v => v.rating)
-                    .reduce((acc, v, i, a) => {
-                      acc += v;
-                      return acc / a.length;
-                    }, 0)
-                    .toFixed(1)}
-                </p>
+                <Row style={{ marginTop: "-25px" }}>
+                  <Col>
+                    {/* RATING   */}
+                    {/* <FontAwesomeIcon icon="star" color="#17a2b8" />
+                    <FontAwesomeIcon icon={["far", "star"]} color="#17a2b8" /> */}
+                    {this.state.azulejo.reviews
+                      .map(v => v.rating)
+                      .reduce((acc, v, i, arr) => {
+                        acc += v / arr.length;
+                        return acc;
+                      }, 0)
+                      .toFixed(1)}
+                  </Col>
+                  <Col>
+                    {/* CREATED BY */} Created by:{" "}
+                    <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
+                  </Col>
+                </Row>
                 {this.props.user && (
                   <Form onSubmit={this.addRate}>
                     <hr />
@@ -245,14 +260,17 @@ export default class SingleAzulejo extends Component {
               </div>
               <div className="pl-2">
                 {this.state.azulejo.reviews.map(v => (
-                  <div className="comments-box my-2 py-3">
-                    <Row>
-                      {/* <Col>{v.user.imageUrl}</Col> */}
-                      <Col>
+                  <div className="comments-box my-2 p-3">
+                    <Col>
+                      <Row>{v.rating}</Row>
+                      <Row>
+                        <strong>{v._createdBy.username}</strong> &nbsp; posted:
+                      </Row>
+                      <Row>
                         {/* <strong> {v.user.username}</strong> */}
-                        <p> {v.comment}</p>
-                      </Col>
-                    </Row>
+                        <i> {v.comment}</i>
+                      </Row>
+                    </Col>
                   </div>
                 ))}
               </div>

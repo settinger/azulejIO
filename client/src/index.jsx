@@ -13,7 +13,10 @@ import {
   faTwitter
 } from "@fortawesome/free-brands-svg-icons";
 import { faHeart, faComments, faStar } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHeart as farHeart,
+  faStar as farStar
+} from "@fortawesome/free-regular-svg-icons";
 
 library.add(
   fab,
@@ -23,7 +26,8 @@ library.add(
   faHeart,
   farHeart,
   faComments,
-  faStar
+  faStar,
+  farStar
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
