@@ -17,6 +17,7 @@ import EditProfile from "./components/EditProfile";
 import NavbarView from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { signOut, verify } from "./services/auth-api";
+import HeaderComponent from "./components/Header";
 
 export default class App extends Component {
   constructor(props) {
@@ -78,9 +79,9 @@ export default class App extends Component {
       <div className="App mb-5">
         <Router>
           <NavbarView user={this.state.user} signOut={this.signOut} />
-
+          {/* <HeaderComponent /> */}
           {this.state.loaded && (
-            <div className="container">
+            <div className="container" id="#container">
               <Switch>
                 <Route
                   path="/"

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import AzulejoThumbnail from "./../components/AzulejoThumbnail";
 import { loadRecent } from "./../services/azulejo-api";
@@ -38,9 +38,9 @@ export default class HomeView extends Component {
 
   render() {
     return (
-      <div>
-        <h1>AZULEJ.IO</h1>
-        <p>Here are some recent designs by users:</p>
+      <div className="py-5">
+        {/* <h1 id="h1">AZULEJ.IO</h1>
+        <p>Here are some recent designs by users:</p> */}
         {this.state.loaded && (
           <CardGroup className="card-set">
             <div className="card-set">

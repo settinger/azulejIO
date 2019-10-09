@@ -8,8 +8,13 @@ import Button from "react-bootstrap/Button";
 
 const NavbarView = props => {
   return (
-    <header>
-      <Navbar expand="lg" bg="light" variant="light" className="shadow-sm">
+    <div className="header-bg">
+      <Navbar
+        expand="lg"
+        bg="bg-transparent"
+        variant="dark"
+        className="shadow-lg"
+      >
         <Navbar.Toggle
           className="navbar-toggler"
           type="button"
@@ -67,7 +72,19 @@ const NavbarView = props => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </header>
+      <div class="slider">
+        <h1 className="header-text">azulej.io</h1>
+        <h2 style={{ color: "#fff", marginTop: "-3%" }}>
+          <i>Your online azulejo designer</i>
+        </h2>
+        <Link to="#h1">
+          {" "}
+          <div class="bounce">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </Link>
+      </div>
+    </div>
   );
 };
 
