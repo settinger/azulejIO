@@ -153,7 +153,8 @@ export default class Profile extends Component {
               })) || (
               <p>
                 You haven't designed any azulejos yet!{" "}
-                <Link>Go design some!</Link>
+                <Link to="/azulejo/create">Go design a new one</Link> or find an
+                existing design to remix!
               </p>
             )}
           </div>
