@@ -8,9 +8,17 @@ const Header = () => {
       <h1 className="header-text" style={{ fontFamily: "Constantia, serif" }}>
         azulej.io
       </h1>
-      <h2 style={{ color: "#fff", fontFamily: "Constantia, serif" }}>
-        <i>Your online azulejo designer</i>
-      </h2>
+      <div>
+        <h2
+          style={{
+            color: "#fff",
+            fontFamily: "Constantia, serif",
+            margin: "0 40px"
+          }}
+        >
+          <i>Your online azulejo designer</i>
+        </h2>
+      </div>
     </div>
   );
 };
