@@ -43,7 +43,11 @@ export default class AzulejoCanvas extends Component {
 
     $exportButton.addEventListener("click", () => {
       const img = $canvas.toDataURL("image/png");
-      $img.innerHTML = `<img src="${img}" alt="my azulejo design" />`;
+      const tabImage = new Image();
+      tabImage.src = img;
+      // $img.innerHTML = `<img src="${img}" alt="my azulejo design" />`;
+      const newTab = window.open("");
+      newTab.document.write(tabImage.outerHTML);
     });
     this.drawing = new Drawing($canvas);
     this.drawing.startMenu();
@@ -113,8 +117,27 @@ export default class AzulejoCanvas extends Component {
                 onClick={() => this.setState({ displayColorPicker: false })}
               ></div>
               <SketchPicker
+                disableAlpha
                 color={this.state.color}
                 onChange={this.colorChanged}
+                presetColors={[
+                  "#D0021B",
+                  "#F5A623",
+                  "#F8E71C",
+                  "#8B572A",
+                  "#7ED321",
+                  "#417505",
+                  "#BD10E0",
+                  "#9013FE",
+                  "#0055AA",
+                  "#4A90E2",
+                  "#50E3C2",
+                  "#B8E986",
+                  "#000000",
+                  "#4A4A4A",
+                  "#9B9B9B",
+                  "#FFFFFF"
+                ]}
               />
             </div>
           )}
@@ -161,7 +184,9 @@ export default class AzulejoCanvas extends Component {
           ></canvas>
         </div>
         <div>
-          <button id="export-button">Export as .png</button>
+          <button id="export-button" className="btn btn-primary">
+            Export .png in new tab
+          </button>
         </div>
       </Fragment>
     );
