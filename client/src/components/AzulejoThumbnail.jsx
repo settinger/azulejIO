@@ -124,8 +124,8 @@ class AzulejoThumbnail extends Component {
                 {this.props.reviews
                   .map(v => v.rating)
                   .reduce((acc, v, i, a) => {
-                    acc += v;
-                    return acc / a.length;
+                    acc += v / a.length;
+                    return acc;
                   }, 0)
                   .toFixed(1)}
               </StarRating>
