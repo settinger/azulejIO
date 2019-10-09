@@ -13,21 +13,21 @@ const StarRating = props => {
   if (rating % 1 === 0) {
     middleStar = "";
   } else if (rating % 1 < 0.25) {
-    middleStar = <FontAwesomeIcon icon={["far", "star"]} />;
+    middleStar = <FontAwesomeIcon icon={["far", "star"]} color={props.color} />;
   } else if (rating % 1 < 0.75) {
-    middleStar = <FontAwesomeIcon icon={faStarHalfAlt} />;
+    middleStar = <FontAwesomeIcon icon={faStarHalfAlt} color={props.color} />;
   } else {
-    middleStar = <FontAwesomeIcon icon={["fas", "star"]} />;
+    middleStar = <FontAwesomeIcon icon={["fas", "star"]} color={props.color} />;
   }
 
   return (
     <div>
       {[...Array(fullStars)].map(() => (
-        <FontAwesomeIcon icon={["fas", "star"]} />
+        <FontAwesomeIcon icon={["fas", "star"]} color={props.color} />
       ))}
       {middleStar}
       {[...Array(emptyStars)].map(() => (
-        <FontAwesomeIcon icon={["far", "star"]} />
+        <FontAwesomeIcon icon={["far", "star"]} color={props.color} />
       ))}
     </div>
   );

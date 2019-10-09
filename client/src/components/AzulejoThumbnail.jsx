@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fav, removeFav } from "./../services/azulejo-api";
+import StarRating from "./../components/StarRating";
 
 class AzulejoThumbnail extends Component {
   constructor(props) {
@@ -118,8 +119,8 @@ class AzulejoThumbnail extends Component {
             </li>
             {/* Average rating */}
             <li className="list-inline-item mr-4">
-              <FontAwesomeIcon icon="star" color="#17a2b8" />
-              <span className="ml-2">
+              {/* <FontAwesomeIcon icon="star" color="#17a2b8" /> */}
+              <StarRating color="#17a2b8">
                 {this.props.reviews
                   .map(v => v.rating)
                   .reduce((acc, v, i, a) => {
@@ -127,7 +128,7 @@ class AzulejoThumbnail extends Component {
                     return acc / a.length;
                   }, 0)
                   .toFixed(1)}
-              </span>
+              </StarRating>
             </li>
           </ul>
 
