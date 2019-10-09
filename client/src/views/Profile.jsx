@@ -21,6 +21,7 @@ export default class Profile extends Component {
     this.toggleEditProfile = this.toggleEditProfile.bind(this);
     this.loadAzulejosFav = this.loadAzulejosFav.bind(this);
     this.loadAzulejos = this.loadAzulejos.bind(this);
+    this.noAzulejosFaved = this.noAzulejosFaved.bind(this);
   }
 
   toggleEditProfile() {
@@ -100,6 +101,18 @@ export default class Profile extends Component {
     }
   }
 
+  noAzulejosFaved() {
+    return (
+      (this.props.user && this.props.user._id === this.state.user._id && (
+        <p>
+          You haven't favorited any azulejos yet!{" "}
+          <Link to="/">Go browse the existing designs</Link> and find some you
+          like!
+        </p>
+      )) || <p>This user hasn't favorited any azulejos yet!</p>
+    );
+  }
+
   render() {
     const user = this.state.user;
     return (
@@ -120,7 +133,9 @@ export default class Profile extends Component {
           {this.state.editProfileState && (
             <EditProfile user={this.state.user} />
           )}
-          <h2>Check your azulejos:</h2>
+          {(this.props.user && user._id === this.props.user._id && (
+            <h2>Check your azulejos:</h2>
+          )) || <h2>{user.username}'s azulejos:</h2>}
           <div className="card-set">
             {(this.state.azulejos &&
               this.state.azulejos.length > 0 &&
@@ -158,9 +173,12 @@ export default class Profile extends Component {
               </p>
             )}
           </div>
-          <h2>Your favourite azulejos:</h2>
+          {(this.props.user && user._id === this.props.user._id && (
+            <h2>Your favourite azulejos:</h2>
+          )) || <h2>{user.username}'s favourite azulejos:</h2>}
           <div className="card-set ">
             {(this.state.azulejosFav &&
+              this.state.azulejosFav.length > 0 &&
               this.state.azulejosFav.map(azulejo => {
                 return (
                   <AzulejoThumbnail
@@ -187,13 +205,8 @@ export default class Profile extends Component {
                     loadAzulejosFav={this.loadAzulejosFav}
                   />
                 );
-              })) || (
-              <p>
-                You haven't favourited any azulejos!{" "}
-                <Link to="/">Browse the latest designs</Link> and find some you
-                like!
-              </p>
-            )}
+              })) ||
+              this.noAzulejosFaved()}
           </div>
         </Container>
       )
