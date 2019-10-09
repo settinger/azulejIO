@@ -100,7 +100,7 @@ export default class Azulejo extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <AzulejoCanvas remixUrl={this.state.remixUrl} />
         {(this.props.user && (
           <Fragment>
@@ -117,7 +117,7 @@ export default class Azulejo extends Component {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label htmlFor="sign-up-username">Colors:</Form.Label>
+                <Form.Label htmlFor="sign-up-username">Colors: </Form.Label>
                 {[
                   "Red",
                   "Orange",
@@ -145,7 +145,9 @@ export default class Azulejo extends Component {
                   );
                 })}
               </Form.Group>
-              <button id="save-to-account">Save to my account</button>
+              <button id="save-to-account" className="btn btn-primary">
+                Save to my account
+              </button>
             </Form>
           </Fragment>
         )) || (

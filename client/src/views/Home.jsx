@@ -4,6 +4,7 @@ import AzulejoThumbnail from "./../components/AzulejoThumbnail";
 import { loadRecent } from "./../services/azulejo-api";
 import CardGroup from "react-bootstrap/CardGroup";
 import { loadSearch } from "../services/azulejo-api";
+import Header from "./../components/Header";
 
 export default class HomeView extends Component {
   constructor(props) {
@@ -38,43 +39,46 @@ export default class HomeView extends Component {
 
   render() {
     return (
-      <div className="py-5">
-        {/* <h1 id="h1">AZULEJ.IO</h1>
+      <Fragment>
+        <Header />
+        <div className="py-5">
+          {/* <h1 id="h1">AZULEJ.IO</h1>
         <p>Here are some recent designs by users:</p> */}
-        {this.state.loaded && (
-          <CardGroup className="card-set">
-            <div className="card-set">
-              {this.state.azulejos.map(azulejo => {
-                return (
-                  <AzulejoThumbnail
-                    key={azulejo._id}
-                    id={azulejo._id}
-                    name={azulejo.name}
-                    img={azulejo.imageUrl}
-                    createdBy={azulejo._createdBy.username}
-                    colors={azulejo.colors}
-                    reviews={azulejo.reviews}
-                    fav={azulejo.fav}
-                    remixedFromTitle={
-                      azulejo._remixedFrom && azulejo._remixedFrom.name
-                    }
-                    remixedFromId={
-                      azulejo._remixedFrom && azulejo._remixedFrom._id
-                    }
-                    remixedFromUser={
-                      azulejo._remixedFrom &&
-                      azulejo._remixedFrom._createdBy.username
-                    }
-                    user={this.props.user}
-                    loadAzulejosFav={this.loadAzulejosFav}
-                  />
-                );
-              })}
-            </div>
-          </CardGroup>
-        )}
-        <Link to="/search?p=1&n=20">Browse older designs</Link>
-      </div>
+          {this.state.loaded && (
+            <CardGroup className="card-set">
+              <div className="card-set">
+                {this.state.azulejos.map(azulejo => {
+                  return (
+                    <AzulejoThumbnail
+                      key={azulejo._id}
+                      id={azulejo._id}
+                      name={azulejo.name}
+                      img={azulejo.imageUrl}
+                      createdBy={azulejo._createdBy.username}
+                      colors={azulejo.colors}
+                      reviews={azulejo.reviews}
+                      fav={azulejo.fav}
+                      remixedFromTitle={
+                        azulejo._remixedFrom && azulejo._remixedFrom.name
+                      }
+                      remixedFromId={
+                        azulejo._remixedFrom && azulejo._remixedFrom._id
+                      }
+                      remixedFromUser={
+                        azulejo._remixedFrom &&
+                        azulejo._remixedFrom._createdBy.username
+                      }
+                      user={this.props.user}
+                      loadAzulejosFav={this.loadAzulejosFav}
+                    />
+                  );
+                })}
+              </div>
+            </CardGroup>
+          )}
+          <Link to="/search?p=1&n=20">Browse older designs</Link>
+        </div>
+      </Fragment>
     );
   }
 }
