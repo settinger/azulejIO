@@ -235,7 +235,7 @@ export default class SingleAzulejo extends Component {
                         <Form.Group>
                           <Form.Control
                             name="rating"
-                            placeholder="rate!"
+                            placeholder="0"
                             type="number"
                             min={1}
                             max={5}
