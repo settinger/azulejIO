@@ -185,7 +185,7 @@ export default class SingleAzulejo extends Component {
                     </Row>
                   </Col>
                 </Row>
-                <Row style={{ marginTop: "-5%" }}>
+                <Row>
                   <Col sm={3}>
                     {/* RATING   */}
                     {/* <FontAwesomeIcon icon="star" color="#17a2b8" />
