@@ -109,9 +109,8 @@ export default class Search extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
-      <div>
+      <div className="container mt-4">
         <h1>Search</h1>
         <h2>Search results</h2>
         {this.OlderNewerButtons()}
