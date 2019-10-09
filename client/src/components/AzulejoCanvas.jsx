@@ -55,7 +55,7 @@ export default class AzulejoCanvas extends Component {
     // Calculate canvas bounding box offsets (and recompute when window resizes/scrolls)
     this.boundingBoxChanged();
 
-    const $header = document.querySelector("header");
+    const $header = document.querySelector("nav");
     $header.addEventListener("transitionrun", e => {
       setTimeout(this.boundingBoxChanged, 750);
     });
