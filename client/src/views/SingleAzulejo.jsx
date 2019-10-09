@@ -87,7 +87,7 @@ export default class SingleAzulejo extends Component {
     return (
       this.state.azulejo && (
         <Container>
-          <Row>
+          <Row className="py-5">
             <Col sm={5}>
               <Carousel>
                 <Carousel.Item>
@@ -148,96 +148,101 @@ export default class SingleAzulejo extends Component {
 
           UNSER INFO*/}
 
-            <Col sm={3}>
+            <Col sm={7}>
               <div className="mb-4 pl-2 profile-user" id="header-content">
-                <h1 style={{ paddingTop: "0px" }}>{this.state.azulejo.name}</h1>
+                <Row>
+                  <h1 style={{ paddingTop: "0px" }}>
+                    {this.state.azulejo.name}
+                  </h1>
+                  {/* REMIXED FROM!!! */}
+                  {this.state.azulejo._remixedFrom && (
+                    <h4>
+                      Remixed from{" "}
+                      <i>
+                        <Link
+                          to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}
+                        >
+                          {this.state.azulejo._remixedFrom.name}
+                        </Link>
+                      </i>{" "}
+                      by{" "}
+                      <Link
+                        to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
+                      >
+                        {this.state.azulejo._remixedFrom._createdBy.username}
+                      </Link>
+                    </h4>
+                  )}
+                  <Row className="ml-5">
+                    {/* REMIX IT!!! */}
+                    <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
+                      <span className="btn btn-primary mr-2">Remix it!</span>
+                    </Link>
+                    {/* DELETE!!! */}
+                    {this.props.user &&
+                      this.props.user._id ===
+                        this.state.azulejo._createdBy._id && (
+                        <Form onSubmit={this.deleteDesign}>
+                          <Form.Group>
+                            <Button type="submit" className="btn btn-danger">
+                              Delete Azulejo
+                            </Button>
+                          </Form.Group>
+                        </Form>
+                      )}
+                  </Row>
+                </Row>
                 <p style={{ marginTop: "-25px" }}>
                   Created by:{" "}
                   <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
                 </p>
-                {this.state.azulejo._remixedFrom && (
-                  <h4>
-                    Remixed from{" "}
-                    <i>
-                      <Link
-                        to={`/azulejo/${this.state.azulejo._remixedFrom._id}`}
-                      >
-                        {this.state.azulejo._remixedFrom.name}
-                      </Link>
-                    </i>{" "}
-                    by{" "}
-                    <Link
-                      to={`/profile/${this.state.azulejo._remixedFrom._createdBy.username}`}
-                    >
-                      {this.state.azulejo._remixedFrom._createdBy.username}
-                    </Link>
-                  </h4>
+                <p>
+                  Rating:{" "}
+                  {this.state.azulejo.reviews
+                    .map(v => v.rating)
+                    .reduce((acc, v, i, a) => {
+                      acc += v;
+                      return acc / a.length;
+                    }, 0)
+                    .toFixed(1)}
+                </p>
+                {this.props.user && (
+                  <Form onSubmit={this.addRate}>
+                    <hr />
+                    <div className="mb-2">Leave a review?</div>
+                    <Row>
+                      <Col sm={2}>
+                        <Form.Group>
+                          <Form.Control
+                            name="rating"
+                            placeholder="rate!"
+                            type="number"
+                            min={1}
+                            max={5}
+                            required
+                            onChange={this.onValueChange}
+                            value={this.state.review.rating}
+                          />
+                        </Form.Group>
+                        <Button type="submit">Rate</Button>
+                      </Col>
+                      <Col>
+                        <Form.Group>
+                          <Form.Control
+                            as="textarea"
+                            rows="4"
+                            name="comment"
+                            placeholder="Comment something"
+                            required
+                            onChange={this.onValueChange}
+                            value={this.state.review.comment}
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                  </Form>
                 )}
-                <Row>
-                  <Col>
-                    <div className="d-flex justify-content-start">
-                      <Link to={`/azulejo/remix/${this.state.azulejo._id}`}>
-                        <span className="btn btn-primary mr-2">Remix it!</span>
-                      </Link>
-                      {this.props.user &&
-                        this.props.user._id ===
-                          this.state.azulejo._createdBy._id && (
-                          <Form onSubmit={this.deleteDesign}>
-                            <Form.Group>
-                              <Button type="submit" className="btn btn-danger">
-                                Delete Azulejo
-                              </Button>
-                            </Form.Group>
-                          </Form>
-                        )}
-                    </div>
-                    <p>
-                      Rating:{" "}
-                      {this.state.azulejo.reviews
-                        .map(v => v.rating)
-                        .reduce((acc, v, i, a) => {
-                          acc += v;
-                          return acc / a.length;
-                        }, 0)
-                        .toFixed(1)}
-                    </p>{" "}
-                  </Col>
-                </Row>
-                <div>
-                  {this.props.user && (
-                    <Form onSubmit={this.addRate}>
-                      <hr />
-                      <div className="mb-2">Leave a review?</div>
-                      <Form.Group>
-                        <Form.Label htmlFor="comment">Comment</Form.Label>
-                        <Form.Control
-                          name="comment"
-                          placeholder="comment"
-                          required
-                          onChange={this.onValueChange}
-                          value={this.state.review.comment}
-                        />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label htmlFor="rating">Rating</Form.Label>
-                        <Form.Control
-                          name="rating"
-                          placeholder="rating"
-                          type="number"
-                          min={1}
-                          max={5}
-                          required
-                          onChange={this.onValueChange}
-                          value={this.state.review.rating}
-                        />
-                      </Form.Group>
-                      <Button type="submit">Rate</Button>
-                    </Form>
-                  )}
-                </div>
               </div>
-            </Col>
-            <Col sm={3}>
               <div className="pl-2">
                 {this.state.azulejo.reviews.map(v => (
                   <div className="comments-box my-2 py-3">

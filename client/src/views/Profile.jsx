@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -173,41 +173,44 @@ export default class Profile extends Component {
               </p>
             )}
           </div>
-          {(this.props.user && user._id === this.props.user._id && (
-            <h2>Your favourite azulejos:</h2>
-          )) || <h2>{user.username}'s favourite azulejos:</h2>}
-          <div className="card-set ">
-            {(this.state.azulejosFav &&
-              this.state.azulejosFav.length > 0 &&
-              this.state.azulejosFav.map(azulejo => {
-                return (
-                  <AzulejoThumbnail
-                    key={azulejo._id}
-                    id={azulejo._id}
-                    name={azulejo.name}
-                    img={azulejo.imageUrl}
-                    createdBy={azulejo._createdBy.username}
-                    colors={azulejo.colors}
-                    reviews={azulejo.reviews}
-                    fav={azulejo.fav}
-                    remixedFromTitle={
-                      azulejo._remixedFrom && azulejo._remixedFrom.name
-                    }
-                    remixedFromId={
-                      azulejo._remixedFrom && azulejo._remixedFrom._id
-                    }
-                    remixedFromUser={
-                      azulejo._remixedFrom &&
-                      azulejo._remixedFrom._createdBy &&
-                      azulejo._remixedFrom._createdBy.username
-                    }
-                    user={this.props.user}
-                    loadAzulejosFav={this.loadAzulejosFav}
-                  />
-                );
-              })) ||
-              this.noAzulejosFaved()}
-          </div>
+          {this.props.user && user._id === this.props.user._id && (
+            <Fragment>
+              <h2>Your favourite azulejos:</h2>
+
+              <div className="card-set ">
+                {(this.state.azulejosFav &&
+                  this.state.azulejosFav.length > 0 &&
+                  this.state.azulejosFav.map(azulejo => {
+                    return (
+                      <AzulejoThumbnail
+                        key={azulejo._id}
+                        id={azulejo._id}
+                        name={azulejo.name}
+                        img={azulejo.imageUrl}
+                        createdBy={azulejo._createdBy.username}
+                        colors={azulejo.colors}
+                        reviews={azulejo.reviews}
+                        fav={azulejo.fav}
+                        remixedFromTitle={
+                          azulejo._remixedFrom && azulejo._remixedFrom.name
+                        }
+                        remixedFromId={
+                          azulejo._remixedFrom && azulejo._remixedFrom._id
+                        }
+                        remixedFromUser={
+                          azulejo._remixedFrom &&
+                          azulejo._remixedFrom._createdBy &&
+                          azulejo._remixedFrom._createdBy.username
+                        }
+                        user={this.props.user}
+                        loadAzulejosFav={this.loadAzulejosFav}
+                      />
+                    );
+                  })) ||
+                  this.noAzulejosFaved()}
+              </div>
+            </Fragment>
+          )}
         </Container>
       )
     );
