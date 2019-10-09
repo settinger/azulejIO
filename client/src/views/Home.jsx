@@ -41,7 +41,7 @@ export default class HomeView extends Component {
     return (
       <Fragment>
         <Header />
-        <div className="py-5">
+        <div className="py-5 container">
           {/* <h1 id="h1">AZULEJ.IO</h1>
         <p>Here are some recent designs by users:</p> */}
           {this.state.loaded && (

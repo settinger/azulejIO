@@ -5,8 +5,10 @@ import NavbarView from "./../components/Navbar";
 const Header = () => {
   return (
     <div className="header-bg">
-      <h1 className="header-text">azulej.io</h1>
-      <h2 style={{ color: "#fff" }}>
+      <h1 className="header-text" style={{ fontFamily: "Constantia, serif" }}>
+        azulej.io
+      </h1>
+      <h2 style={{ color: "#fff", fontFamily: "Constantia, serif" }}>
         <i>Your online azulejo designer</i>
       </h2>
     </div>
