@@ -38,7 +38,7 @@ export default class HomeView extends Component {
 
   render() {
     return (
-      <div className="py-5">
+      <div className="py-5" name="h1">
         {/* <h1 id="h1">AZULEJ.IO</h1>
         <p>Here are some recent designs by users:</p> */}
         {this.state.loaded && (
