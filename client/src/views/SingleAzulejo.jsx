@@ -263,7 +263,7 @@ export default class SingleAzulejo extends Component {
               {this.state.azulejo.reviews.map(v => (
                 <div className="comments-box my-2 p-3">
                   <Row>
-                    <Col md={1}>
+                    <Col md={2}>
                       <img
                         width="50px"
                         height="auto"
