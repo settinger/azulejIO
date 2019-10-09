@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 // import Button from "react-bootstrap/Button";
 import { loadSearch, loadFavs } from "../services/azulejo-api";
 import AzulejoThumbnail from "../components/AzulejoThumbnail";
+import queryString from "query-string";
 
 export default class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
-      azulejos: null
+      azulejos: null,
+      queries: null,
+      otherQueries: null
     };
     this.loadAzulejosFav = this.loadAzulejosFav.bind(this);
     this.OlderNewerButtons = this.OlderNewerButtons.bind(this);
@@ -43,6 +46,17 @@ export default class Search extends Component {
 
   componentDidMount() {
     this.loadAzulejos();
+    this.setState({ queries: queryString.parse(this.props.location.search) });
+    let otherQueries = "";
+    for (let query in this.state.queries) {
+      if (query !== "n" && query !== "p") {
+        console.log(`Query is ${query}, value is ${this.state.queries[query]}`);
+        otherQueries = otherQueries.concat(
+          `${query}=${this.state.queries[query]}`
+        );
+      }
+    }
+    this.setState({ otherQueries });
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -95,6 +109,7 @@ export default class Search extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <h1>Search</h1>
