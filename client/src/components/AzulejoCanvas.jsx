@@ -113,8 +113,27 @@ export default class AzulejoCanvas extends Component {
                 onClick={() => this.setState({ displayColorPicker: false })}
               ></div>
               <SketchPicker
+                disableAlpha
                 color={this.state.color}
                 onChange={this.colorChanged}
+                presetColors={[
+                  "#D0021B",
+                  "#F5A623",
+                  "#F8E71C",
+                  "#8B572A",
+                  "#7ED321",
+                  "#417505",
+                  "#BD10E0",
+                  "#9013FE",
+                  "#0055AA",
+                  "#4A90E2",
+                  "#50E3C2",
+                  "#B8E986",
+                  "#000000",
+                  "#4A4A4A",
+                  "#9B9B9B",
+                  "#FFFFFF"
+                ]}
               />
             </div>
           )}
