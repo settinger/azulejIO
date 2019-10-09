@@ -113,8 +113,8 @@ exports.loadSingle = (req, res, next) => {
 exports.create = (req, res, next) => {
   const { name, _remixedFrom } = req.body;
   const colors = JSON.parse(req.body.colors);
-  console.log("REQUEST BODY", { name, colors, _remixedFrom });
-  console.log("REQUEST FILE", req.file);
+  // console.log("REQUEST BODY", { name, colors, _remixedFrom });
+  // console.log("REQUEST FILE", req.file);
   // Convert req.file.buffer to a file
   const dataUri = new DataUri();
   dataUri.format(".png", req.file.buffer);

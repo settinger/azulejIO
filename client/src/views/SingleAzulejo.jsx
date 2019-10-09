@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import { rate, deleteDesign, loadSingle } from "./../services/azulejo-api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import StarRating from "./../components/StarRating";
 
 export default class SingleAzulejo extends Component {
   constructor(props) {
@@ -185,17 +186,19 @@ export default class SingleAzulejo extends Component {
                   </Col>
                 </Row>
                 <Row style={{ marginTop: "-5%" }}>
-                  <Col sm={1}>
+                  <Col sm={3}>
                     {/* RATING   */}
                     {/* <FontAwesomeIcon icon="star" color="#17a2b8" />
                     <FontAwesomeIcon icon={["far", "star"]} color="#17a2b8" /> */}
-                    {this.state.azulejo.reviews
-                      .map(v => v.rating)
-                      .reduce((acc, v, i, arr) => {
-                        acc += v / arr.length;
-                        return acc;
-                      }, 0)
-                      .toFixed(1)}
+                    <StarRating>
+                      {this.state.azulejo.reviews
+                        .map(v => v.rating)
+                        .reduce((acc, v, i, arr) => {
+                          acc += v / arr.length;
+                          return acc;
+                        }, 0)
+                        .toFixed(1)}
+                    </StarRating>
                   </Col>
                   <Col>
                     {/* CREATED BY */} Created by:{" "}
