@@ -29,7 +29,7 @@ export default class SingleAzulejo extends Component {
   loadAzulejo() {
     loadSingle(this.props.match.params.id)
       .then(azulejo => {
-        console.log("THIS IS AZULEJO LOADED", azulejo);
+        // console.log("THIS IS AZULEJO LOADED", azulejo);
         this.setState({
           azulejo
         });
@@ -89,7 +89,7 @@ export default class SingleAzulejo extends Component {
   }
 
   render() {
-    console.log(this.state.average && this.state.average);
+    // console.log(this.state.average && this.state.average);
     const createdBy =
       this.state.azulejo && this.state.azulejo._createdBy.username;
     return (
