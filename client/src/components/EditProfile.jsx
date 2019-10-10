@@ -72,7 +72,6 @@ export default class EditProfile extends Component {
   }
 
   deleteUser() {
-    console.log(this.props.history);
     remove(this.props.user.username)
       .then(user => {
         this.props.history.push("/");

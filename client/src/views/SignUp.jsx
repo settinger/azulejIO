@@ -24,7 +24,6 @@ export default class SignUp extends Component {
       ...this.state,
       [name]: value
     });
-    console.log(this.state);
   }
 
   signUp(event) {

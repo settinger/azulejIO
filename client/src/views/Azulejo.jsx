@@ -42,8 +42,6 @@ export default class Azulejo extends Component {
   }
 
   onValueChange(event) {
-    // console.log(event.target.value);
-    // console.log(this.state);
     this.setState({
       name: event.target.value
     });
@@ -62,7 +60,6 @@ export default class Azulejo extends Component {
       };
       if (this.state.remix) {
         azulejo._remixedFrom = this.state.remixedFrom;
-        // console.log(azulejo);
       }
 
       const formData = new FormData();
@@ -87,7 +84,6 @@ export default class Azulejo extends Component {
     this.$canvas = document.getElementById("drawing-canvas");
     // If we're making a remix, load the image URL to remix from
     if (this.state.remix) {
-      // console.log("A remix is occurring");
       loadSingle(this.props.match.params.id)
         .then(azulejo => {
           this.setState({ remixUrl: azulejo.imageUrl });

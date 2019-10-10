@@ -41,7 +41,6 @@ export default class AzulejoCanvas extends Component {
   }
 
   colorChanged(event) {
-    // console.log(event);
     this.drawing.brushColor = event.hex;
     this.setState({ color: event.rgb });
   }
@@ -80,7 +79,6 @@ export default class AzulejoCanvas extends Component {
 
   componentDidUpdate() {
     if (this.props.remixUrl && !this.remixLoaded) {
-      // console.log(this.props.remixUrl);
       const remix = new Image();
       remix.crossOrigin = "anonymous";
       remix.src = this.props.remixUrl;

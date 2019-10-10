@@ -29,7 +29,6 @@ export default class SingleAzulejo extends Component {
   loadAzulejo() {
     loadSingle(this.props.match.params.id)
       .then(azulejo => {
-        // console.log("THIS IS AZULEJO LOADED", azulejo);
         this.setState({
           azulejo
         });
@@ -42,7 +41,6 @@ export default class SingleAzulejo extends Component {
   onValueChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    console.log(this.props.user);
     this.setState({
       review: { ...this.state.review, user: this.props.user, [name]: value }
     });
@@ -52,7 +50,6 @@ export default class SingleAzulejo extends Component {
     const rating = this.state.review;
     rate(this.state.azulejo._id, rating)
       .then(review => {
-        console.log(review);
         this.props.history.push(`/azulejo/${this.state.azulejo._id}`);
         this.setState({
           review
@@ -89,7 +86,6 @@ export default class SingleAzulejo extends Component {
   }
 
   render() {
-    // console.log(this.state.average && this.state.average);
     const createdBy =
       this.state.azulejo && this.state.azulejo._createdBy.username;
     return (
