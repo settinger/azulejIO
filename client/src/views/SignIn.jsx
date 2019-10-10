@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
 import { signIn } from "../services/auth-api";
@@ -40,36 +42,51 @@ export default class SignIn extends Component {
 
   render() {
     return (
-      <Container>
-        <h1>SIGN IN</h1>
-        <Form onSubmit={this.signIn}>
-          <Form.Group>
-            <Form.Label htmlFor="sign-up-email">Email</Form.Label>
-            <Form.Control
-              id="sign-up-email"
-              name="email"
-              required
-              type="email"
-              placeholder="email"
-              onChange={this.onValueChange}
-              value={this.state.email}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor="sign-up-password">Password</Form.Label>
-            <Form.Control
-              id="sign-up-password"
-              name="password"
-              required
-              type="password"
-              placeholder="Password"
-              onChange={this.onValueChange}
-              value={this.state.password}
-            />
-          </Form.Group>
-          <Button type="submit">Sign In</Button>
-        </Form>
-      </Container>
+      <div className="signin-bg">
+        <Col sm={3}>
+          {/* <Row>
+            <h1
+              className="header-text"
+              style={{ fontFamily: "Constantia, serif" }}
+            >
+              SIGN IN
+            </h1>
+          </Row> */}
+          <div className="signin-square">
+            <Row>
+              <Form onSubmit={this.signIn}>
+                <Form.Group>
+                  {/* <Form.Label htmlFor="sign-up-email">Email</Form.Label> */}
+                  <Form.Control
+                    id="sign-up-email"
+                    name="email"
+                    required
+                    type="email"
+                    placeholder="email"
+                    onChange={this.onValueChange}
+                    value={this.state.email}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  {/* <Form.Label htmlFor="sign-up-password">Password</Form.Label> */}
+                  <Form.Control
+                    id="sign-up-password"
+                    name="password"
+                    required
+                    type="password"
+                    placeholder="Password"
+                    onChange={this.onValueChange}
+                    value={this.state.password}
+                  />
+                </Form.Group>
+                <Button type="submit" className="d-flex justify-content-center">
+                  Sign In
+                </Button>
+              </Form>
+            </Row>
+          </div>
+        </Col>
+      </div>
     );
   }
 }

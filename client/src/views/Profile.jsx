@@ -234,8 +234,7 @@ export default class Profile extends Component {
                           />
                         </Row>
                       );
-                    })) ||
-                    this.noAzulejosFaved()}
+                    })) || <Row>{this.noAzulejosFaved()}</Row>}
                 </div>
               </Fragment>
             )}

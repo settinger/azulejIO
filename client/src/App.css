@@ -22,8 +22,10 @@
 } */
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Crimson+Text:400,400i&display=swap");
 
-.header-bg {
+.header-bg,
+.signin-bg {
   height: 60vh;
   background-color: #333;
   background-image: url("/img/header.jpg");
@@ -36,6 +38,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.signin-bg {
+  height: 90vh;
+}
+
+.signin-square {
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
 }
 
 .header-text {
@@ -62,7 +74,7 @@
 
 h1 {
   color: #333;
-  font-family: "Roboto", sans-serif;
+  font-family: "Crimson Text", sans-serif;
   font-size: 64px;
   /* font-weight: 700; */
   line-height: 64px;
@@ -70,11 +82,12 @@ h1 {
 
 h2 {
   color: #333;
-  font-family: "Roboto", sans-serif;
+  font-family: "Crimson Text", sans-serif;
   /* font-size: 38px; */
   /* font-weight: 700; */
   /* line-height: 48px; */
   /* margin: 0 0 24px; */
+  padding: 4% 0;
 }
 
 p {
@@ -85,12 +98,25 @@ p {
   margin: 0 0 48px;
 }
 
+.btn {
+  background-color: #17a2b8;
+  color: #fff;
+  border: 2px solid white;
+}
+.btn:hover {
+  background-color: white;
+  color: #17a2b8;
+  border: 2px solid #17a2b8;
+}
+
+a,
 .link {
-  color: #333;
+  color: #17a2b8;
+  /* color: inherit; */
   text-decoration: none;
 }
 
-.link:hover {
+a:hover {
   color: #17a2b8;
 }
 
