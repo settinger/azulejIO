@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { edit, remove } from "./../services/auth-api";
+import { edit, remove, handleUpload } from "./../services/auth-api";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -11,27 +11,21 @@ export default class EditProfile extends Component {
     super(props);
     this.state = {
       user: {
-        username: ""
+        username: "",
+        imageUrl: ""
+      },
+      button: {
+        state: true,
+        text: "Edit profile"
       }
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.editUser = this.editUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   componentDidMount() {
-    // loadUser()
-    //   .then(singleUser => {
-    //     console.log(singleUser);
-    //     this.setState({
-    //       user: singleUser
-    //     });
-    //     console.log(this.state);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    // console.log("hola", this.props.user._id);
     this.setState({
       user: this.props.user
     });
@@ -41,7 +35,24 @@ export default class EditProfile extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      user: { [name]: value }
+      user: { ...this.state.user, [name]: value }
+    });
+  }
+
+  onInputChange(event) {
+    const image = new FormData();
+    image.append("imageUrl", event.target.files[0]);
+    this.setState({
+      ...this.state,
+      button: {
+        state: false,
+        text: "Loading image... "
+      }
+    });
+    handleUpload(image).then(response => {
+      this.setState({
+        user: { ...this.state.user, imageUrl: response.secure_url }
+      });
     });
   }
 
@@ -70,10 +81,22 @@ export default class EditProfile extends Component {
       });
   }
 
+  componentDidUpdate(nextProps, nextState) {
+    if (this.state.user.imageUrl !== nextState.user.imageUrl) {
+      this.setState({
+        ...this.state,
+        button: {
+          state: true,
+          text: "Update profile!"
+        }
+      });
+    }
+  }
+
   render() {
-    // console.log(this.props);
     return (
       <Container>
+        <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
         <Form onSubmit={this.editUser}>
           <Form.Group>
             <Form.Label htmlFor="sign-up-username">Username</Form.Label>
@@ -85,8 +108,19 @@ export default class EditProfile extends Component {
               defaultValue={this.state.user.username}
             />
           </Form.Group>
-          <Button variant="outline-success" type="submit">
-            Edit Profile
+          <Form.Group>
+            <Form.Label htmlFor="sign-up-imageUrl">Profile Image</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={event => this.onInputChange(event)}
+            />
+          </Form.Group>
+          <Button
+            disabled={!this.state.button.state}
+            variant="outline-success"
+            type="submit"
+          >
+            {this.state.button.text}
           </Button>
         </Form>
         <Button variant="outline-danger" onClick={this.deleteUser}>

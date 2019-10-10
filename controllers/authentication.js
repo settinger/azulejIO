@@ -56,11 +56,12 @@ exports.loadUser = (req, res, next) => {
 };
 
 exports.edit = (req, res, next) => {
-  const username = req.body.username;
+  const { username, imageUrl } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
     {
-      username
+      username,
+      imageUrl
     },
     { new: true }
   )
