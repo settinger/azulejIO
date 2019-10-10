@@ -97,7 +97,16 @@ export default class SingleAzulejo extends Component {
         <Container>
           <Row className="py-5">
             <Col sm={5}>
-              <Carousel>
+              <Carousel
+                interval="3000"
+                pauseOnHover="true"
+                nextIcon={
+                  <span
+                    aria-hidden="true"
+                    className="carousel-control-next-icon"
+                  />
+                }
+              >
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
