@@ -3,6 +3,11 @@ import Drawing from "./scripts/Drawing";
 import GridLines from "./GridLines";
 
 import { SketchPicker } from "react-color";
+import { Link } from "react-router-dom";
+
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default class AzulejoCanvas extends Component {
   constructor(props) {
@@ -20,7 +25,7 @@ export default class AzulejoCanvas extends Component {
   }
 
   checkboxChecked(event) {
-    this.setState({ gridLines: event.target.checked });
+    this.setState({ gridLines: !this.state.gridLines });
   }
 
   boundingBoxChanged(event) {
@@ -89,120 +94,188 @@ export default class AzulejoCanvas extends Component {
   render() {
     return (
       <Fragment>
-        <div id="brush-tools" style={{ fontSize: "1em" }}>
-          {/* <SketchPicker /> */}
-          <label htmlFor="brush-color">Choose brush color: </label>
-          <div
-            style={{
-              margin: "0 .4em",
-              padding: ".4em",
-              boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
-              borderRadius: "1px",
-              display: "inline-block",
-              cursor: "pointer",
-              transform: "translateY(.4em)"
-            }}
-            onClick={this.toggleColorPicker}
-          >
-            <div
-              style={{
-                width: "3.2em",
-                height: "1em",
-                borderRadius: "2px",
-                background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`
-              }}
-            ></div>
-          </div>
-          {this.state.displayColorPicker && (
-            <div style={{ position: "absolute", zIndex: "2" }}>
+        <h1 className="mt-4">Azulejo designer</h1>
+        <Row>
+          <Col md="8">
+            <div id="drawing-board" style={{ maxWidth: "85vh" }}>
+              <canvas
+                id="drawing-canvas"
+                className="img-fluid"
+                style={{
+                  border: "1px solid rgba(0,0,0,.1)",
+                  backgroundColor: "white",
+                  marginBottom: "-6px"
+                }}
+              ></canvas>
+              {this.state.gridLines && <GridLines canvas={this.state.canvas} />}
+            </div>
+          </Col>
+          <Col md="4">
+            <div id="brush-tools" style={{ fontSize: "1em" }}>
+              {/* <SketchPicker /> */}
+              <label htmlFor="brush-color">Choose brush color: </label>
               <div
                 style={{
-                  position: "fixed",
-                  top: "0px",
-                  right: "0px",
-                  bottom: "0px",
-                  left: "0px"
+                  margin: "0 .4em",
+                  padding: ".4em",
+                  boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
+                  borderRadius: "1px",
+                  display: "inline-block",
+                  cursor: "pointer",
+                  transform: "translateY(.4em)"
                 }}
-                onClick={() => this.setState({ displayColorPicker: false })}
-              ></div>
-              <SketchPicker
-                disableAlpha
-                color={this.state.color}
-                onChange={this.colorChanged}
-                presetColors={[
-                  "#D0021B",
-                  "#F5A623",
-                  "#F8E71C",
-                  "#8B572A",
-                  "#7ED321",
-                  "#417505",
-                  "#BD10E0",
-                  "#9013FE",
-                  "#0055AA",
-                  "#4A90E2",
-                  "#50E3C2",
-                  "#B8E986",
-                  "#000000",
-                  "#4A4A4A",
-                  "#9B9B9B",
-                  "#FFFFFF"
-                ]}
+                onClick={this.toggleColorPicker}
+              >
+                <div
+                  style={{
+                    width: "3.2em",
+                    height: "1em",
+                    borderRadius: "2px",
+                    background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`
+                  }}
+                ></div>
+              </div>
+              {this.state.displayColorPicker && (
+                <div style={{ position: "absolute", zIndex: "2" }}>
+                  <div
+                    style={{
+                      position: "fixed",
+                      top: "0px",
+                      right: "0px",
+                      bottom: "0px",
+                      left: "0px"
+                    }}
+                    onClick={() => this.setState({ displayColorPicker: false })}
+                  ></div>
+                  <SketchPicker
+                    disableAlpha
+                    color={this.state.color}
+                    onChange={this.colorChanged}
+                    presetColors={[
+                      "#D0021B",
+                      "#F5A623",
+                      "#F8E71C",
+                      "#8B572A",
+                      "#7ED321",
+                      "#417505",
+                      "#BD10E0",
+                      "#9013FE",
+                      "#0055AA",
+                      "#4A90E2",
+                      "#50E3C2",
+                      "#B8E986",
+                      "#000000",
+                      "#4A4A4A",
+                      "#9B9B9B",
+                      "#FFFFFF"
+                    ]}
+                  />
+                </div>
+              )}
+              <br />
+              <input
+                onChange={() => {}}
+                onInput={event => {
+                  this.drawing.brushSize = event.target.value;
+                  this.$brushSizeValue.innerText = this.drawing.brushSize;
+                }}
+                type="range"
+                id="brush-size"
+                name="brush-size"
+                min="1"
+                max="40"
+                defaultValue="20"
+                step="1"
+                style={{
+                  transform: "translateX(-.4em) translateY(0em)",
+                  width: "6em"
+                }}
               />
+              <label htmlFor="brush-size">
+                Brush size: <span id="brush-size-value">20</span>
+              </label>
+              <br />
+              <button
+                onClick={this.checkboxChecked}
+                className="btn btn-primary mb-5"
+              >
+                Toggle grid lines
+              </button>
             </div>
-          )}
-          <br />
-          <input
-            onChange={() => {}}
-            onInput={event => {
-              this.drawing.brushSize = event.target.value;
-              this.$brushSizeValue.innerText = this.drawing.brushSize;
-            }}
-            type="range"
-            id="brush-size"
-            name="brush-size"
-            min="1"
-            max="40"
-            defaultValue="20"
-            step="1"
-            style={{
-              transform: "translateX(-.4em) translateY(0em)",
-              width: "6em"
-            }}
-          />
-          <label htmlFor="brush-size">
-            Brush size: <span id="brush-size-value">20</span>
-          </label>
-          <br />
-          <label htmlFor="show-grid" style={{ marginRight: "5px" }}>
-            Show grid lines:{" "}
-          </label>
-          <input
-            type="checkbox"
-            id="show-grid"
-            onInput={this.checkboxChecked}
-          ></input>
-        </div>
-        <div id="drawing-board" style={{ maxWidth: "85vh" }}>
-          <canvas
-            id="drawing-canvas"
-            className="img-fluid"
-            style={{
-              border: "1px solid rgba(0,0,0,.1)",
-              backgroundColor: "white",
-              marginBottom: "-6px"
-            }}
-          ></canvas>
-          {this.state.gridLines && <GridLines canvas={this.state.canvas} />}
-        </div>
-        <div>
-          <button
-            id="export-button"
-            className="btn btn-primary"
-            style={{ margin: "20px 0" }}
-          >
-            Export .png in new tab
-          </button>
-        </div>
+            {(this.props.user && (
+              <Fragment>
+                <Form onSubmit={this.saveToAccount}>
+                  <Form.Group>
+                    <Form.Label htmlFor="azulejo-name">
+                      Azulejo Name:
+                    </Form.Label>
+                    <Form.Control
+                      id="azulejo-name"
+                      name="name"
+                      placeholder="name"
+                      required
+                      type="name"
+                      onChange={this.onValueChange}
+                      value={this.state.name}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label
+                      htmlFor="azulejo-colors"
+                      style={{ paddingRight: "6px" }}
+                    >
+                      Colors:
+                    </Form.Label>
+                    {[
+                      "Red",
+                      "Orange",
+                      "Yellow",
+                      "Green",
+                      "Blue",
+                      "Purple",
+                      "Black"
+                    ].map(color => {
+                      return (
+                        <Form.Check
+                          inline
+                          type="checkbox"
+                          key={color}
+                          label={color}
+                          id={color}
+                          name={color}
+                          onClick={event => {
+                            event.target.checked
+                              ? this.addColor(color)
+                              : this.removeColor(color);
+                            console.log(this.state.colors);
+                          }}
+                        />
+                      );
+                    })}
+                  </Form.Group>
+                  <button id="save-to-account" className="btn btn-primary">
+                    Save to my account
+                  </button>
+                </Form>
+              </Fragment>
+            )) || (
+              <Fragment>
+                <Link to="/auth/signup">Sign up</Link> or{" "}
+                <Link to="/auth/signin">sign in</Link> to save, share, and remix
+                your designs!
+              </Fragment>
+            )}
+            <div>
+              <button
+                id="export-button"
+                className="btn btn-primary"
+                style={{ margin: "20px 0" }}
+              >
+                Export .png in new tab
+              </button>
+            </div>
+          </Col>
+        </Row>
       </Fragment>
     );
   }

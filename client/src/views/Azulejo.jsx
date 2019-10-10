@@ -101,62 +101,7 @@ export default class Azulejo extends Component {
   render() {
     return (
       <div className="container">
-        <AzulejoCanvas remixUrl={this.state.remixUrl} />
-        {(this.props.user && (
-          <Fragment>
-            <Form onSubmit={this.saveToAccount}>
-              <Form.Group>
-                <Form.Label htmlFor="sign-up-email">Name</Form.Label>
-                <Form.Control
-                  name="name"
-                  placeholder="name"
-                  required
-                  type="name"
-                  onChange={this.onValueChange}
-                  value={this.state.name}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label htmlFor="sign-up-username">Colors: </Form.Label>
-                {[
-                  "Red",
-                  "Orange",
-                  "Yellow",
-                  "Green",
-                  "Blue",
-                  "Purple",
-                  "Black"
-                ].map(color => {
-                  return (
-                    <Form.Check
-                      inline
-                      type="checkbox"
-                      key={color}
-                      label={color}
-                      id={color}
-                      name={color}
-                      onClick={event => {
-                        event.target.checked
-                          ? this.addColor(color)
-                          : this.removeColor(color);
-                        console.log(this.state.colors);
-                      }}
-                    />
-                  );
-                })}
-              </Form.Group>
-              <button id="save-to-account" className="btn btn-primary">
-                Save to my account
-              </button>
-            </Form>
-          </Fragment>
-        )) || (
-          <Fragment>
-            <Link to="/auth/signup">Sign up</Link> or{" "}
-            <Link to="/auth/signin">sign in</Link> to save, share, and remix
-            your designs!
-          </Fragment>
-        )}
+        <AzulejoCanvas remixUrl={this.state.remixUrl} user={this.props.user} />
         <div id="image-goes-here"></div>
       </div>
     );
