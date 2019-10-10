@@ -24,17 +24,6 @@ export default class SignUp extends Component {
     });
     console.log(this.state);
   }
-  onInputChange(event) {
-    const image = new FormData();
-    image.append("imageUrl", event.target.files[0]);
-    handleUpload(image).then(response => {
-      this.setState({
-        ...this.state,
-        imageUrl: response.secure_url
-      });
-      console.log(this.state);
-    });
-  }
 
   signUp(event) {
     event.preventDefault();
