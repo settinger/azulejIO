@@ -190,7 +190,7 @@ export default class SingleAzulejo extends Component {
                     {/* RATING   */}
                     {/* <FontAwesomeIcon icon="star" color="#17a2b8" />
                     <FontAwesomeIcon icon={["far", "star"]} color="#17a2b8" /> */}
-                    <StarRating>
+                    <StarRating color="#17a2b8">
                       {this.state.azulejo.reviews
                         .map(v => v.rating)
                         .reduce((acc, v, i, arr) => {
@@ -275,7 +275,9 @@ export default class SingleAzulejo extends Component {
                       />
                     </Col>
                     <Col md={8}>
-                      <Row>{v.rating}</Row>
+                      <Row>
+                        <StarRating color="#17a2b8">{v.rating}</StarRating>
+                      </Row>
                       <Row>
                         <strong>{v._createdBy.username}</strong> &nbsp; posted:
                       </Row>
