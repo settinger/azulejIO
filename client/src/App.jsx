@@ -76,6 +76,7 @@ export default class App extends Component {
     return !this.state.user;
   }
   render() {
+    console.log(this.props);
     return (
       <div className="App">
         <Router>

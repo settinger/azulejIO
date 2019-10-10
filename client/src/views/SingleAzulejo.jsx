@@ -97,7 +97,7 @@ export default class SingleAzulejo extends Component {
         <Container>
           <Row className="py-5">
             <Col sm={5}>
-              <Carousel>
+              <Carousel interval="3000" pauseOnHover="true">
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
@@ -108,7 +108,7 @@ export default class SingleAzulejo extends Component {
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
-                    src="/img/lukas-blazek-EWDvHNNfUmQ-unsplash.jpg"
+                    src="/img/wood-bg.png"
                     alt="First slide"
                   />
                   <img
