@@ -20,6 +20,7 @@ export default class SignUp extends Component {
   onValueChange(event) {
     const { name, value } = event.target;
     this.setState({
+      ...this.state,
       [name]: value
     });
   }
@@ -36,7 +37,7 @@ export default class SignUp extends Component {
 
   signUp(event) {
     event.preventDefault();
-
+    console.log(this.state);
     const { email, username, imageUrl, password } = this.state;
     signUp({ email, username, imageUrl, password })
       .then(user => {
