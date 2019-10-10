@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Drawing from "./scripts/Drawing";
+import GridLines from "./GridLines";
 
 import { SketchPicker } from "react-color";
 
@@ -8,11 +9,18 @@ export default class AzulejoCanvas extends Component {
     super(props);
     this.state = {
       displayColorPicker: false,
-      color: { r: 0, g: 85, b: 170, a: 1 }
+      color: { r: 0, g: 85, b: 170, a: 1 },
+      canvas: undefined,
+      gridLines: false
     };
     this.toggleColorPicker = this.toggleColorPicker.bind(this);
     this.colorChanged = this.colorChanged.bind(this);
     this.boundingBoxChanged = this.boundingBoxChanged.bind(this);
+    this.checkboxChecked = this.checkboxChecked.bind(this);
+  }
+
+  checkboxChecked(event) {
+    this.setState({ gridLines: event.target.checked });
   }
 
   boundingBoxChanged(event) {
@@ -35,6 +43,7 @@ export default class AzulejoCanvas extends Component {
 
   componentDidMount() {
     const $canvas = document.getElementById("drawing-canvas");
+    this.setState({ canvas: $canvas });
     const $exportButton = document.getElementById("export-button");
     const $img = document.getElementById("image-goes-here");
     // const $brushColor = document.getElementById("brush-color");
@@ -141,14 +150,6 @@ export default class AzulejoCanvas extends Component {
               />
             </div>
           )}
-          {/* <input
-            type="color"
-            id="brush-color"
-            defaultValue="#0055AA"
-            onChange={event => {
-              this.drawing.brushColor = event.target.value;
-            }}
-          /> */}
           <br />
           <input
             onChange={() => {}}
@@ -171,17 +172,27 @@ export default class AzulejoCanvas extends Component {
           <label htmlFor="brush-size">
             Brush size: <span id="brush-size-value">20</span>
           </label>
+          <br />
+          <label htmlFor="show-grid" style={{ marginRight: "5px" }}>
+            Show grid lines:{" "}
+          </label>
+          <input
+            type="checkbox"
+            id="show-grid"
+            onInput={this.checkboxChecked}
+          ></input>
         </div>
         <div id="drawing-board">
           <canvas
             id="drawing-canvas"
-            style={{
-              boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
-              borderRadius: "1px",
-              backgroundColor: "white"
-            }}
             className="img-fluid"
+            style={{
+              border: "1px solid rgba(0,0,0,.1)",
+              backgroundColor: "white",
+              marginBottom: "-6px"
+            }}
           ></canvas>
+          {this.state.gridLines && <GridLines canvas={this.state.canvas} />}
         </div>
         <div>
           <button id="export-button" className="btn btn-primary">
