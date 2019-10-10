@@ -151,37 +151,41 @@ export default class Profile extends Component {
                 )}
               </Col>
             </Row>
-            {(this.props.user && user._id === this.props.user._id && (
-              <h2>Check your azulejos:</h2>
-            )) || <h2>{user.username}'s azulejos:</h2>}
+            <Row>
+              {(this.props.user && user._id === this.props.user._id && (
+                <h2>Check your azulejos:</h2>
+              )) || <h2>{user.username}'s azulejos:</h2>}
+            </Row>
             <div className="card-set">
               {(this.state.azulejos &&
                 this.state.azulejos.length > 0 &&
                 this.state.azulejos.map(azulejo => {
                   return (
-                    <AzulejoThumbnailMod
-                      key={azulejo._id}
-                      id={azulejo._id}
-                      name={azulejo.name}
-                      img={azulejo.imageUrl}
-                      createdBy={azulejo._createdBy.username}
-                      colors={azulejo.colors}
-                      reviews={azulejo.reviews}
-                      fav={azulejo.fav}
-                      remixedFromTitle={
-                        azulejo._remixedFrom && azulejo._remixedFrom.name
-                      }
-                      remixedFromId={
-                        azulejo._remixedFrom && azulejo._remixedFrom._id
-                      }
-                      remixedFromUser={
-                        azulejo._remixedFrom &&
-                        azulejo._remixedFrom._createdBy &&
-                        azulejo._remixedFrom._createdBy.username
-                      }
-                      user={this.props.user}
-                      loadAzulejosFav={this.loadAzulejosFav}
-                    />
+                    <Row>
+                      <AzulejoThumbnailMod
+                        key={azulejo._id}
+                        id={azulejo._id}
+                        name={azulejo.name}
+                        img={azulejo.imageUrl}
+                        createdBy={azulejo._createdBy.username}
+                        colors={azulejo.colors}
+                        reviews={azulejo.reviews}
+                        fav={azulejo.fav}
+                        remixedFromTitle={
+                          azulejo._remixedFrom && azulejo._remixedFrom.name
+                        }
+                        remixedFromId={
+                          azulejo._remixedFrom && azulejo._remixedFrom._id
+                        }
+                        remixedFromUser={
+                          azulejo._remixedFrom &&
+                          azulejo._remixedFrom._createdBy &&
+                          azulejo._remixedFrom._createdBy.username
+                        }
+                        user={this.props.user}
+                        loadAzulejosFav={this.loadAzulejosFav}
+                      />
+                    </Row>
                   );
                 })) || (
                 <p>
@@ -193,36 +197,42 @@ export default class Profile extends Component {
             </div>
             {this.props.user && user._id === this.props.user._id && (
               <Fragment>
-                <h2>Your favourite azulejos:</h2>
+                <Row>
+                  {" "}
+                  <h2>Your favourite azulejos:</h2>
+                </Row>
 
                 <div className="card-set ">
                   {(this.state.azulejosFav &&
                     this.state.azulejosFav.length > 0 &&
                     this.state.azulejosFav.map(azulejo => {
                       return (
-                        <AzulejoThumbnail
-                          key={azulejo._id}
-                          id={azulejo._id}
-                          name={azulejo.name}
-                          img={azulejo.imageUrl}
-                          createdBy={azulejo._createdBy.username}
-                          colors={azulejo.colors}
-                          reviews={azulejo.reviews}
-                          fav={azulejo.fav}
-                          remixedFromTitle={
-                            azulejo._remixedFrom && azulejo._remixedFrom.name
-                          }
-                          remixedFromId={
-                            azulejo._remixedFrom && azulejo._remixedFrom._id
-                          }
-                          remixedFromUser={
-                            azulejo._remixedFrom &&
-                            azulejo._remixedFrom._createdBy &&
-                            azulejo._remixedFrom._createdBy.username
-                          }
-                          user={this.props.user}
-                          loadAzulejosFav={this.loadAzulejosFav}
-                        />
+                        <Row>
+                          {" "}
+                          <AzulejoThumbnail
+                            key={azulejo._id}
+                            id={azulejo._id}
+                            name={azulejo.name}
+                            img={azulejo.imageUrl}
+                            createdBy={azulejo._createdBy.username}
+                            colors={azulejo.colors}
+                            reviews={azulejo.reviews}
+                            fav={azulejo.fav}
+                            remixedFromTitle={
+                              azulejo._remixedFrom && azulejo._remixedFrom.name
+                            }
+                            remixedFromId={
+                              azulejo._remixedFrom && azulejo._remixedFrom._id
+                            }
+                            remixedFromUser={
+                              azulejo._remixedFrom &&
+                              azulejo._remixedFrom._createdBy &&
+                              azulejo._remixedFrom._createdBy.username
+                            }
+                            user={this.props.user}
+                            loadAzulejosFav={this.loadAzulejosFav}
+                          />
+                        </Row>
                       );
                     })) ||
                     this.noAzulejosFaved()}
