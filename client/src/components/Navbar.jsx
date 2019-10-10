@@ -14,6 +14,18 @@ const NavbarView = props => {
       variant="light"
       className="shadow-sm"
     >
+      <Navbar.Brand>
+        <Link
+          to="/"
+          className="nav-link"
+          style={{
+            fontFamily: "Crimson Text",
+            fontSize: "1.2em"
+          }}
+        >
+          azulej.io
+        </Link>
+      </Navbar.Brand>
       <Navbar.Toggle
         className="navbar-toggler"
         type="button"
@@ -26,10 +38,7 @@ const NavbarView = props => {
         <span className="navbar-toggler-icon"></span>
       </Navbar.Toggle>
       <Navbar.Collapse>
-        <Nav className="mr-auto">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
+        <Nav className="ml-auto">
           {(!props.user && (
             <Fragment>
               <Link to="/azulejo/create" className="nav-link">
