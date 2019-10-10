@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { edit, remove, handleUpload } from "./../services/auth-api";
 
 import Form from "react-bootstrap/Form";
@@ -96,36 +97,54 @@ export default class EditProfile extends Component {
   render() {
     return (
       <Container>
-        <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
-        <Form onSubmit={this.editUser}>
-          <Form.Group>
-            <Form.Label htmlFor="sign-up-username">Username</Form.Label>
-            <Form.Control
-              name="username"
-              placeholder="username"
-              required
-              onChange={this.onValueChange}
-              defaultValue={this.state.user.username}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor="sign-up-imageUrl">Profile Image</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={event => this.onInputChange(event)}
-            />
-          </Form.Group>
-          <Button
-            disabled={!this.state.button.state}
-            variant="outline-success"
-            type="submit"
-          >
-            {this.state.button.text}
-          </Button>
-        </Form>
-        <Button variant="outline-danger" onClick={this.deleteUser}>
-          Delete
-        </Button>
+        <Col>
+          <Row>
+            <Col>
+              <Form onSubmit={this.editUser}>
+                <Row>
+                  <Form.Group>
+                    <Form.Label htmlFor="sign-up-username">Username</Form.Label>
+                    <Form.Control
+                      name="username"
+                      placeholder="username"
+                      required
+                      onChange={this.onValueChange}
+                      defaultValue={this.state.user.username}
+                    />
+                  </Form.Group>
+                  <Form.Group className="ml-2">
+                    <Form.Label htmlFor="sign-up-imageUrl">
+                      Profile Image
+                    </Form.Label>
+                    <Form.Control
+                      type="file"
+                      onChange={event => this.onInputChange(event)}
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Button
+                    disabled={!this.state.button.state}
+                    variant="outline-success"
+                    type="submit"
+                  >
+                    {this.state.button.text}
+                  </Button>
+                  <Button
+                    className="ml-2"
+                    variant="outline-danger"
+                    onClick={this.deleteUser}
+                  >
+                    Delete
+                  </Button>
+                </Row>
+              </Form>
+            </Col>
+          </Row>
+          <Col></Col>
+          <Col></Col>
+          <Row></Row>
+        </Col>
       </Container>
     );
   }
