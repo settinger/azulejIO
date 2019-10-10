@@ -118,7 +118,7 @@ export default class Profile extends Component {
     return (
       user && (
         <Container>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between mt-4">
             <h1>{user.username}'s profile</h1>
             <img src={user.imageUrl} alt={user.username} width="100px" />
             {(!this.props.user && <div></div>) ||
