@@ -77,13 +77,6 @@ export default class SignUp extends Component {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label htmlFor="sign-up-imageUrl">Profile Image</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={event => this.onInputChange(event)}
-            />
-          </Form.Group>
-          <Form.Group>
             <Form.Label htmlFor="sign-up-password">Password</Form.Label>
             <Form.Control
               name="password"
