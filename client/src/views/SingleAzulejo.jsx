@@ -6,7 +6,13 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
-import { rate, deleteDesign, loadSingle } from "./../services/azulejo-api";
+import {
+  rate,
+  deleteDesign,
+  loadSingle,
+  fav,
+  removeFav
+} from "./../services/azulejo-api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import StarRating from "./../components/StarRating";
 
@@ -25,10 +31,13 @@ export default class SingleAzulejo extends Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.addRate = this.addRate.bind(this);
     this.deleteDesign = this.deleteDesign.bind(this);
+    this.addFav = this.addFav.bind(this);
+    this.removeFav = this.removeFav.bind(this);
   }
   loadAzulejo() {
     loadSingle(this.props.match.params.id)
       .then(azulejo => {
+        console.log(azulejo);
         this.setState({
           azulejo
         });
@@ -72,16 +81,49 @@ export default class SingleAzulejo extends Component {
       });
   }
 
+  addFav() {
+    fav(this.state.azulejo._id)
+      .then(fav => {
+        this.setState({
+          ...this.state,
+          azulejo: { ...this.state.azulejo, fav: fav }
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  removeFav() {
+    removeFav(this.state.azulejo._id)
+      .then(fav => {
+        this.setState({
+          ...this.state,
+          azulejo: { ...this.state.azulejo, fav: fav }
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   componentDidMount() {
     this.loadAzulejo();
   }
 
-  componentDidUpdate(previousProps) {
+  componentDidUpdate(previousProps, previousState) {
     if (
       !this.state.azulejo ||
       previousProps.match.params.id !== this.props.match.params.id
     ) {
       this.loadAzulejo();
+    }
+    if (
+      this.props.user &&
+      (!this.state.azulejo || previousState.azulejo !== this.state.azulejo)
+    ) {
+      this.setState({
+        ...this.state
+      });
     }
   }
 
@@ -195,6 +237,40 @@ export default class SingleAzulejo extends Component {
                         }, 0)
                         .toFixed(1)}
                     </StarRating>
+                  </Col>
+                  <Col>
+                    {(this.state.azulejo.fav &&
+                      this.props.user &&
+                      !this.state.azulejo.fav.includes(this.props.user._id) && (
+                        <li className="list-inline-item mr-4">
+                          <span
+                            onClick={this.addFav}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <FontAwesomeIcon
+                              icon={["far", "heart"]}
+                              color="#17a2b8"
+                            />
+                            <span className="ml-2">
+                              {this.state.azulejo.fav &&
+                                this.state.azulejo.fav.length}
+                            </span>
+                          </span>
+                        </li>
+                      )) || (
+                      <li className="list-inline-item mr-4">
+                        <span
+                          onClick={this.removeFav}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <FontAwesomeIcon icon="heart" color="#17a2b8" />
+                          <span className="ml-2">
+                            {this.state.azulejo.fav &&
+                              this.state.azulejo.fav.length}
+                          </span>
+                        </span>
+                      </li>
+                    )}
                   </Col>
                   <Col>
                     {/* CREATED BY */} Created by:{" "}
