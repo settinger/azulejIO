@@ -182,7 +182,7 @@ export default class AzulejoCanvas extends Component {
             onInput={this.checkboxChecked}
           ></input>
         </div>
-        <div id="drawing-board">
+        <div id="drawing-board" style={{ maxWidth: "85vh" }}>
           <canvas
             id="drawing-canvas"
             className="img-fluid"
