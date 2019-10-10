@@ -72,7 +72,7 @@ class AzulejoThumbnail extends Component {
         <Link className="link" to={`/azulejo/${this.props.id}`}>
           <Card.Img
             className="bgCardImg"
-            src="/img/lukas-blazek-EWDvHNNfUmQ-unsplash.jpg"
+            src="/img/wood-bg.png"
             alt="Azulejo Thumbnail"
           />
           <Card.Img
