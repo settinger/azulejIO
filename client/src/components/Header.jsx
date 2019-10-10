@@ -5,14 +5,11 @@ import NavbarView from "./../components/Navbar";
 const Header = () => {
   return (
     <div className="header-bg">
-      <h1 className="header-text" style={{ fontFamily: "Constantia, serif" }}>
-        azulej.io
-      </h1>
+      <h1 className="header-text">azulej.io</h1>
       <div>
         <h2
           style={{
             color: "#fff",
-            fontFamily: "Constantia, serif",
             margin: "0 40px"
           }}
         >
