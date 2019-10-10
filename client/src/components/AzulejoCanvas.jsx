@@ -195,7 +195,11 @@ export default class AzulejoCanvas extends Component {
           {this.state.gridLines && <GridLines canvas={this.state.canvas} />}
         </div>
         <div>
-          <button id="export-button" className="btn btn-primary">
+          <button
+            id="export-button"
+            className="btn btn-primary"
+            style={{ margin: "20px 0" }}
+          >
             Export .png in new tab
           </button>
         </div>
