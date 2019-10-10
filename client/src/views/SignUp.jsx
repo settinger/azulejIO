@@ -11,8 +11,7 @@ export default class SignUp extends Component {
     this.state = {
       email: "",
       username: "",
-      password: "",
-      imageUrl: ""
+      password: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.signUp = this.signUp.bind(this);
@@ -23,21 +22,11 @@ export default class SignUp extends Component {
       ...this.state,
       [name]: value
     });
-  }
-  onInputChange(event) {
-    const image = new FormData();
-    image.append("imageUrl", event.target.files[0]);
-    handleUpload(image).then(response => {
-      this.setState({
-        ...this.state,
-        imageUrl: response.secure_url
-      });
-    });
+    console.log(this.state);
   }
 
   signUp(event) {
     event.preventDefault();
-    console.log(this.state);
     const { email, username, imageUrl, password } = this.state;
     signUp({ email, username, imageUrl, password })
       .then(user => {
@@ -74,13 +63,6 @@ export default class SignUp extends Component {
               required
               onChange={this.onValueChange}
               value={this.state.username}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor="sign-up-imageUrl">Profile Image</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={event => this.onInputChange(event)}
             />
           </Form.Group>
           <Form.Group>

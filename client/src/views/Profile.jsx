@@ -120,6 +120,7 @@ export default class Profile extends Component {
         <Container>
           <div className="d-flex justify-content-between">
             <h1>{user.username}'s profile</h1>
+            <img src={user.imageUrl} alt={user.username} width="100px" />
             {(!this.props.user && <div></div>) ||
               (this.props.user._id === user._id && (
                 <Button
@@ -131,7 +132,7 @@ export default class Profile extends Component {
               ))}
           </div>
           {this.state.editProfileState && (
-            <EditProfile user={this.state.user} />
+            <EditProfile user={this.state.user} redir={this.props} />
           )}
           {(this.props.user && user._id === this.props.user._id && (
             <h2>Check your azulejos:</h2>

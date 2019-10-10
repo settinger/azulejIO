@@ -46,7 +46,7 @@ exports.verify = (req, res, next) => {
   });
 };
 exports.loadUser = (req, res, next) => {
-  User.findOne({ username: req.params.username })
+  User.findOne({ username: req.user.username })
     .then(user => {
       res.json({ type: "success", user });
     })
@@ -56,11 +56,12 @@ exports.loadUser = (req, res, next) => {
 };
 
 exports.edit = (req, res, next) => {
-  const username = req.body.username;
+  const { username, imageUrl } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
     {
-      username
+      username,
+      imageUrl
     },
     { new: true }
   )
