@@ -161,31 +161,29 @@ export default class Profile extends Component {
                 this.state.azulejos.length > 0 &&
                 this.state.azulejos.map(azulejo => {
                   return (
-                    <Row>
-                      <AzulejoThumbnailMod
-                        key={azulejo._id}
-                        id={azulejo._id}
-                        name={azulejo.name}
-                        img={azulejo.imageUrl}
-                        createdBy={azulejo._createdBy.username}
-                        colors={azulejo.colors}
-                        reviews={azulejo.reviews}
-                        fav={azulejo.fav}
-                        remixedFromTitle={
-                          azulejo._remixedFrom && azulejo._remixedFrom.name
-                        }
-                        remixedFromId={
-                          azulejo._remixedFrom && azulejo._remixedFrom._id
-                        }
-                        remixedFromUser={
-                          azulejo._remixedFrom &&
-                          azulejo._remixedFrom._createdBy &&
-                          azulejo._remixedFrom._createdBy.username
-                        }
-                        user={this.props.user}
-                        loadAzulejosFav={this.loadAzulejosFav}
-                      />
-                    </Row>
+                    <AzulejoThumbnailMod
+                      key={azulejo._id}
+                      id={azulejo._id}
+                      name={azulejo.name}
+                      img={azulejo.imageUrl}
+                      createdBy={azulejo._createdBy.username}
+                      colors={azulejo.colors}
+                      reviews={azulejo.reviews}
+                      fav={azulejo.fav}
+                      remixedFromTitle={
+                        azulejo._remixedFrom && azulejo._remixedFrom.name
+                      }
+                      remixedFromId={
+                        azulejo._remixedFrom && azulejo._remixedFrom._id
+                      }
+                      remixedFromUser={
+                        azulejo._remixedFrom &&
+                        azulejo._remixedFrom._createdBy &&
+                        azulejo._remixedFrom._createdBy.username
+                      }
+                      user={this.props.user}
+                      loadAzulejosFav={this.loadAzulejosFav}
+                    />
                   );
                 })) || (
                 <p>
@@ -207,32 +205,29 @@ export default class Profile extends Component {
                     this.state.azulejosFav.length > 0 &&
                     this.state.azulejosFav.map(azulejo => {
                       return (
-                        <Row>
-                          {" "}
-                          <AzulejoThumbnail
-                            key={azulejo._id}
-                            id={azulejo._id}
-                            name={azulejo.name}
-                            img={azulejo.imageUrl}
-                            createdBy={azulejo._createdBy.username}
-                            colors={azulejo.colors}
-                            reviews={azulejo.reviews}
-                            fav={azulejo.fav}
-                            remixedFromTitle={
-                              azulejo._remixedFrom && azulejo._remixedFrom.name
-                            }
-                            remixedFromId={
-                              azulejo._remixedFrom && azulejo._remixedFrom._id
-                            }
-                            remixedFromUser={
-                              azulejo._remixedFrom &&
-                              azulejo._remixedFrom._createdBy &&
-                              azulejo._remixedFrom._createdBy.username
-                            }
-                            user={this.props.user}
-                            loadAzulejosFav={this.loadAzulejosFav}
-                          />
-                        </Row>
+                        <AzulejoThumbnail
+                          key={azulejo._id}
+                          id={azulejo._id}
+                          name={azulejo.name}
+                          img={azulejo.imageUrl}
+                          createdBy={azulejo._createdBy.username}
+                          colors={azulejo.colors}
+                          reviews={azulejo.reviews}
+                          fav={azulejo.fav}
+                          remixedFromTitle={
+                            azulejo._remixedFrom && azulejo._remixedFrom.name
+                          }
+                          remixedFromId={
+                            azulejo._remixedFrom && azulejo._remixedFrom._id
+                          }
+                          remixedFromUser={
+                            azulejo._remixedFrom &&
+                            azulejo._remixedFrom._createdBy &&
+                            azulejo._remixedFrom._createdBy.username
+                          }
+                          user={this.props.user}
+                          loadAzulejosFav={this.loadAzulejosFav}
+                        />
                       );
                     })) || <Row>{this.noAzulejosFaved()}</Row>}
                 </div>

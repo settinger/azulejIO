@@ -22,12 +22,12 @@ const StarRating = props => {
 
   return (
     <div>
-      {[...Array(fullStars)].map(() => (
-        <FontAwesomeIcon icon={["fas", "star"]} color={props.color} />
+      {[...Array(fullStars)].map((_, i) => (
+        <FontAwesomeIcon icon={["fas", "star"]} color={props.color} key={i} />
       ))}
       {middleStar}
-      {[...Array(emptyStars)].map(() => (
-        <FontAwesomeIcon icon={["far", "star"]} color={props.color} />
+      {[...Array(emptyStars)].map((_, i) => (
+        <FontAwesomeIcon icon={["far", "star"]} color={props.color} key={i} />
       ))}
     </div>
   );
