@@ -101,7 +101,14 @@ export default class Azulejo extends Component {
   render() {
     return (
       <div className="container">
-        <AzulejoCanvas remixUrl={this.state.remixUrl} user={this.props.user} />
+        <AzulejoCanvas
+          remixUrl={this.state.remixUrl}
+          user={this.props.user}
+          addColor={this.addColor}
+          removeColor={this.removeColor}
+          onValueChange={this.onValueChange}
+          saveToAccount={this.saveToAccount}
+        />
         <div id="image-goes-here"></div>
       </div>
     );

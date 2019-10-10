@@ -204,7 +204,7 @@ export default class AzulejoCanvas extends Component {
             </div>
             {(this.props.user && (
               <Fragment>
-                <Form onSubmit={this.saveToAccount}>
+                <Form onSubmit={this.props.saveToAccount}>
                   <Form.Group>
                     <Form.Label htmlFor="azulejo-name">
                       Azulejo Name:
@@ -215,8 +215,7 @@ export default class AzulejoCanvas extends Component {
                       placeholder="name"
                       required
                       type="name"
-                      onChange={this.onValueChange}
-                      value={this.state.name}
+                      onChange={this.props.onValueChange}
                     />
                   </Form.Group>
                   <Form.Group>
@@ -245,9 +244,8 @@ export default class AzulejoCanvas extends Component {
                           name={color}
                           onClick={event => {
                             event.target.checked
-                              ? this.addColor(color)
-                              : this.removeColor(color);
-                            console.log(this.state.colors);
+                              ? this.props.addColor(color)
+                              : this.props.removeColor(color);
                           }}
                         />
                       );
