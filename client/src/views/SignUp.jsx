@@ -11,8 +11,7 @@ export default class SignUp extends Component {
     this.state = {
       email: "",
       username: "",
-      password: "",
-      imageUrl: ""
+      password: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.signUp = this.signUp.bind(this);
@@ -23,6 +22,7 @@ export default class SignUp extends Component {
       ...this.state,
       [name]: value
     });
+    console.log(this.state);
   }
   onInputChange(event) {
     const image = new FormData();
@@ -32,12 +32,12 @@ export default class SignUp extends Component {
         ...this.state,
         imageUrl: response.secure_url
       });
+      console.log(this.state);
     });
   }
 
   signUp(event) {
     event.preventDefault();
-    console.log(this.state);
     const { email, username, imageUrl, password } = this.state;
     signUp({ email, username, imageUrl, password })
       .then(user => {

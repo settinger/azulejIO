@@ -45,12 +45,14 @@ export default class EditProfile extends Component {
     });
   }
 
-  editUser() {
+  editUser(event) {
+    event.preventDefault();
     const user = this.state.user;
     edit(this.state.user.username, user)
       .then(user => {
+        console.dir(this.props);
         // this.props.history.push("/");
-        this.props.history.push(`/profile/${user.username}`);
+        this.props.redir.history.push(`/`);
       })
       .catch(error => {
         console.log(error);

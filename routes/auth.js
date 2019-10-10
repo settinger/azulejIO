@@ -15,13 +15,19 @@ const routeGuardMiddleware = require("./../middleware/route-guard");
 // const editController = require("./../controllers/auth/edit");
 
 const auth = require("./../controllers/authentication");
+const deserializeUserMiddleware = require("./../middleware/deserialize-user");
 
 router.post("/signup", routeGuardMiddleware(false), auth.signUp);
 router.post("/signin", routeGuardMiddleware(false), auth.signIn);
 router.post("/signout", routeGuardMiddleware(true), auth.signOut);
 router.get("/verify", auth.verify);
 router.get("/profile/:username", auth.loadUser);
-router.patch("/profile/:username/edit", routeGuardMiddleware(true), auth.edit);
+router.patch(
+  "/profile/:username/edit",
+  routeGuardMiddleware(true),
+  auth.edit,
+  deserializeUserMiddleware
+);
 router.delete("/profile/:username", routeGuardMiddleware(true), auth.remove);
 router.post("/upload", upload.single("imageUrl"), (req, res, next) => {
   if (!req.file) {

@@ -70,12 +70,11 @@ export const loadUser = username => {
   });
 };
 
-export const edit = (username, editedUser) => {
+export const edit = (username, data) => {
   return new Promise((resolve, reject) => {
     authAPI
-      .patch(`/profile/${username}/edit`, editedUser)
+      .patch(`/profile/${username}/edit`, data)
       .then(response => {
-        console.log(response);
         resolve(response.data.user);
       })
       .catch(error => {

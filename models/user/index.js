@@ -21,7 +21,9 @@ const schema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
-    required: false
+    trim: true,
+    default:
+      "https://res.cloudinary.com/dmywmpx6s/image/upload/v1570699288/azulejio/profile_a6xza0.png"
   },
   azulejos: {
     type: Array
