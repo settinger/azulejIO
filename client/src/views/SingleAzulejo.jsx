@@ -353,7 +353,12 @@ export default class SingleAzulejo extends Component {
                         <StarRating color="#17a2b8">{v.rating}</StarRating>
                       </Row>
                       <Row>
-                        <strong>{v._createdBy.username}</strong> &nbsp; posted:
+                        <strong>
+                          <Link to={`${v._createdBy.username}`}>
+                            {v._createdBy.username}
+                          </Link>
+                        </strong>{" "}
+                        &nbsp; posted:
                       </Row>
                       <Row>
                         <i> {v.comment}</i>
