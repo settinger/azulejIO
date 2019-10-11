@@ -78,7 +78,6 @@ export const edit = (username, data) => {
         resolve(response.data.user);
       })
       .catch(error => {
-        console.log("BIG ERROR");
         reject(error);
       });
   });

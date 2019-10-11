@@ -50,7 +50,6 @@ class AzulejoThumbnail extends Component {
       this.props.user &&
       (!this.state.fav || previousState.fav !== this.state.fav)
     ) {
-      // console.log("FAV STATE UPDATED", this.state.fav);
       this.setState({
         ...this.state
       });

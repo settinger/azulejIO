@@ -40,7 +40,7 @@ export default class Search extends Component {
         })
       )
       .catch(error => {
-        console.log("BIG ERROR", error);
+        console.log(error);
       });
   }
 
@@ -50,7 +50,6 @@ export default class Search extends Component {
     let otherQueries = "";
     for (let query in this.state.queries) {
       if (query !== "n" && query !== "p") {
-        // console.log(`Query is ${query}, value is ${this.state.queries[query]}`);
         otherQueries = otherQueries.concat(
           `${query}=${this.state.queries[query]}`
         );

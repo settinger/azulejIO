@@ -24,7 +24,7 @@ export default class HomeView extends Component {
         })
       )
       .catch(error => {
-        console.log("BIG ERROR", error);
+        console.log(error);
       });
   }
   componentDidMount() {

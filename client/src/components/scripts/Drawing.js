@@ -164,7 +164,6 @@ export default class Drawing {
 
   onMouseUp(event) {
     this.drawing = false;
-    // console.log("mouse/touch ended");
   }
 
   onMouseMove(event) {
@@ -179,7 +178,6 @@ export default class Drawing {
       this.context.strokeStyle = this.brushColor;
       this.drawEightLine(...this.currentPoint, x, y);
       this.currentPoint = [x, y];
-      // console.log(this.lines);
     }
   }
 

@@ -63,14 +63,13 @@ export default class Profile extends Component {
   loadAzulejosFav(userId) {
     loadFavs(`fav=${userId}`)
       .then(azulejosFav => {
-        // console.log(response);
         this.setState({
           ...this.state,
           azulejosFav
         });
       })
       .catch(error => {
-        console.log("BIG ERROR", error);
+        console.log(error);
       });
   }
 

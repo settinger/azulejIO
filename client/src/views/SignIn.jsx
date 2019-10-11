@@ -29,7 +29,6 @@ export default class SignIn extends Component {
   signIn(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    // console.log(this.state);
     signIn({ email, password })
       .then(user => {
         this.props.uploadUser(user);
