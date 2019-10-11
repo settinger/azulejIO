@@ -79,11 +79,11 @@ class AzulejoThumbnail extends Component {
             src={thumbUrl}
             alt="Azulejo Thumbnail"
           />
+        </Link>{" "}
+        <Link to={`/azulejo/${this.props.id}`}>
+          <div className="cardButton">View Azulejo</div>
         </Link>
-        <div className="cardButton">View Azulejo</div>
-
         <div className="mask rgba-white-slight" />
-
         <Card.Body>
           <ul className="list-inline">
             {/* Favorites */}
