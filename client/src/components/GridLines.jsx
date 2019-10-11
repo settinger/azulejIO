@@ -40,7 +40,7 @@ export default class GridLines extends Component {
           this.props.canvas.getBoundingClientRect().width * 1.41) ||
         "1%",
       height: "0px",
-      borderTop: "2px dashed rgba(0,0,0,0.5)",
+      borderBottom: "2px dashed rgba(0,0,0,0.5)",
       transformOrigin: "top left",
       transform: `translateY(-${this.props.canvas &&
         this.props.canvas.getBoundingClientRect().height}px) rotate(0.125turn)`
@@ -68,7 +68,7 @@ export default class GridLines extends Component {
           this.props.canvas.getBoundingClientRect().width) ||
         "1%",
       height: "0px",
-      borderTop: "2px dashed rgba(0,0,0,0.5)",
+      borderBottom: "2px dashed rgba(0,0,0,0.5)",
       transformOrigin: "top left",
       transform: `translateX(${this.props.canvas &&
         this.props.canvas.getBoundingClientRect().width /
