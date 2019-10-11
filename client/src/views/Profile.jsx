@@ -126,11 +126,11 @@ export default class Profile extends Component {
               </Col>
               <Col sm={3}>
                 <Row className="flex-lg-wrap">
-                  <h1
-                    className="flex-lg-wrap"
-                    style={{ wordBreak: "break-all" }}
-                  >
-                    {user.username}'s profile
+                  <h1 className="flex-lg-wrap">
+                    <span style={{ wordBreak: "break-all" }}>
+                      {user.username}'s
+                    </span>{" "}
+                    profile
                   </h1>
                 </Row>
                 <Row>
