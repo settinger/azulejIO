@@ -301,7 +301,9 @@ export default class SingleAzulejo extends Component {
                 {this.props.user && (
                   <Form onSubmit={this.addRate}>
                     <hr />
-                    <div className="mb-2">Leave a review?</div>
+                    <div className="mb-2">
+                      Rate between 1 - 5 and share your opinion!
+                    </div>
                     <Row>
                       <Col sm={2}>
                         <Form.Group>
