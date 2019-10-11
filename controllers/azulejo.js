@@ -143,9 +143,14 @@ exports.updateRate = (req, res, next) => {
   Azulejo.findByIdAndUpdate(req.params.id, {
     $push: {
       reviews: {
-        rating,
-        comment,
-        _createdBy: req.user._id
+        $each: [
+          {
+            rating,
+            comment,
+            _createdBy: req.user._id
+          }
+        ],
+        $position: 0
       }
     }
   })

@@ -55,14 +55,20 @@ export default class SingleAzulejo extends Component {
     });
   }
 
-  addRate() {
+  addRate(event) {
+    event.preventDefault();
     const rating = this.state.review;
     rate(this.state.azulejo._id, rating)
       .then(review => {
-        this.props.history.push(`/azulejo/${this.state.azulejo._id}`);
         this.setState({
-          review
+          review: {
+            comment: "",
+            rating: "",
+            user: ""
+          }
         });
+        this.loadAzulejo();
+        this.props.history.push(`/azulejo/${this.state.azulejo._id}`);
       })
       .catch(error => {
         console.log(error);
@@ -230,6 +236,7 @@ export default class SingleAzulejo extends Component {
                     <FontAwesomeIcon icon={["far", "star"]} color="#17a2b8" /> */}
                     <StarRating color="#17a2b8">
                       {this.state.azulejo.reviews
+                        .sort((a, b) => a.crea > b)
                         .map(v => v.rating)
                         .reduce((acc, v, i, arr) => {
                           acc += v / arr.length;
