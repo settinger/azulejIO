@@ -195,7 +195,7 @@ export default class SingleAzulejo extends Component {
           UNSER INFO*/}
 
             <Col sm={7}>
-              <div className="mb-4 pl-2 profile-user" id="header-content">
+              <div className=" pl-2 profile-user" id="header-content">
                 <Row>
                   <Col sm={6}>
                     <h1 style={{ paddingTop: "0px" }}>
@@ -224,7 +224,7 @@ export default class SingleAzulejo extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col sm={3}>
+                  <Col xs={4}>
                     {/* RATING   */}
                     {/* <FontAwesomeIcon icon="star" color="#17a2b8" />
                     <FontAwesomeIcon icon={["far", "star"]} color="#17a2b8" /> */}
@@ -238,7 +238,7 @@ export default class SingleAzulejo extends Component {
                         .toFixed(1)}
                     </StarRating>
                   </Col>
-                  <Col>
+                  <Col xs={3}>
                     {(this.state.azulejo.fav &&
                       this.props.user &&
                       !this.state.azulejo.fav.includes(this.props.user._id) && (
@@ -272,7 +272,7 @@ export default class SingleAzulejo extends Component {
                       </li>
                     )}
                   </Col>
-                  <Col>
+                  <Col xs={5}>
                     {/* CREATED BY */} Created by:{" "}
                     <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
                   </Col>
@@ -304,8 +304,8 @@ export default class SingleAzulejo extends Component {
                     <div className="mb-2">
                       Rate between 1 - 5 and share your opinion!
                     </div>
-                    <Row>
-                      <Col sm={2}>
+                    <Col className="mb-0">
+                      <Row>
                         <Form.Group>
                           <Form.Control
                             name="rating"
@@ -318,41 +318,47 @@ export default class SingleAzulejo extends Component {
                             value={this.state.review.rating}
                           />
                         </Form.Group>
+                        <Col xs={9}>
+                          <Form.Group>
+                            <Form.Control
+                              as="textarea"
+                              rows="4"
+                              name="comment"
+                              placeholder="Comment something"
+                              required
+                              onChange={this.onValueChange}
+                              value={this.state.review.comment}
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <Row style={{ transform: "translateY(-200%)" }}>
                         <Button type="submit">Rate</Button>
-                      </Col>
-                      <Col>
-                        <Form.Group>
-                          <Form.Control
-                            as="textarea"
-                            rows="4"
-                            name="comment"
-                            placeholder="Comment something"
-                            required
-                            onChange={this.onValueChange}
-                            value={this.state.review.comment}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
+                      </Row>
+                    </Col>
                   </Form>
                 )}
               </div>
               {this.state.azulejo.reviews.map(v => (
                 <div className="comments-box my-2 p-3">
                   <Row>
-                    <Col md={3}>
-                      <img
-                        width="100em"
-                        height="auto"
-                        src={v._createdBy.imageUrl}
-                        alt={`${v._createdBy.username} profile image`}
-                      />
-                    </Col>
-                    <Col md={8}>
+                    <Col sm={2} className="ml-3">
                       <Row>
+                        <Link to={`${v._createdBy.username}`}>
+                          <img
+                            width="100em"
+                            height="auto"
+                            src={v._createdBy.imageUrl}
+                            alt={`${v._createdBy.username} profile image`}
+                          />
+                        </Link>
+                      </Row>
+                    </Col>
+                    <Col sm={9} className="ml-3">
+                      <Row sm={12}>
                         <StarRating color="#17a2b8">{v.rating}</StarRating>
                       </Row>
-                      <Row>
+                      <Row sm={12}>
                         <strong>
                           <Link to={`${v._createdBy.username}`}>
                             {v._createdBy.username}
@@ -360,7 +366,7 @@ export default class SingleAzulejo extends Component {
                         </strong>{" "}
                         &nbsp; posted:
                       </Row>
-                      <Row>
+                      <Row sm={12}>
                         <i> {v.comment}</i>
                       </Row>
                       {/* <strong> {v.user.username}</strong> */}
