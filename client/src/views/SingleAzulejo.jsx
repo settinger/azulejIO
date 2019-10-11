@@ -198,7 +198,7 @@ export default class SingleAzulejo extends Component {
               <div className=" pl-2 profile-user" id="header-content">
                 <Row>
                   <Col sm={6}>
-                    <h1 style={{ paddingTop: "0px" }}>
+                    <h1 style={{ paddingTop: "0px", wordBreak: "break-all" }}>
                       {this.state.azulejo.name}
                     </h1>
                   </Col>
@@ -274,7 +274,11 @@ export default class SingleAzulejo extends Component {
                   </Col>
                   <Col xs={5}>
                     {/* CREATED BY */} Created by:{" "}
-                    <Link to={`/profile/${createdBy}`}>{createdBy}</Link>
+                    <Link to={`/profile/${createdBy}`}>
+                      <span style={{ wordBreak: "break-all" }}>
+                        {createdBy}
+                      </span>
+                    </Link>
                   </Col>
                   <Col>
                     {/* REMIXED FROM!!! */}
