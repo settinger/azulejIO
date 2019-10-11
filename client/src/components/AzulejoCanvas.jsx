@@ -56,13 +56,21 @@ export default class AzulejoCanvas extends Component {
     this.$brushSizeValue = document.getElementById("brush-size-value");
 
     $exportButton.addEventListener("click", () => {
-      const img = $canvas.toDataURL("image/png");
-      const tabImage = new Image();
-      tabImage.src = img;
-      // $img.innerHTML = `<img src="${img}" alt="my azulejo design" />`;
-      const newTab = window.open("");
-      newTab.document.write(tabImage.outerHTML);
+      // const img = $canvas.toDataURL("image/png");
+      // const tabImage = new Image();
+      // tabImage.src = img;
+      // // $img.innerHTML = `<img src="${img}" alt="my azulejo design" />`;
+      // const newTab = window.open("");
+      // newTab.document.write(tabImage.outerHTML);
+      // console.log(tabImage.outerHTML);
+      const link = document.createElement("a");
+      link.download = "azulejo.png";
+      const img = $canvas.toBlob(blob => {
+        link.href = URL.createObjectURL(blob);
+        link.click();
+      });
     });
+
     this.drawing = new Drawing($canvas);
     this.drawing.startMenu();
 
@@ -269,7 +277,7 @@ export default class AzulejoCanvas extends Component {
                 className="btn btn-primary"
                 style={{ margin: "20px 0" }}
               >
-                Export .png in new tab
+                Export as .png
               </button>
             </div>
           </Col>
